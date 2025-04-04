@@ -157,6 +157,29 @@ export class Panel extends ZZZPlugin {
          return false;
       }
   }
+  async getCharPanelList() {
+    const uid = await this.getUID();
+    const result = getPanelList(uid);
+    if (!result) {
+      await this.reply('未找到面板数据，请先%刷新面板');
+      return false;
+    }
+    await this.getPlayerInfo();
+    const timer = setTimeout(() => {
+      if (this?.reply) {
+        this.reply('查询成功，正在下载图片资源，请稍候。');
+      }
+    }, 5000);
+    for (const item of result) {
+      await item.get_basic_assets();
+    }
+    clearTimeout(timer);
+    const finalData = {
+      count: result?.length || 0,
+      list: result,
+    };
+    await this.render('panel/list.html', finalData);
+  }
   async getCharPanelListTool(uid, origin = false) {
     if (!uid) {
       return false;
