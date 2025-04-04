@@ -12,6 +12,7 @@ import _ from 'lodash';
 import { rulePrefix } from '../lib/common.js';
 import { getZzzEnkaData } from '../lib/ekapi/query.js'
 import { _enka_data_to_mys_data } from '../lib/ekapi/enka_to_mys.js'
+import { ZZZAvatarInfo } from '../model/avatar.js'
 
 export class Panel extends ZZZPlugin {
   constructor() {
@@ -57,6 +58,7 @@ export class Panel extends ZZZPlugin {
     const uid = await this.getUID();
     this.uid = uid
     let playerInfo = null;
+    let finalResultList = null;
     try {
       playerInfo = await this.getPlayerInfo();
       if (!playerInfo) playerInfo = this.e.player;
@@ -84,47 +86,22 @@ export class Panel extends ZZZPlugin {
           }
           await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
           await this.reply('正在刷新面板列表 (MYS API)，请稍候...');
-
-          const mysResult = await refreshPanelFunction(api); // 调用 MYS 刷新函数
-          if (!mysResult) { throw new Error('MYS API 返回空结果'); }
-          this.result = mysResult; // <<< MYS 结果赋给 this.result
-          logger.mark('[panel.js] MYS API refreshPanelFunction 调用完成.');
+          finalResultList = await refreshPanelFunction(api);
+         if (!finalResultList || !Array.isArray(finalResultList)) {
+             if (finalResultList === null || finalResultList === false) throw new Error('MYS API refreshPanelFunction 未返回有效结果');
+             if (finalResultList.length === 0) logger.mark(`[panel.js] MYS API for UID ${uid} returned an empty list.`);
+        }
       } catch (mysError) {
           logger.error(' MYS API 刷新出错:', mysError);
-           await this.refreshByEnka();
+          finalResultList = await this.refreshByEnka();
       }
 
     } else {
-       await this.refreshByEnka();
+      finalResultList = await this.refreshByEnka(); // <--- 赋值给局部变量
     }
 
-    if (this.result && Array.isArray(this.result)) { // 确保有有效数据 (非 null, 是数组)
-      // 并且至少包含一个角色数据才存，避免存空数组？(可选)
-      if (this.result.length > 0) {
-          try {
+    const currentResult = finalResultList;
 
-            await updatePanelData(uid, this.result);
-
-          } catch (cacheError) {
-            logger.error('出错:', cacheError);
-            // 记录错误，但可能继续
-          }
-      } else {
-          logger.debug('[panel.js] 获取到的角色列表为空数组，不执行缓存更新。');
-          // 如果是 Enka 路径且展示柜为空，这是正常情况
-      }
-    } else {
-      logger.debug('[panel.js] 没有有效的角色列表数据 (this.result)，跳过缓存更新。');
-      // 如果之前的步骤没有 return false，这里可能需要提示用户
-      if (!useEnka) { // MYS 失败的情况
-          await this.reply('未能获取或处理有效的面板列表数据。');
-          return false; // 如果 MYS 失败且结果无效，应该退出
-      }
-      // 如果是 Enka 路径且结果无效/非数组，也提示并退出
-      await this.reply('处理后的面板数据格式无效。');
-      return false;
-    }
-    const currentResult = this.result || [];
     const newCharCount = (currentResult.length > 0 && currentResult[0]?.isNew !== undefined)
                          ? currentResult.filter(item => item && item.isNew).length
                          : 0;
@@ -142,21 +119,68 @@ export class Panel extends ZZZPlugin {
         await this.reply(`生成刷新结果图片时出错: ${renderError.message}`);
     }
   }
+  //
+  // async refreshByEnka(){
+  //   //enka兜底 todo:数据转换修正..
+  //     logger.debug('[panel.js] 进入 Enka 逻辑块');
+  //     try {
+  //       const enkaData = await getZzzEnkaData(this.uid);
+  //       if (!enkaData || enkaData === -1 || !enkaData.PlayerInfo) { throw new Error('获取或验证 Enka 数据失败'); }
+  //       this.result = await _enka_data_to_mys_data(enkaData);
+  //       return this.result;
+  //     } catch (enkaError) {
+  //        logger.error('处理 Enka 逻辑时出错:', enkaError);
+  //        await this.reply(`处理Enka数据时出错: ${enkaError.message}`);
+  //        return false;
+  //     }
+  // }
 
-  async refreshByEnka(){
-    //enka兜底 todo:数据转换修正..
-      logger.debug('[panel.js] 进入 Enka 逻辑块');
-      try {
+  async refreshByEnka() {
+    logger.debug('[panel.js] 进入 Enka 逻辑块');
+    try {
+        // 1. 获取 Enka 数据
         const enkaData = await getZzzEnkaData(this.uid);
-        if (!enkaData || enkaData === -1 || !enkaData.PlayerInfo) { throw new Error('获取或验证 Enka 数据失败'); }
-        this.result = await _enka_data_to_mys_data(enkaData);
-        return this.result;
-      } catch (enkaError) {
-         logger.error('处理 Enka 逻辑时出错:', enkaError);
-         await this.reply(`处理Enka数据时出错: ${enkaError.message}`);
-         return false;
-      }
-  }
+       if (!enkaData || enkaData === -1 || !enkaData.PlayerInfo) {
+  throw new Error('获取或验证 Enka 数据失败');
+}
+        // 2. 转换 Enka 数据为 "新数据" 格式
+        const convertedNewData = await _enka_data_to_mys_data(enkaData);
+        if (!Array.isArray(convertedNewData)) {
+            logger.error('[panel.js] Enka 数据转换 (_enka_data_to_mys_data) 后结果非数组:', convertedNewData);
+            throw new Error('Enka 数据转换失败或结果格式不正确');
+        }
+        logger.mark(`[panel.js] Enka 数据转换完成，得到 ${convertedNewData.length} 条新记录.`);
+
+        // 3. 调用 updatePanelData 进行合并、保存，并获取合并后的完整数据
+        //    *** 关键：假设 updatePanelData 内部处理合并逻辑并返回合并结果 ***
+        const finalMergedData = updatePanelData(this.uid, convertedNewData);
+        if (!finalMergedData || !Array.isArray(finalMergedData)) {
+             logger.error(`[panel.js] updatePanelData (called by Enka path) 未返回有效的合并后数组 for UID ${this.uid}`);
+             throw new Error('数据合并或保存后未能返回有效列表');
+        }
+        logger.mark(`[panel.js] Enka 数据通过 updatePanelData 合并保存完成，合并后总 ${finalMergedData.length} 条.`);
+
+        // 4. 格式化合并后的数据
+        const formattedData = finalMergedData.map(item => new ZZZAvatarInfo(item));
+
+        // 5. 加载基础资源 (可选，但为了与 MYS 版本一致)
+        // 注意：如果资源加载很慢，可能会增加 Enka 路径的耗时
+        logger.debug(`[panel.js] Enka path: 开始为 ${formattedData.length} 个角色加载基础资源...`);
+        for (const item of formattedData) {
+            await item.get_basic_assets();
+        }
+        logger.debug('[panel.js] Enka path: 基础资源加载完成.');
+
+
+        // 6. 返回格式化后的完整列表
+        return formattedData;
+
+    } catch (enkaError) {
+        logger.error(`[panel.js] 处理 Enka 逻辑 (refreshByEnka) 时出错 for UID ${this.uid}:`, enkaError);
+        // 不在此处 reply，让调用者处理
+        return false; // 返回 false 表示失败
+    }
+}
   async getCharPanelList() {
     const uid = await this.getUID();
     const result = getPanelList(uid);

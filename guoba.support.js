@@ -163,6 +163,15 @@ export function supportGuoba() {
           label: '面板设置',
         },
         {
+          field: 'panel.EnkaUrl',
+          label: 'Enka业务域名',
+          bottomHelpMessage: '可用于自定义反代',
+          component: 'Input',
+          componentProps: {
+            placeholder: '请输入Enka业务域名',
+          },
+        },
+        {
           field: 'panel.useEnka',
           label: 'enka查询',
           bottomHelpMessage: '优先使用enka接口查询',
