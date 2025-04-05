@@ -1,0 +1,1872 @@
+{
+  "Id": 1091,
+  "Icon": "IconRole13",
+  "Name": "雅",
+  "CodeName": "Miyabi",
+  "Rarity": 4,
+  "WeaponType": {
+    "3": "异常"
+  },
+  "ElementType": {
+    "202": "冰属性"
+  },
+  "SpecialElementType": {
+    "Name": "烈霜",
+    "Title": "烈霜属性",
+    "Desc": "<color=#98EFF0>烈霜属性</color>会基于<color=#98EFF0>冰属性</color>结算伤害与增益效果，造成<color=#98EFF0>烈霜伤害</color>的同时，会对敌人累积<color=#98EFF0>烈霜异常积蓄值</color>，随之将触发<color=#98EFF0>[冻结]</color>并施加<color=#98EFF0>[霜寒]</color>效果；\n<color=#98EFF0>[冻结]</color>效果能够在一段时间内，使目标无法行动；\n<color=#98EFF0>[碎冰]</color>效果会在<color=#98EFF0>[冻结]</color>效果结束时触发，打断敌人的行动并造成<color=#98EFF0>烈霜伤害</color>；\n<color=#98EFF0>[霜寒]</color>效果能够在一段时间内，使目标承受的暴击伤害提升。",
+    "Icon": "UI/Sprite/A1DynamicLoad/IconGeneralBuff/Packer/IconFrost.png"
+  },
+  "HitType": {
+    "101": "斩击"
+  },
+  "Camp": {
+    "6": "对空洞特别行动部第六课"
+  },
+  "Gender": 2,
+  "PartnerInfo": {
+    "Birthday": "6/19",
+    "FullName": "星见雅",
+    "Gender": "女",
+    "IconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle13.png",
+    "ImpressionF": "Fairy，帮我找一下「珍贵的影像」！我哥想看！",
+    "ImpressionM": "Fairy，不必麻烦了。铃如果想看，她会自己向雅小姐开口的…",
+    "Name": "",
+    "OutlookDesc": "相关信息显示：\n执行官-星见雅，以太适性为保密，允许在都内已知空洞（包含伴生空洞）进行调查开采等基础工作。",
+    "ProfileDesc": "星见雅，对空洞事务特别行动部第六课课长。\n雅常出外勤，至今不知道部内每月例会的会议室在几楼。\n即使在办公室内看到雅，雅也多半没有在处理文书工作，而是专注于保养佩刀。\n\n因出色功勋荣获「虚狩」之名的她，是对空六课强者中的强者。\n在市民中亦颇有威望。\n某次，迷路的雅误入一场「星见雅后援会」的线下活动现场。\n雅被视为变装水平出神入化的的粉丝，留下了珍贵的影像。\n\n星见雅个性坦诚务实，并非耽溺修行、不通世务的武痴。\n了解她的人都会明白，她一直在追寻心中的正义——哪怕这正义终将掀起变革。",
+    "Race": "对空六课",
+    "RoleIcon": "IconRole/UnPacker/IconRole13",
+    "Stature": "170（包括耳朵）",
+    "UnlockCondition": [
+      "获得代理人",
+      "完成主线「悠然插曲·金翅雀逃跑计划」（主线第五章完成后开启）"
+    ],
+    "TrustLv": {
+      "1": "星见雅，对空洞事务特别行动部第六课课长。\n雅常出外勤，至今不知道部内每月例会的会议室在几楼。\n即使在办公室内看到雅，雅也多半没有在处理文书工作，而是专注于保养佩刀。\n\n因出色功勋荣获「虚狩」之名的她，是对空六课强者中的强者。\n在市民中亦颇有威望。\n某次，迷路的雅误入一场「星见雅后援会」的线下活动现场。\n雅被视为变装水平出神入化的的粉丝，留下了珍贵的影像。\n\n星见雅个性坦诚务实，并非耽溺修行、不通世务的武痴。\n了解她的人都会明白，她一直在追寻心中的正义——哪怕这正义终将掀起变革。",
+      "2": "",
+      "3": "星见雅是新艾利都知名武家的继承人。\n据知情人士透露，雅的母亲早逝。而雅与父亲的关系，似乎十分微妙。\n备注：雅的父亲并未担任新艾利都内任何公共职务。",
+      "4": ""
+    }
+  },
+  "Skin": {},
+  "Stats": {
+    "Armor": 0,
+    "ArmorGrowth": 0,
+    "Attack": 127,
+    "AttackGrowth": 76728,
+    "AvatarPieceId": 5091,
+    "BreakStun": 86,
+    "BuffResistBurnPossibilityDelta": 0,
+    "BuffResistBurnPossibilityRatio": 0,
+    "BuffResistElectricPossibilityDelta": 0,
+    "BuffResistElectricPossibilityRatio": 0,
+    "BuffResistFrozenPossibilityDelta": 0,
+    "BuffResistFrozenPossibilityRatio": 0,
+    "Crit": 500,
+    "CritDamage": 5000,
+    "CritDmgRes": 0,
+    "CritRes": 0,
+    "Defence": 49,
+    "DefenceGrowth": 66203,
+    "ElementAbnormalPower": 116,
+    "ElementMystery": 148,
+    "Endurance": 0,
+    "HpGrowth": 837238,
+    "HpMax": 617,
+    "Luck": 10,
+    "PenDelta": 0,
+    "PenRate": 0,
+    "Rbl": 1,
+    "RblCorrectionFactor": 10000,
+    "RblProbability": 0,
+    "Shield": 0,
+    "ShieldGrowth": 0,
+    "SpBarPoint": 120,
+    "SpRecover": 120,
+    "StarInitial": 1,
+    "Stun": 0,
+    "Tags": [
+      "Unagi",
+      "Cut",
+      "Ice",
+      "Female",
+      "Camp6",
+      "Size2",
+      "AidTypeParry",
+      "Unagi"
+    ]
+  },
+  "Level": {
+    "1": {
+      "HpMax": 0,
+      "Attack": 0,
+      "Defence": 0,
+      "LevelMax": 10,
+      "LevelMin": 0,
+      "Materials": {
+        "10": 24000,
+        "100213": 4
+      }
+    },
+    "2": {
+      "HpMax": 423,
+      "Attack": 45,
+      "Defence": 33,
+      "LevelMax": 20,
+      "LevelMin": 10,
+      "Materials": {
+        "10": 56000,
+        "100223": 12
+      }
+    },
+    "3": {
+      "HpMax": 847,
+      "Attack": 90,
+      "Defence": 67,
+      "LevelMax": 30,
+      "LevelMin": 20,
+      "Materials": {
+        "10": 120000,
+        "100223": 20
+      }
+    },
+    "4": {
+      "HpMax": 1270,
+      "Attack": 136,
+      "Defence": 100,
+      "LevelMax": 40,
+      "LevelMin": 30,
+      "Materials": {
+        "10": 200000,
+        "100233": 10
+      }
+    },
+    "5": {
+      "HpMax": 1694,
+      "Attack": 181,
+      "Defence": 134,
+      "LevelMax": 50,
+      "LevelMin": 40,
+      "Materials": {
+        "10": 400000,
+        "100233": 20
+      }
+    },
+    "6": {
+      "HpMax": 2117,
+      "Attack": 226,
+      "Defence": 167,
+      "LevelMax": 60,
+      "LevelMin": 50,
+      "Materials": {}
+    }
+  },
+  "ExtraLevel": {
+    "1": {
+      "MaxLevel": 15,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 0
+        },
+        "31201": {
+          "Prop": 31201,
+          "Name": "异常精通",
+          "Format": "{0:0}",
+          "Value": 30
+        }
+      }
+    },
+    "2": {
+      "MaxLevel": 25,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 25
+        },
+        "31201": {
+          "Prop": 31201,
+          "Name": "异常精通",
+          "Format": "{0:0}",
+          "Value": 30
+        }
+      }
+    },
+    "3": {
+      "MaxLevel": 35,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 25
+        },
+        "31201": {
+          "Prop": 31201,
+          "Name": "异常精通",
+          "Format": "{0:0}",
+          "Value": 60
+        }
+      }
+    },
+    "4": {
+      "MaxLevel": 45,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 50
+        },
+        "31201": {
+          "Prop": 31201,
+          "Name": "异常精通",
+          "Format": "{0:0}",
+          "Value": 60
+        }
+      }
+    },
+    "5": {
+      "MaxLevel": 55,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 50
+        },
+        "31201": {
+          "Prop": 31201,
+          "Name": "异常精通",
+          "Format": "{0:0}",
+          "Value": 90
+        }
+      }
+    },
+    "6": {
+      "MaxLevel": 60,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 75
+        },
+        "31201": {
+          "Prop": 31201,
+          "Name": "异常精通",
+          "Format": "{0:0}",
+          "Value": 90
+        }
+      }
+    }
+  },
+  "LevelEXP": [
+    50,
+    150,
+    250,
+    400,
+    600,
+    800,
+    1000,
+    1250,
+    1500,
+    1800,
+    1935,
+    2065,
+    2200,
+    2335,
+    2465,
+    2600,
+    2735,
+    2865,
+    3000,
+    4680,
+    4975,
+    5265,
+    5560,
+    5855,
+    6145,
+    6440,
+    6735,
+    7025,
+    7320,
+    10800,
+    11400,
+    12000,
+    12600,
+    13200,
+    13800,
+    14400,
+    15000,
+    15600,
+    16200,
+    17100,
+    18300,
+    19500,
+    20700,
+    21900,
+    23100,
+    24300,
+    25500,
+    26700,
+    27900,
+    34200,
+    36600,
+    39000,
+    41400,
+    43800,
+    46200,
+    48600,
+    51000,
+    53400,
+    55800,
+    0
+  ],
+  "Skill": {
+    "Basic": {
+      "Description": [
+        {
+          "Name": "普通攻击：风花",
+          "Desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多五段的斩击，前两段造成<color=#F0D12B>物理伤害</color>，后三段造成<color=#98EFF0>烈霜伤害</color>；\n第五段<color=#FFFFFF>[普通攻击]</color>发动期间可以格挡敌人的攻击。"
+        },
+        {
+          "Name": "普通攻击：霜月",
+          "Desc": "拥有2点或以上<color=#FFFFFF>[落霜]</color>时，长按 <IconMap:Icon_Normal> 发动：\n星见雅收刀进入<color=#FFFFFF>[霜月架势]</color>并开始蓄力，每段蓄力会消耗2点<color=#FFFFFF>[落霜]</color>，最多可以进行三段蓄力，松开 <IconMap:Icon_Normal> 或<color=#FFFFFF>[落霜]</color>耗尽时，星见雅将根据当前蓄力段数，拔刀向前方发动强力斩击，造成大量<color=#98EFF0>烈霜伤害</color>，随后退出<color=#FFFFFF>[霜月架势]</color>；\n<color=#FFFFFF>[霜月架势]</color>期间拥有无敌效果；\n星见雅最多拥有6点<color=#FFFFFF>[落霜]</color>，进入战场时，星见雅立刻获得3点<color=#FFFFFF>[落霜]</color>。"
+        },
+        {
+          "Name": "普通攻击：风花",
+          "Param": [
+            {
+              "Name": "一段伤害倍率",
+              "Desc": "{Skill:1091001, Prop:1001}",
+              "Param": {
+                "1091001": {
+                  "Main": 2690,
+                  "Growth": 250,
+                  "Format": "%",
+                  "DamagePercentage": 2690,
+                  "DamagePercentageGrowth": 250,
+                  "StunRatio": 1350,
+                  "StunRatioGrowth": 70,
+                  "SpRecovery": 4400,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 33825,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段伤害倍率",
+              "Desc": "{Skill:1091002, Prop:1001}",
+              "Param": {
+                "1091002": {
+                  "Main": 2960,
+                  "Growth": 270,
+                  "Format": "%",
+                  "DamagePercentage": 2960,
+                  "DamagePercentageGrowth": 270,
+                  "StunRatio": 2690,
+                  "StunRatioGrowth": 130,
+                  "SpRecovery": 8790,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 67375,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段伤害倍率",
+              "Desc": "{Skill:1091003, Prop:1001}",
+              "Param": {
+                "1091003": {
+                  "Main": 6280,
+                  "Growth": 580,
+                  "Format": "%",
+                  "DamagePercentage": 6280,
+                  "DamagePercentageGrowth": 580,
+                  "StunRatio": 4640,
+                  "StunRatioGrowth": 220,
+                  "SpRecovery": 15170,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 116050,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 6290,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "四段伤害倍率",
+              "Desc": "{Skill:1091004, Prop:1001}",
+              "Param": {
+                "1091004": {
+                  "Main": 9650,
+                  "Growth": 880,
+                  "Format": "%",
+                  "DamagePercentage": 9650,
+                  "DamagePercentageGrowth": 880,
+                  "StunRatio": 8210,
+                  "StunRatioGrowth": 380,
+                  "SpRecovery": 26860,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 205150,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 9121,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "五段伤害倍率",
+              "Desc": "{Skill:1091005, Prop:1001}",
+              "Param": {
+                "1091005": {
+                  "Main": 12900,
+                  "Growth": 1180,
+                  "Format": "%",
+                  "DamagePercentage": 12900,
+                  "DamagePercentageGrowth": 1180,
+                  "StunRatio": 13100,
+                  "StunRatioGrowth": 600,
+                  "SpRecovery": 42850,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 327525,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 12927,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "一段失衡倍率",
+              "Desc": "{Skill:1091001, Prop:1002}",
+              "Param": {
+                "1091001": {
+                  "Main": 1350,
+                  "Growth": 70,
+                  "Format": "%",
+                  "DamagePercentage": 2690,
+                  "DamagePercentageGrowth": 250,
+                  "StunRatio": 1350,
+                  "StunRatioGrowth": 70,
+                  "SpRecovery": 4400,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 33825,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段失衡倍率",
+              "Desc": "{Skill:1091002, Prop:1002}",
+              "Param": {
+                "1091002": {
+                  "Main": 2690,
+                  "Growth": 130,
+                  "Format": "%",
+                  "DamagePercentage": 2960,
+                  "DamagePercentageGrowth": 270,
+                  "StunRatio": 2690,
+                  "StunRatioGrowth": 130,
+                  "SpRecovery": 8790,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 67375,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段失衡倍率",
+              "Desc": "{Skill:1091003, Prop:1002}",
+              "Param": {
+                "1091003": {
+                  "Main": 4640,
+                  "Growth": 220,
+                  "Format": "%",
+                  "DamagePercentage": 6280,
+                  "DamagePercentageGrowth": 580,
+                  "StunRatio": 4640,
+                  "StunRatioGrowth": 220,
+                  "SpRecovery": 15170,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 116050,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 6290,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "四段失衡倍率",
+              "Desc": "{Skill:1091004, Prop:1002}",
+              "Param": {
+                "1091004": {
+                  "Main": 8210,
+                  "Growth": 380,
+                  "Format": "%",
+                  "DamagePercentage": 9650,
+                  "DamagePercentageGrowth": 880,
+                  "StunRatio": 8210,
+                  "StunRatioGrowth": 380,
+                  "SpRecovery": 26860,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 205150,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 9121,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "五段失衡倍率",
+              "Desc": "{Skill:1091005, Prop:1002}",
+              "Param": {
+                "1091005": {
+                  "Main": 13100,
+                  "Growth": 600,
+                  "Format": "%",
+                  "DamagePercentage": 12900,
+                  "DamagePercentageGrowth": 1180,
+                  "StunRatio": 13100,
+                  "StunRatioGrowth": 600,
+                  "SpRecovery": 42850,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 327525,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 12927,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "普通攻击：霜月",
+          "Param": [
+            {
+              "Name": "一段蓄力斩击伤害倍率",
+              "Desc": "{Skill:1091027, Prop:1001}",
+              "Param": {
+                "1091027": {
+                  "Main": 45470,
+                  "Growth": 4140,
+                  "Format": "%",
+                  "DamagePercentage": 45470,
+                  "DamagePercentageGrowth": 4140,
+                  "StunRatio": 4400,
+                  "StunRatioGrowth": 200,
+                  "SpRecovery": 14400,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 110000,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 3998,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段蓄力斩击伤害倍率",
+              "Desc": "{Skill:1091028, Prop:1001}",
+              "Param": {
+                "1091028": {
+                  "Main": 85810,
+                  "Growth": 7810,
+                  "Format": "%",
+                  "DamagePercentage": 85810,
+                  "DamagePercentageGrowth": 7810,
+                  "StunRatio": 6240,
+                  "StunRatioGrowth": 290,
+                  "SpRecovery": 20410,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 155925,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5668,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段蓄力斩击伤害倍率",
+              "Desc": "{Skill:1091029, Prop:1001}",
+              "Param": {
+                "1091029": {
+                  "Main": 214110,
+                  "Growth": 19470,
+                  "Format": "%",
+                  "DamagePercentage": 214110,
+                  "DamagePercentageGrowth": 19470,
+                  "StunRatio": 37780,
+                  "StunRatioGrowth": 1720,
+                  "SpRecovery": 61810,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 944350,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 34336,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "一段蓄力斩击失衡倍率",
+              "Desc": "{Skill:1091027, Prop:1002}",
+              "Param": {
+                "1091027": {
+                  "Main": 4400,
+                  "Growth": 200,
+                  "Format": "%",
+                  "DamagePercentage": 45470,
+                  "DamagePercentageGrowth": 4140,
+                  "StunRatio": 4400,
+                  "StunRatioGrowth": 200,
+                  "SpRecovery": 14400,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 110000,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 3998,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段蓄力斩击失衡倍率",
+              "Desc": "{Skill:1091028, Prop:1002}",
+              "Param": {
+                "1091028": {
+                  "Main": 6240,
+                  "Growth": 290,
+                  "Format": "%",
+                  "DamagePercentage": 85810,
+                  "DamagePercentageGrowth": 7810,
+                  "StunRatio": 6240,
+                  "StunRatioGrowth": 290,
+                  "SpRecovery": 20410,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 155925,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5668,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段蓄力斩击失衡倍率",
+              "Desc": "{Skill:1091029, Prop:1002}",
+              "Param": {
+                "1091029": {
+                  "Main": 37780,
+                  "Growth": 1720,
+                  "Format": "%",
+                  "DamagePercentage": 214110,
+                  "DamagePercentageGrowth": 19470,
+                  "StunRatio": 37780,
+                  "StunRatioGrowth": 1720,
+                  "SpRecovery": 61810,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 944350,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 34336,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100112": 2
+        },
+        "2": {
+          "10": 3000,
+          "100112": 3
+        },
+        "3": {
+          "10": 6000,
+          "100122": 2
+        },
+        "4": {
+          "10": 9000,
+          "100122": 3
+        },
+        "5": {
+          "10": 12000,
+          "100122": 4
+        },
+        "6": {
+          "10": 18000,
+          "100122": 6
+        },
+        "7": {
+          "10": 45000,
+          "100132": 5
+        },
+        "8": {
+          "10": 67500,
+          "100132": 8
+        },
+        "9": {
+          "10": 90000,
+          "100132": 10
+        },
+        "10": {
+          "10": 112500,
+          "100132": 12
+        },
+        "11": {
+          "10": 135000,
+          "100132": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    },
+    "Dodge": {
+      "Description": [
+        {
+          "Name": "闪避：水鸟",
+          "Desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。\n闪避时，连点或长按 <IconMap:Icon_Evade> 发动：\n长距离的冲刺闪避；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "冲刺攻击：冬蜂",
+          "Desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前方进行斩击，造成<color=#F0D12B>物理伤害</color>；"
+        },
+        {
+          "Name": "闪避反击：寒雀",
+          "Desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动斩击，造成<color=#98EFF0>烈霜伤害</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "冲刺攻击：冬蜂",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1091013, Prop:1001}",
+              "Param": {
+                "1091013": {
+                  "Main": 2580,
+                  "Growth": 240,
+                  "Format": "%",
+                  "DamagePercentage": 2580,
+                  "DamagePercentageGrowth": 240,
+                  "StunRatio": 1290,
+                  "StunRatioGrowth": 60,
+                  "SpRecovery": 4210,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 32175,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1091013, Prop:1002}",
+              "Param": {
+                "1091013": {
+                  "Main": 1290,
+                  "Growth": 60,
+                  "Format": "%",
+                  "DamagePercentage": 2580,
+                  "DamagePercentageGrowth": 240,
+                  "StunRatio": 1290,
+                  "StunRatioGrowth": 60,
+                  "SpRecovery": 4210,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 32175,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "闪避反击：寒雀",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1091014, Prop:1001}",
+              "Param": {
+                "1091014": {
+                  "Main": 24590,
+                  "Growth": 2240,
+                  "Format": "%",
+                  "DamagePercentage": 24590,
+                  "DamagePercentageGrowth": 2240,
+                  "StunRatio": 21450,
+                  "StunRatioGrowth": 980,
+                  "SpRecovery": 34200,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 261250,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 9499,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1091014, Prop:1002}",
+              "Param": {
+                "1091014": {
+                  "Main": 21450,
+                  "Growth": 980,
+                  "Format": "%",
+                  "DamagePercentage": 24590,
+                  "DamagePercentageGrowth": 2240,
+                  "StunRatio": 21450,
+                  "StunRatioGrowth": 980,
+                  "SpRecovery": 34200,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 261250,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 9499,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100112": 2
+        },
+        "2": {
+          "10": 3000,
+          "100112": 3
+        },
+        "3": {
+          "10": 6000,
+          "100122": 2
+        },
+        "4": {
+          "10": 9000,
+          "100122": 3
+        },
+        "5": {
+          "10": 12000,
+          "100122": 4
+        },
+        "6": {
+          "10": 18000,
+          "100122": 6
+        },
+        "7": {
+          "10": 45000,
+          "100132": 5
+        },
+        "8": {
+          "10": 67500,
+          "100132": 8
+        },
+        "9": {
+          "10": 90000,
+          "100132": 10
+        },
+        "10": {
+          "10": 112500,
+          "100132": 12
+        },
+        "11": {
+          "10": 135000,
+          "100132": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    },
+    "Special": {
+      "Description": [
+        {
+          "Name": "特殊技：深雪",
+          "Desc": "点按 <IconMap:Icon_Special> 发动：\n快速拔刀向前方进行斩击，造成<color=#98EFF0>烈霜伤害</color>；\n招式发动期间抗打断等级提升。"
+        },
+        {
+          "Name": "强化特殊技：飞雪",
+          "Desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n快速突进，对路径上的敌人发动强力斩击，造成大量<color=#98EFF0>烈霜伤害</color>；\n招式发动时，获得2点<color=#FFFFFF>[落霜]</color>；\n招式发动期间拥有无敌效果。\n招式发动后，能量足够时，再次点按 <IconMap:Icon_SpecialReady> 发动：\n额外消耗能量，对前方范围内的敌人发动强力追击，造成大量<color=#98EFF0>烈霜伤害</color>；\n招式发动时，获得2点<color=#FFFFFF>[落霜]</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "特殊技：深雪",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1091008, Prop:1001}",
+              "Param": {
+                "1091008": {
+                  "Main": 3580,
+                  "Growth": 330,
+                  "Format": "%",
+                  "DamagePercentage": 3580,
+                  "DamagePercentageGrowth": 330,
+                  "StunRatio": 3580,
+                  "StunRatioGrowth": 170,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 89650,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 3251,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1091008, Prop:1002}",
+              "Param": {
+                "1091008": {
+                  "Main": 3580,
+                  "Growth": 170,
+                  "Format": "%",
+                  "DamagePercentage": 3580,
+                  "DamagePercentageGrowth": 330,
+                  "StunRatio": 3580,
+                  "StunRatioGrowth": 170,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 89650,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 3251,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "强化特殊技：飞雪",
+          "Param": [
+            {
+              "Name": "斩击伤害倍率",
+              "Desc": "{{Skill:1091009, Prop:1001} + {Skill:1091010, Prop:1001}}",
+              "Param": {
+                "1091009": {
+                  "Main": 15740,
+                  "Growth": 1440,
+                  "Format": "%",
+                  "DamagePercentage": 15740,
+                  "DamagePercentageGrowth": 1440,
+                  "StunRatio": 12870,
+                  "StunRatioGrowth": 590,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 465300,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 15775,
+                  "SpConsume": 0,
+                  "AttackData": []
+                },
+                "1091010": {
+                  "Main": 23600,
+                  "Growth": 2150,
+                  "Format": "%",
+                  "DamagePercentage": 23600,
+                  "DamagePercentageGrowth": 2150,
+                  "StunRatio": 19300,
+                  "StunRatioGrowth": 880,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 697675,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 25052,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "追击伤害倍率",
+              "Desc": "{{Skill:1091011, Prop:1001} + {Skill:1091012, Prop:1001}}",
+              "Param": {
+                "1091011": {
+                  "Main": 19330,
+                  "Growth": 1760,
+                  "Format": "%",
+                  "DamagePercentage": 19330,
+                  "DamagePercentageGrowth": 1760,
+                  "StunRatio": 16200,
+                  "StunRatioGrowth": 740,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 561550,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 18925,
+                  "SpConsume": 0,
+                  "AttackData": []
+                },
+                "1091012": {
+                  "Main": 28990,
+                  "Growth": 2640,
+                  "Format": "%",
+                  "DamagePercentage": 28990,
+                  "DamagePercentageGrowth": 2640,
+                  "StunRatio": 24300,
+                  "StunRatioGrowth": 1110,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 842050,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 29777,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "斩击失衡倍率",
+              "Desc": "{{Skill:1091009, Prop:1002} + {Skill:1091010, Prop:1002}}",
+              "Param": {
+                "1091009": {
+                  "Main": 12870,
+                  "Growth": 590,
+                  "Format": "%",
+                  "DamagePercentage": 15740,
+                  "DamagePercentageGrowth": 1440,
+                  "StunRatio": 12870,
+                  "StunRatioGrowth": 590,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 465300,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 15775,
+                  "SpConsume": 0,
+                  "AttackData": []
+                },
+                "1091010": {
+                  "Main": 19300,
+                  "Growth": 880,
+                  "Format": "%",
+                  "DamagePercentage": 23600,
+                  "DamagePercentageGrowth": 2150,
+                  "StunRatio": 19300,
+                  "StunRatioGrowth": 880,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 697675,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 25052,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "追击失衡倍率",
+              "Desc": "{{Skill:1091011, Prop:1002} + {Skill:1091012, Prop:1002}}",
+              "Param": {
+                "1091011": {
+                  "Main": 16200,
+                  "Growth": 740,
+                  "Format": "%",
+                  "DamagePercentage": 19330,
+                  "DamagePercentageGrowth": 1760,
+                  "StunRatio": 16200,
+                  "StunRatioGrowth": 740,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 561550,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 18925,
+                  "SpConsume": 0,
+                  "AttackData": []
+                },
+                "1091012": {
+                  "Main": 24300,
+                  "Growth": 1110,
+                  "Format": "%",
+                  "DamagePercentage": 28990,
+                  "DamagePercentageGrowth": 2640,
+                  "StunRatio": 24300,
+                  "StunRatioGrowth": 1110,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 842050,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 29777,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "斩击能量消耗",
+              "Desc": "40点"
+            },
+            {
+              "Name": "追击能量消耗",
+              "Desc": "40点"
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100112": 2
+        },
+        "2": {
+          "10": 3000,
+          "100112": 3
+        },
+        "3": {
+          "10": 6000,
+          "100122": 2
+        },
+        "4": {
+          "10": 9000,
+          "100122": 3
+        },
+        "5": {
+          "10": 12000,
+          "100122": 4
+        },
+        "6": {
+          "10": 18000,
+          "100122": 6
+        },
+        "7": {
+          "10": 45000,
+          "100132": 5
+        },
+        "8": {
+          "10": 67500,
+          "100132": 8
+        },
+        "9": {
+          "10": 90000,
+          "100132": 10
+        },
+        "10": {
+          "10": 112500,
+          "100132": 12
+        },
+        "11": {
+          "10": 135000,
+          "100132": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    },
+    "Chain": {
+      "Description": [
+        {
+          "Name": "连携技：春临",
+          "Desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n对前方大范围敌人发动强力斩击，造成大量<color=#98EFF0>烈霜伤害</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "终结技：名残雪",
+          "Desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n对前方大范围敌人发动强力斩击，略作延迟后发动终结一击，造成大量<color=#98EFF0>烈霜伤害</color>；\n招式发动时，获得3点<color=#FFFFFF>[落霜]</color>，自身造成的<color=#98EFF0>冰属性伤害</color>提升30%，持续12秒；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "连携技：春临",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{{Skill:1091015, Prop:1001} + {Skill:1091016, Prop:1001} + {Skill:1091017, Prop:1001}}",
+              "Param": {
+                "1091015": {
+                  "Main": 18840,
+                  "Growth": 1720,
+                  "Format": "%",
+                  "DamagePercentage": 18840,
+                  "DamagePercentageGrowth": 1720,
+                  "StunRatio": 5670,
+                  "StunRatioGrowth": 260,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 690525,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 11136,
+                  "SpConsume": 0,
+                  "AttackData": []
+                },
+                "1091016": {
+                  "Main": 18840,
+                  "Growth": 1720,
+                  "Format": "%",
+                  "DamagePercentage": 18840,
+                  "DamagePercentageGrowth": 1720,
+                  "StunRatio": 5670,
+                  "StunRatioGrowth": 260,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 690525,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 11136,
+                  "SpConsume": 0,
+                  "AttackData": []
+                },
+                "1091017": {
+                  "Main": 25120,
+                  "Growth": 2290,
+                  "Format": "%",
+                  "DamagePercentage": 25120,
+                  "DamagePercentageGrowth": 2290,
+                  "StunRatio": 7560,
+                  "StunRatioGrowth": 350,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 920425,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 14848,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{{Skill:1091015, Prop:1002} + {Skill:1091016, Prop:1002} + {Skill:1091017, Prop:1002}}",
+              "Param": {
+                "1091015": {
+                  "Main": 5670,
+                  "Growth": 260,
+                  "Format": "%",
+                  "DamagePercentage": 18840,
+                  "DamagePercentageGrowth": 1720,
+                  "StunRatio": 5670,
+                  "StunRatioGrowth": 260,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 690525,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 11136,
+                  "SpConsume": 0,
+                  "AttackData": []
+                },
+                "1091016": {
+                  "Main": 5670,
+                  "Growth": 260,
+                  "Format": "%",
+                  "DamagePercentage": 18840,
+                  "DamagePercentageGrowth": 1720,
+                  "StunRatio": 5670,
+                  "StunRatioGrowth": 260,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 690525,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 11136,
+                  "SpConsume": 0,
+                  "AttackData": []
+                },
+                "1091017": {
+                  "Main": 7560,
+                  "Growth": 350,
+                  "Format": "%",
+                  "DamagePercentage": 25120,
+                  "DamagePercentageGrowth": 2290,
+                  "StunRatio": 7560,
+                  "StunRatioGrowth": 350,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 920425,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 14848,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "终结技：名残雪",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1091018, Prop:1001}",
+              "Param": {
+                "1091018": {
+                  "Main": 238800,
+                  "Growth": 21710,
+                  "Format": "%",
+                  "DamagePercentage": 238800,
+                  "DamagePercentageGrowth": 21710,
+                  "StunRatio": 37040,
+                  "StunRatioGrowth": 1690,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 0,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 113716,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1091018, Prop:1002}",
+              "Param": {
+                "1091018": {
+                  "Main": 37040,
+                  "Growth": 1690,
+                  "Format": "%",
+                  "DamagePercentage": 238800,
+                  "DamagePercentageGrowth": 21710,
+                  "StunRatio": 37040,
+                  "StunRatioGrowth": 1690,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 0,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 113716,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100112": 2
+        },
+        "2": {
+          "10": 3000,
+          "100112": 3
+        },
+        "3": {
+          "10": 6000,
+          "100122": 2
+        },
+        "4": {
+          "10": 9000,
+          "100122": 3
+        },
+        "5": {
+          "10": 12000,
+          "100122": 4
+        },
+        "6": {
+          "10": 18000,
+          "100122": 6
+        },
+        "7": {
+          "10": 45000,
+          "100132": 5
+        },
+        "8": {
+          "10": 67500,
+          "100132": 8
+        },
+        "9": {
+          "10": 90000,
+          "100132": 10
+        },
+        "10": {
+          "10": 112500,
+          "100132": 12
+        },
+        "11": {
+          "10": 135000,
+          "100132": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    },
+    "Assist": {
+      "Description": [
+        {
+          "Name": "快速支援：花信风",
+          "Desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n对前方敌人发动斩击，造成<color=#98EFF0>烈霜伤害</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "招架支援：花筏",
+          "Desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "支援突击：花辞",
+          "Desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n对前方敌人发动突进斩击，造成<color=#98EFF0>烈霜伤害</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "快速支援：花信风",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1091021, Prop:1001}",
+              "Param": {
+                "1091021": {
+                  "Main": 10450,
+                  "Growth": 950,
+                  "Format": "%",
+                  "DamagePercentage": 10450,
+                  "DamagePercentageGrowth": 950,
+                  "StunRatio": 10450,
+                  "StunRatioGrowth": 480,
+                  "SpRecovery": 34200,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 261250,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 9499,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1091021, Prop:1002}",
+              "Param": {
+                "1091021": {
+                  "Main": 10450,
+                  "Growth": 480,
+                  "Format": "%",
+                  "DamagePercentage": 10450,
+                  "DamagePercentageGrowth": 950,
+                  "StunRatio": 10450,
+                  "StunRatioGrowth": 480,
+                  "SpRecovery": 34200,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 261250,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 9499,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "招架支援：花筏",
+          "Param": [
+            {
+              "Name": "轻招架失衡倍率",
+              "Desc": "{Skill:1091022, Prop:1002}",
+              "Param": {
+                "1091022": {
+                  "Main": 27130,
+                  "Growth": 1240,
+                  "Format": "%",
+                  "DamagePercentage": 0,
+                  "DamagePercentageGrowth": 0,
+                  "StunRatio": 27130,
+                  "StunRatioGrowth": 1240,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 0,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "重招架失衡倍率",
+              "Desc": "{Skill:1091023, Prop:1002}",
+              "Param": {
+                "1091023": {
+                  "Main": 34280,
+                  "Growth": 1560,
+                  "Format": "%",
+                  "DamagePercentage": 0,
+                  "DamagePercentageGrowth": 0,
+                  "StunRatio": 34280,
+                  "StunRatioGrowth": 1560,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 0,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "连续招架失衡倍率",
+              "Desc": "{Skill:1091024, Prop:1002}",
+              "Param": {
+                "1091024": {
+                  "Main": 12830,
+                  "Growth": 590,
+                  "Format": "%",
+                  "DamagePercentage": 0,
+                  "DamagePercentageGrowth": 0,
+                  "StunRatio": 12830,
+                  "StunRatioGrowth": 590,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 0,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "支援突击：花辞",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1091025, Prop:1001}",
+              "Param": {
+                "1091025": {
+                  "Main": 33780,
+                  "Growth": 3080,
+                  "Format": "%",
+                  "DamagePercentage": 33780,
+                  "DamagePercentageGrowth": 3080,
+                  "StunRatio": 29190,
+                  "StunRatioGrowth": 1330,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 959475,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 28617,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1091025, Prop:1002}",
+              "Param": {
+                "1091025": {
+                  "Main": 29190,
+                  "Growth": 1330,
+                  "Format": "%",
+                  "DamagePercentage": 33780,
+                  "DamagePercentageGrowth": 3080,
+                  "StunRatio": 29190,
+                  "StunRatioGrowth": 1330,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 959475,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 28617,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100112": 2
+        },
+        "2": {
+          "10": 3000,
+          "100112": 3
+        },
+        "3": {
+          "10": 6000,
+          "100122": 2
+        },
+        "4": {
+          "10": 9000,
+          "100122": 3
+        },
+        "5": {
+          "10": 12000,
+          "100122": 4
+        },
+        "6": {
+          "10": 18000,
+          "100122": 6
+        },
+        "7": {
+          "10": 45000,
+          "100132": 5
+        },
+        "8": {
+          "10": 67500,
+          "100132": 8
+        },
+        "9": {
+          "10": 90000,
+          "100132": 10
+        },
+        "10": {
+          "10": 112500,
+          "100132": 12
+        },
+        "11": {
+          "10": 135000,
+          "100132": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    }
+  },
+  "SkillList": {
+    "1091001": {
+      "Name": "普通攻击：风花（一、二段）",
+      "Desc": "<IconMap:Icon_Normal>",
+      "ElementType": 200,
+      "HitType": 101
+    },
+    "1091002": {
+      "Name": "普通攻击：风花（三、四、五段）",
+      "Desc": "<IconMap:Icon_Normal>",
+      "ElementType": 202,
+      "HitType": 101
+    },
+    "1091003": {
+      "Name": "普通攻击：霜月",
+      "Desc": "<IconMap:Icon_Normal>（长按）（拥有至少2点落霜时）",
+      "ElementType": 202,
+      "HitType": 101
+    },
+    "1091004": {
+      "Name": "特殊技：深雪",
+      "Desc": "<IconMap:Icon_Special>",
+      "ElementType": 202,
+      "HitType": 101
+    },
+    "1091005": {
+      "Name": "强化特殊技：飞雪",
+      "Desc": "<IconMap:Icon_SpecialReady> ; <IconMap:Icon_SpecialReady>",
+      "ElementType": 202,
+      "HitType": 101
+    },
+    "1091006": {
+      "Name": "冲刺攻击：冬蜂",
+      "Desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "ElementType": 200,
+      "HitType": 101
+    },
+    "1091007": {
+      "Name": "闪避反击：寒雀",
+      "Desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "ElementType": 202,
+      "HitType": 101
+    },
+    "1091008": {
+      "Name": "连携技：春临",
+      "Desc": "<IconMap:Icon_QTE>",
+      "ElementType": 202,
+      "HitType": 101
+    },
+    "1091009": {
+      "Name": "终结技：名残雪",
+      "Desc": "<IconMap:Icon_UltimateReady>",
+      "ElementType": 202,
+      "HitType": 101
+    },
+    "1091010": {
+      "Name": "快速支援：花信风",
+      "Desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "ElementType": 202,
+      "HitType": 101
+    },
+    "1091011": {
+      "Name": "招架支援：花筏",
+      "Desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "ElementType": 0,
+      "HitType": 0
+    },
+    "1091012": {
+      "Name": "支援突击：花辞",
+      "Desc": "<IconMap:Icon_Special>（发动招架支援后）",
+      "ElementType": 202,
+      "HitType": 101
+    }
+  },
+  "Passive": {
+    "Level": {
+      "1": {
+        "Level": 1,
+        "Id": 1091501,
+        "Name": [
+          "核心被动：寒炎",
+          "额外能力：同沐霜雪"
+        ],
+        "Desc": [
+          "星见雅对敌人造成<color=#98EFF0>烈霜伤害</color>时，将会为目标附着<color=#FFFFFF>[冰焰]</color>，持续30秒；对附着<color=#FFFFFF>[冰焰]</color>的敌人累积<color=#98EFF0>烈霜异常积蓄值</color>时，会基于星见雅暴击率的100%提升<color=#98EFF0>烈霜异常积蓄效率</color>，最多提升80%；星见雅累积<color=#98EFF0>烈霜异常积蓄值</color>时，具有独立的属性异常积蓄槽，随之触发的<color=#98EFF0>[冻结]</color>、<color=#98EFF0>[碎冰]</color>和<color=#98EFF0>[霜寒]</color>效果，可以与包括<color=#98EFF0>冰属性异常效果</color>在内的其他属性异常效果互相结算<color=#FFFFFF>[紊乱]</color>；\n星见雅对附着<color=#FFFFFF>[冰焰]</color>的敌人施加<color=#98EFF0>[霜寒]</color>效果时，将会消除<color=#FFFFFF>[冰焰]</color>并触发<color=#FFFFFF>[霜灼·破]</color>，对目标造成星见雅<color=#2BAD00>750%</color>攻击力的<color=#98EFF0>烈霜伤害</color>，同时使目标进入<color=#FFFFFF>[霜灼]</color>状态；<color=#FFFFFF>[霜灼]</color>状态下，全队对目标累积的属性异常积蓄值提升<color=#2BAD00>14%</color>，但星见雅无法再次为其附着<color=#FFFFFF>[冰焰]</color>；<color=#FFFFFF>[霜灼]</color>状态将会随本次<color=#98EFF0>[霜寒]</color>效果一起结束，状态持续期间，对敌人重新施加属性异常效果可以覆盖<color=#98EFF0>[霜寒]</color>并消除<color=#FFFFFF>[霜灼]</color>；\n触发<color=#FFFFFF>[霜灼·破]</color>时，星见雅获得1点<color=#FFFFFF>[落霜]</color>，10秒内最多触发一次。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[普通攻击：霜月]</color>造成的伤害提升60%；队伍中任意角色触发<color=#FFFFFF>[紊乱]</color>效果时，星见雅获得2点<color=#FFFFFF>[落霜]</color>，且在下一次<color=#FFFFFF>[霜月架势]</color>期间，<color=#FFFFFF>[普通攻击：霜月]</color>将无视目标30%<color=#98EFF0>冰属性伤害抗性</color>。"
+        ]
+      },
+      "2": {
+        "Level": 2,
+        "Id": 1091502,
+        "Name": [
+          "核心被动：寒炎",
+          "额外能力：同沐霜雪"
+        ],
+        "Desc": [
+          "星见雅对敌人造成<color=#98EFF0>烈霜伤害</color>时，将会为目标附着<color=#FFFFFF>[冰焰]</color>，持续30秒；对附着<color=#FFFFFF>[冰焰]</color>的敌人累积<color=#98EFF0>烈霜异常积蓄值</color>时，会基于星见雅暴击率的100%提升<color=#98EFF0>烈霜异常积蓄效率</color>，最多提升80%；星见雅累积<color=#98EFF0>烈霜异常积蓄值</color>时，具有独立的属性异常积蓄槽，随之触发的<color=#98EFF0>[冻结]</color>、<color=#98EFF0>[碎冰]</color>和<color=#98EFF0>[霜寒]</color>效果，可以与包括<color=#98EFF0>冰属性异常效果</color>在内的其他属性异常效果互相结算<color=#FFFFFF>[紊乱]</color>；\n星见雅对附着<color=#FFFFFF>[冰焰]</color>的敌人施加<color=#98EFF0>[霜寒]</color>效果时，将会消除<color=#FFFFFF>[冰焰]</color>并触发<color=#FFFFFF>[霜灼·破]</color>，对目标造成星见雅<color=#2BAD00>875%</color>攻击力的<color=#98EFF0>烈霜伤害</color>，同时使目标进入<color=#FFFFFF>[霜灼]</color>状态；<color=#FFFFFF>[霜灼]</color>状态下，全队对目标累积的属性异常积蓄值提升<color=#2BAD00>15%</color>，但星见雅无法再次为其附着<color=#FFFFFF>[冰焰]</color>；<color=#FFFFFF>[霜灼]</color>状态将会随本次<color=#98EFF0>[霜寒]</color>效果一起结束，状态持续期间，对敌人重新施加属性异常效果可以覆盖<color=#98EFF0>[霜寒]</color>并消除<color=#FFFFFF>[霜灼]</color>；\n触发<color=#FFFFFF>[霜灼·破]</color>时，星见雅获得1点<color=#FFFFFF>[落霜]</color>，10秒内最多触发一次。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[普通攻击：霜月]</color>造成的伤害提升60%；队伍中任意角色触发<color=#FFFFFF>[紊乱]</color>效果时，星见雅获得2点<color=#FFFFFF>[落霜]</color>，且在下一次<color=#FFFFFF>[霜月架势]</color>期间，<color=#FFFFFF>[普通攻击：霜月]</color>将无视目标30%<color=#98EFF0>冰属性伤害抗性</color>。"
+        ]
+      },
+      "3": {
+        "Level": 3,
+        "Id": 1091503,
+        "Name": [
+          "核心被动：寒炎",
+          "额外能力：同沐霜雪"
+        ],
+        "Desc": [
+          "星见雅对敌人造成<color=#98EFF0>烈霜伤害</color>时，将会为目标附着<color=#FFFFFF>[冰焰]</color>，持续30秒；对附着<color=#FFFFFF>[冰焰]</color>的敌人累积<color=#98EFF0>烈霜异常积蓄值</color>时，会基于星见雅暴击率的100%提升<color=#98EFF0>烈霜异常积蓄效率</color>，最多提升80%；星见雅累积<color=#98EFF0>烈霜异常积蓄值</color>时，具有独立的属性异常积蓄槽，随之触发的<color=#98EFF0>[冻结]</color>、<color=#98EFF0>[碎冰]</color>和<color=#98EFF0>[霜寒]</color>效果，可以与包括<color=#98EFF0>冰属性异常效果</color>在内的其他属性异常效果互相结算<color=#FFFFFF>[紊乱]</color>；\n星见雅对附着<color=#FFFFFF>[冰焰]</color>的敌人施加<color=#98EFF0>[霜寒]</color>效果时，将会消除<color=#FFFFFF>[冰焰]</color>并触发<color=#FFFFFF>[霜灼·破]</color>，对目标造成星见雅<color=#2BAD00>1000%</color>攻击力的<color=#98EFF0>烈霜伤害</color>，同时使目标进入<color=#FFFFFF>[霜灼]</color>状态；<color=#FFFFFF>[霜灼]</color>状态下，全队对目标累积的属性异常积蓄值提升<color=#2BAD00>16%</color>，但星见雅无法再次为其附着<color=#FFFFFF>[冰焰]</color>；<color=#FFFFFF>[霜灼]</color>状态将会随本次<color=#98EFF0>[霜寒]</color>效果一起结束，状态持续期间，对敌人重新施加属性异常效果可以覆盖<color=#98EFF0>[霜寒]</color>并消除<color=#FFFFFF>[霜灼]</color>；\n触发<color=#FFFFFF>[霜灼·破]</color>时，星见雅获得1点<color=#FFFFFF>[落霜]</color>，10秒内最多触发一次。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[普通攻击：霜月]</color>造成的伤害提升60%；队伍中任意角色触发<color=#FFFFFF>[紊乱]</color>效果时，星见雅获得2点<color=#FFFFFF>[落霜]</color>，且在下一次<color=#FFFFFF>[霜月架势]</color>期间，<color=#FFFFFF>[普通攻击：霜月]</color>将无视目标30%<color=#98EFF0>冰属性伤害抗性</color>。"
+        ]
+      },
+      "4": {
+        "Level": 4,
+        "Id": 1091504,
+        "Name": [
+          "核心被动：寒炎",
+          "额外能力：同沐霜雪"
+        ],
+        "Desc": [
+          "星见雅对敌人造成<color=#98EFF0>烈霜伤害</color>时，将会为目标附着<color=#FFFFFF>[冰焰]</color>，持续30秒；对附着<color=#FFFFFF>[冰焰]</color>的敌人累积<color=#98EFF0>烈霜异常积蓄值</color>时，会基于星见雅暴击率的100%提升<color=#98EFF0>烈霜异常积蓄效率</color>，最多提升80%；星见雅累积<color=#98EFF0>烈霜异常积蓄值</color>时，具有独立的属性异常积蓄槽，随之触发的<color=#98EFF0>[冻结]</color>、<color=#98EFF0>[碎冰]</color>和<color=#98EFF0>[霜寒]</color>效果，可以与包括<color=#98EFF0>冰属性异常效果</color>在内的其他属性异常效果互相结算<color=#FFFFFF>[紊乱]</color>；\n星见雅对附着<color=#FFFFFF>[冰焰]</color>的敌人施加<color=#98EFF0>[霜寒]</color>效果时，将会消除<color=#FFFFFF>[冰焰]</color>并触发<color=#FFFFFF>[霜灼·破]</color>，对目标造成星见雅<color=#2BAD00>1125%</color>攻击力的<color=#98EFF0>烈霜伤害</color>，同时使目标进入<color=#FFFFFF>[霜灼]</color>状态；<color=#FFFFFF>[霜灼]</color>状态下，全队对目标累积的属性异常积蓄值提升<color=#2BAD00>17%</color>，但星见雅无法再次为其附着<color=#FFFFFF>[冰焰]</color>；<color=#FFFFFF>[霜灼]</color>状态将会随本次<color=#98EFF0>[霜寒]</color>效果一起结束，状态持续期间，对敌人重新施加属性异常效果可以覆盖<color=#98EFF0>[霜寒]</color>并消除<color=#FFFFFF>[霜灼]</color>；\n触发<color=#FFFFFF>[霜灼·破]</color>时，星见雅获得1点<color=#FFFFFF>[落霜]</color>，10秒内最多触发一次。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[普通攻击：霜月]</color>造成的伤害提升60%；队伍中任意角色触发<color=#FFFFFF>[紊乱]</color>效果时，星见雅获得2点<color=#FFFFFF>[落霜]</color>，且在下一次<color=#FFFFFF>[霜月架势]</color>期间，<color=#FFFFFF>[普通攻击：霜月]</color>将无视目标30%<color=#98EFF0>冰属性伤害抗性</color>。"
+        ]
+      },
+      "5": {
+        "Level": 5,
+        "Id": 1091505,
+        "Name": [
+          "核心被动：寒炎",
+          "额外能力：同沐霜雪"
+        ],
+        "Desc": [
+          "星见雅对敌人造成<color=#98EFF0>烈霜伤害</color>时，将会为目标附着<color=#FFFFFF>[冰焰]</color>，持续30秒；对附着<color=#FFFFFF>[冰焰]</color>的敌人累积<color=#98EFF0>烈霜异常积蓄值</color>时，会基于星见雅暴击率的100%提升<color=#98EFF0>烈霜异常积蓄效率</color>，最多提升80%；星见雅累积<color=#98EFF0>烈霜异常积蓄值</color>时，具有独立的属性异常积蓄槽，随之触发的<color=#98EFF0>[冻结]</color>、<color=#98EFF0>[碎冰]</color>和<color=#98EFF0>[霜寒]</color>效果，可以与包括<color=#98EFF0>冰属性异常效果</color>在内的其他属性异常效果互相结算<color=#FFFFFF>[紊乱]</color>；\n星见雅对附着<color=#FFFFFF>[冰焰]</color>的敌人施加<color=#98EFF0>[霜寒]</color>效果时，将会消除<color=#FFFFFF>[冰焰]</color>并触发<color=#FFFFFF>[霜灼·破]</color>，对目标造成星见雅<color=#2BAD00>1250%</color>攻击力的<color=#98EFF0>烈霜伤害</color>，同时使目标进入<color=#FFFFFF>[霜灼]</color>状态；<color=#FFFFFF>[霜灼]</color>状态下，全队对目标累积的属性异常积蓄值提升<color=#2BAD00>18%</color>，但星见雅无法再次为其附着<color=#FFFFFF>[冰焰]</color>；<color=#FFFFFF>[霜灼]</color>状态将会随本次<color=#98EFF0>[霜寒]</color>效果一起结束，状态持续期间，对敌人重新施加属性异常效果可以覆盖<color=#98EFF0>[霜寒]</color>并消除<color=#FFFFFF>[霜灼]</color>；\n触发<color=#FFFFFF>[霜灼·破]</color>时，星见雅获得1点<color=#FFFFFF>[落霜]</color>，10秒内最多触发一次。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[普通攻击：霜月]</color>造成的伤害提升60%；队伍中任意角色触发<color=#FFFFFF>[紊乱]</color>效果时，星见雅获得2点<color=#FFFFFF>[落霜]</color>，且在下一次<color=#FFFFFF>[霜月架势]</color>期间，<color=#FFFFFF>[普通攻击：霜月]</color>将无视目标30%<color=#98EFF0>冰属性伤害抗性</color>。"
+        ]
+      },
+      "6": {
+        "Level": 6,
+        "Id": 1091506,
+        "Name": [
+          "核心被动：寒炎",
+          "额外能力：同沐霜雪"
+        ],
+        "Desc": [
+          "星见雅对敌人造成<color=#98EFF0>烈霜伤害</color>时，将会为目标附着<color=#FFFFFF>[冰焰]</color>，持续30秒；对附着<color=#FFFFFF>[冰焰]</color>的敌人累积<color=#98EFF0>烈霜异常积蓄值</color>时，会基于星见雅暴击率的100%提升<color=#98EFF0>烈霜异常积蓄效率</color>，最多提升80%；星见雅累积<color=#98EFF0>烈霜异常积蓄值</color>时，具有独立的属性异常积蓄槽，随之触发的<color=#98EFF0>[冻结]</color>、<color=#98EFF0>[碎冰]</color>和<color=#98EFF0>[霜寒]</color>效果，可以与包括<color=#98EFF0>冰属性异常效果</color>在内的其他属性异常效果互相结算<color=#FFFFFF>[紊乱]</color>；\n星见雅对附着<color=#FFFFFF>[冰焰]</color>的敌人施加<color=#98EFF0>[霜寒]</color>效果时，将会消除<color=#FFFFFF>[冰焰]</color>并触发<color=#FFFFFF>[霜灼·破]</color>，对目标造成星见雅<color=#2BAD00>1375%</color>攻击力的<color=#98EFF0>烈霜伤害</color>，同时使目标进入<color=#FFFFFF>[霜灼]</color>状态；<color=#FFFFFF>[霜灼]</color>状态下，全队对目标累积的属性异常积蓄值提升<color=#2BAD00>19%</color>，但星见雅无法再次为其附着<color=#FFFFFF>[冰焰]</color>；<color=#FFFFFF>[霜灼]</color>状态将会随本次<color=#98EFF0>[霜寒]</color>效果一起结束，状态持续期间，对敌人重新施加属性异常效果可以覆盖<color=#98EFF0>[霜寒]</color>并消除<color=#FFFFFF>[霜灼]</color>；\n触发<color=#FFFFFF>[霜灼·破]</color>时，星见雅获得1点<color=#FFFFFF>[落霜]</color>，10秒内最多触发一次。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[普通攻击：霜月]</color>造成的伤害提升60%；队伍中任意角色触发<color=#FFFFFF>[紊乱]</color>效果时，星见雅获得2点<color=#FFFFFF>[落霜]</color>，且在下一次<color=#FFFFFF>[霜月架势]</color>期间，<color=#FFFFFF>[普通攻击：霜月]</color>将无视目标30%<color=#98EFF0>冰属性伤害抗性</color>。"
+        ]
+      },
+      "7": {
+        "Level": 7,
+        "Id": 1091507,
+        "Name": [
+          "核心被动：寒炎",
+          "额外能力：同沐霜雪"
+        ],
+        "Desc": [
+          "星见雅对敌人造成<color=#98EFF0>烈霜伤害</color>时，将会为目标附着<color=#FFFFFF>[冰焰]</color>，持续30秒；对附着<color=#FFFFFF>[冰焰]</color>的敌人累积<color=#98EFF0>烈霜异常积蓄值</color>时，会基于星见雅暴击率的100%提升<color=#98EFF0>烈霜异常积蓄效率</color>，最多提升80%；星见雅累积<color=#98EFF0>烈霜异常积蓄值</color>时，具有独立的属性异常积蓄槽，随之触发的<color=#98EFF0>[冻结]</color>、<color=#98EFF0>[碎冰]</color>和<color=#98EFF0>[霜寒]</color>效果，可以与包括<color=#98EFF0>冰属性异常效果</color>在内的其他属性异常效果互相结算<color=#FFFFFF>[紊乱]</color>；\n星见雅对附着<color=#FFFFFF>[冰焰]</color>的敌人施加<color=#98EFF0>[霜寒]</color>效果时，将会消除<color=#FFFFFF>[冰焰]</color>并触发<color=#FFFFFF>[霜灼·破]</color>，对目标造成星见雅<color=#2BAD00>1500%</color>攻击力的<color=#98EFF0>烈霜伤害</color>，同时使目标进入<color=#FFFFFF>[霜灼]</color>状态；<color=#FFFFFF>[霜灼]</color>状态下，全队对目标累积的属性异常积蓄值提升<color=#2BAD00>20%</color>，但星见雅无法再次为其附着<color=#FFFFFF>[冰焰]</color>；<color=#FFFFFF>[霜灼]</color>状态将会随本次<color=#98EFF0>[霜寒]</color>效果一起结束，状态持续期间，对敌人重新施加属性异常效果可以覆盖<color=#98EFF0>[霜寒]</color>并消除<color=#FFFFFF>[霜灼]</color>；\n触发<color=#FFFFFF>[霜灼·破]</color>时，星见雅获得1点<color=#FFFFFF>[落霜]</color>，10秒内最多触发一次。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n<color=#FFFFFF>[普通攻击：霜月]</color>造成的伤害提升60%；队伍中任意角色触发<color=#FFFFFF>[紊乱]</color>效果时，星见雅获得2点<color=#FFFFFF>[落霜]</color>，且在下一次<color=#FFFFFF>[霜月架势]</color>期间，<color=#FFFFFF>[普通攻击：霜月]</color>将无视目标30%<color=#98EFF0>冰属性伤害抗性</color>。"
+        ]
+      }
+    },
+    "Materials": {
+      "1": {
+        "10": 5000
+      },
+      "2": {
+        "10": 12000,
+        "110508": 2
+      },
+      "3": {
+        "10": 28000,
+        "110508": 4
+      },
+      "4": {
+        "10": 60000,
+        "110005": 2,
+        "110508": 9
+      },
+      "5": {
+        "10": 100000,
+        "110005": 3,
+        "110508": 15
+      },
+      "6": {
+        "10": 200000,
+        "110005": 4,
+        "110508": 30
+      }
+    }
+  },
+  "Talent": {
+    "1": {
+      "Level": 1,
+      "Name": "雪上加霜",
+      "Desc": "在<color=#FFFFFF>[霜月架势]</color>期间，每消耗1点<color=#FFFFFF>[落霜]</color>，<color=#FFFFFF>[普通攻击：霜月]</color>将无视目标6%防御力，最多叠加6层，退出<color=#FFFFFF>[霜月架势]</color>后增益效果结束；在<color=#FFFFFF>[普通攻击：霜月]</color>中进行三段蓄力，斩击命中处于<color=#FFFFFF>[霜灼]</color>状态下的敌人时，可以立即消除目标的<color=#FFFFFF>[霜灼]</color>状态，并使全队属性异常积蓄效率提升20%，持续10秒。",
+      "Desc2": "雅自幼起便喜欢吟诵霜雪相关的诗句。\n即使初见时不能完全理解，但她依旧日复一日地思索着。\n不知不觉间，她已明悟出其中的真意。\n不是在某个清朗的雪夜，而是在刀刃相向的战场上。"
+    },
+    "2": {
+      "Level": 2,
+      "Name": "吐纳法",
+      "Desc": "<color=#FFFFFF>[普通攻击：风花]</color>和<color=#FFFFFF>[闪避反击]</color>造成的伤害提升30%；第五段<color=#FFFFFF>[普通攻击：风花]</color>最后一击命中敌人时，星见雅获得1点<color=#FFFFFF>[落霜]</color>；进入战场时，星见雅立刻获得6点<color=#FFFFFF>[落霜]</color>，自身暴击率提升15%。",
+      "Desc2": "「刀刃如常，心亦如是。」这是星见流剑术的训诫之一。\n击倒敌人只是致胜的第一步，在战斗中不失从容之心、\n保持毫不懈怠的仪态始终如一，才是武者的修行之道。"
+    },
+    "3": {
+      "Level": 3,
+      "Name": "武者修养",
+      "Desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "Desc2": "武家出身的雅有着极好锻炼习惯，剑术修行是不能断的。什么？要开会？那就翘掉开会。"
+    },
+    "4": {
+      "Level": 4,
+      "Name": "皲裂",
+      "Desc": "<color=#FFFFFF>[霜灼·破]</color>造成的伤害提升30%，触发<color=#FFFFFF>[霜灼·破]</color>时，星见雅额外获得250点喧响值。",
+      "Desc2": "战斗时轻吟诗句，可以调节呼吸的节律。\n无论是心境还是呼吸，少女都时刻保持在盛开前的最佳状态。"
+    },
+    "5": {
+      "Level": 5,
+      "Name": "纪念日",
+      "Desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "Desc2": "少女带着鲜花来到那个熟悉的地方，呼出的气化作白雾，融化在冰冷的空气里。\n她的指尖轻轻抚过纪念碑上的那个名字。\n周围的一切都很安静，如同最沉默的见证者。"
+    },
+    "6": {
+      "Level": 6,
+      "Name": "天资卓越",
+      "Desc": "在<color=#FFFFFF>[霜月架势]</color>期间，星见雅将获得<color=#FFFFFF>[极意]</color>效果，使<color=#FFFFFF>[普通攻击：霜月]</color>造成的伤害提升30%，获得<color=#FFFFFF>[极意]</color>效果后，消耗<color=#FFFFFF>[落霜]</color>时，星见雅会根据当前蓄力段数，自动拔刀向前方发动强力斩击；在<color=#FFFFFF>[落霜]</color>耗尽前，拔刀斩击不会打断<color=#FFFFFF>[霜月架势]</color>下的蓄力进度；在一次<color=#FFFFFF>[霜月架势]</color>期间，最多连续发动3次拔刀斩击。",
+      "Desc2": "经历的战斗数量越多，越是能让外人察觉到一个事实：若是有刀剑的神灵存在，那他们一定颇为偏爱星见雅。"
+    }
+  }
+}

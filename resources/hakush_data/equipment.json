@@ -1,0 +1,416 @@
+{
+  "31900": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitProtoPunk.png",
+    "EN": {
+      "name": "Proto Punk",
+      "desc2": "Increases Shield effect by 15%.",
+      "desc4": "When any squad member triggers a \u003Ccolor=#FFFFFF\u003EDefensive Assist\u003C/color\u003E or \u003Ccolor=#FFFFFF\u003EEvasive Assist\u003C/color\u003E, all squad members deal 15% increased DMG, lasting 10s. Passive effects of the same name do not stack."
+    },
+    "KO": {
+      "name": "원시 펑크",
+      "desc2": "부여하는 실드량+15%",
+      "desc4": "파티 내 임의의 캐릭터가 \u003Ccolor=#FFFFFF\u003E[패링 지원]\u003C/color\u003E 혹은 \u003Ccolor=#FFFFFF\u003E[회피 지원]\u003C/color\u003E 시전 시 모든 파티원이 주는 피해가 15% 증가한다. 지속 시간: 10초, 이름이 같은 패시브 효과끼리 중첩되지 않는다."
+    },
+    "CHS": {
+      "name": "原始朋克",
+      "desc2": "施加的护盾值提升15%。",
+      "desc4": "队伍中任意角色发动\u003Ccolor=#FFFFFF\u003E[招架支援]\u003C/color\u003E或\u003Ccolor=#FFFFFF\u003E[回避支援]\u003C/color\u003E时，全队造成的伤害提升15%，持续10秒，同名被动效果之间不可叠加。"
+    },
+    "JA": {
+      "name": "プロト・パンク",
+      "desc2": "シールド生成量+15%。",
+      "desc4": "任意のメンバーが\u003Ccolor=#FFFFFF\u003E『パリィ支援』\u003C/color\u003Eまたは\u003Ccolor=#FFFFFF\u003E『回避支援』\u003C/color\u003Eを発動した時、チーム全体の与ダメージ+15%、継続時間10秒。同じパッシブ効果は重ね掛け不可。"
+    }
+  },
+  "31300": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitFreedomBlues.png",
+    "EN": {
+      "name": "Freedom Blues",
+      "desc2": "Anomaly Proficiency +30",
+      "desc4": "When an \u003Ccolor=#FFFFFF\u003EEX Special Attack\u003C/color\u003E hits an enemy, reduce the target's Anomaly Buildup RES to the equipper's Attribute by 20% for 8s. This effect does not stack with others of the same attribute."
+    },
+    "KO": {
+      "name": "자유의 블루스",
+      "desc2": "이상 마스터리+30pt",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[강화 특수 스킬]\u003C/color\u003E이 적에게 명중 시 착용자의 속성 타입에 따라 타깃의 상응하는 속성 이상 축적 저항이 20% 감소한다. 지속 시간: 8초, 동일한 속성 타입의 효과는 중첩되지 않는다."
+    },
+    "CHS": {
+      "name": "自由蓝调",
+      "desc2": "异常精通+30点。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[强化特殊技]\u003C/color\u003E命中敌人时，根据装备者的属性类型，使目标对应属性异常积蓄抗性降低20%，持续8秒，相同属性类型的效果不可叠加。"
+    },
+    "JA": {
+      "name": "フリーダム・ブルース",
+      "desc2": "異常マスタリー+30Pt。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E『強化特殊スキル』\u003C/color\u003Eが敵に命中すると、装備者の属性に応じてターゲットの対応する状態異常蓄積耐性-20%、継続時間8秒。同属性での重ね掛けは不可。"
+    }
+  },
+  "31600": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSwingJazz.png",
+    "EN": {
+      "name": "Swing Jazz",
+      "desc2": "Energy Regen +20%",
+      "desc4": "Launching a \u003Ccolor=#FFFFFF\u003EChain Attack\u003C/color\u003E or \u003Ccolor=#FFFFFF\u003EUltimate\u003C/color\u003E increases all squad members' DMG by 15% for 12s. Passive effects of the same name do not stack."
+    },
+    "KO": {
+      "name": "스윙 재즈",
+      "desc2": "에너지 자동 회복+20%",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[콤보 스킬]\u003C/color\u003E 혹은 \u003Ccolor=#FFFFFF\u003E[궁극기]\u003C/color\u003E 시전 시 모든 파티원이 주는 피해가 15% 증가한다. 지속 시간: 12초, 이름이 같은 패시브 효과끼리 중첩되지 않는다."
+    },
+    "CHS": {
+      "name": "摇摆爵士",
+      "desc2": "能量自动回复+20%。",
+      "desc4": "发动\u003Ccolor=#FFFFFF\u003E[连携技]\u003C/color\u003E或\u003Ccolor=#FFFFFF\u003E[终结技]\u003C/color\u003E时，全队造成的伤害提升15%，持续12秒，同名被动效果之间不可叠加。"
+    },
+    "JA": {
+      "name": "スイング・ジャズ",
+      "desc2": "エネルギー自動回復+20%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E『連携スキル』\u003C/color\u003Eまたは\u003Ccolor=#FFFFFF\u003E『終結スキル』\u003C/color\u003E発動時、チーム全体の与ダメージ+15%、継続時間12秒。同じパッシブ効果は重ね掛け不可。"
+    }
+  },
+  "32700": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitBranch&BladeSong.png",
+    "EN": {
+      "name": "Branch & Blade Song",
+      "desc2": "CRIT DMG +16%",
+      "desc4": "When Anomaly Mastery exceeds or equals 115 points, the equipper's CRIT DMG increases by 30%. When any squad member applies \u003Ccolor=#98EFF0\u003EFreeze\u003C/color\u003E or triggers the \u003Ccolor=#98EFF0\u003EShatter\u003C/color\u003E effect on an enemy, the equipper's CRIT Rate increases by 12%, lasting 15s."
+    },
+    "KO": {
+      "name": "나뭇가지 검의 노래",
+      "desc2": "치명타 피해+16%",
+      "desc4": "이상 장악력이 115pt 이상일 시 착용자의 치명타 피해가 30% 증가한다. 파티 내 임의의 캐릭터가 적에게 \u003Ccolor=#98EFF0\u003E[빙결]\u003C/color\u003E 부여 혹은 \u003Ccolor=#98EFF0\u003E[쇄빙]\u003C/color\u003E 효과 발동 시 착용자의 치명타 확률이 12% 증가한다. 지속 시간: 15초"
+    },
+    "CHS": {
+      "name": "折枝剑歌",
+      "desc2": "暴击伤害+16%。",
+      "desc4": "异常掌控大于等于115点时，装备者的暴击伤害提升30%；队伍中任意角色对敌人施加\u003Ccolor=#98EFF0\u003E[冻结]\u003C/color\u003E或触发\u003Ccolor=#98EFF0\u003E[碎冰]\u003C/color\u003E效果时，装备者的暴击率提升12%，持续15秒。"
+    },
+    "JA": {
+      "name": "折枝の刀歌",
+      "desc2": "会心ダメージ+16%。",
+      "desc4": "異常掌握が115Pt以上の時、装備者の会心ダメージ+30%。任意のメンバーが敵に\u003Ccolor=#98EFF0\u003E[凍結]\u003C/color\u003E効果を付与した時、または\u003Ccolor=#98EFF0\u003E[砕氷]\u003C/color\u003E効果を発動した時、装備者の会心率+12%、継続時間15秒。"
+    }
+  },
+  "31100": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitPufferElectro.png",
+    "EN": {
+      "name": "Puffer Electro",
+      "desc2": "PEN Ratio +8%",
+      "desc4": "\u003Ccolor=#FFFFFF\u003EUltimate\u003C/color\u003E DMG increases by 20%. Launching an \u003Ccolor=#FFFFFF\u003EUltimate\u003C/color\u003E increases the equipper's ATK by 15% for 12s."
+    },
+    "KO": {
+      "name": "복어 일렉트로",
+      "desc2": "관통률+8%",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[궁극기]\u003C/color\u003E로 주는 피해가 20% 증가한다. \u003Ccolor=#FFFFFF\u003E[궁극기]\u003C/color\u003E 시전 시 착용자의 공격력이 15% 증가한다. 지속 시간: 12초"
+    },
+    "CHS": {
+      "name": "河豚电音",
+      "desc2": "穿透率+8%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[终结技]\u003C/color\u003E造成的伤害提升20%；发动\u003Ccolor=#FFFFFF\u003E[终结技]\u003C/color\u003E时，装备者的攻击力提升15%，持续12秒。"
+    },
+    "JA": {
+      "name": "パファー・エレクトロ",
+      "desc2": "貫通率+8%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E『終結スキル』\u003C/color\u003Eの与ダメージ+20%。\u003Ccolor=#FFFFFF\u003E『終結スキル』\u003C/color\u003E発動時、装備者の攻撃力+15%、継続時間12秒。"
+    }
+  },
+  "31200": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShockstarDisco.png",
+    "EN": {
+      "name": "Shockstar Disco",
+      "desc2": "Impact +6%",
+      "desc4": "\u003Ccolor=#FFFFFF\u003EBasic Attacks\u003C/color\u003E, \u003Ccolor=#FFFFFF\u003EDash Attacks\u003C/color\u003E, and \u003Ccolor=#FFFFFF\u003EDodge Counters\u003C/color\u003E inflict 20% more Daze to the main target."
+    },
+    "KO": {
+      "name": "쇼크스타 디스코",
+      "desc2": "충격력+6%",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[일반 공격]\u003C/color\u003E, \u003Ccolor=#FFFFFF\u003E[대시 공격]\u003C/color\u003E, \u003Ccolor=#FFFFFF\u003E[회피 반격]\u003C/color\u003E이 주요 공격 타깃에게 주는 그로기 수치가 20% 증가한다."
+    },
+    "CHS": {
+      "name": "震星迪斯科",
+      "desc2": "冲击力+6%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[普通攻击]\u003C/color\u003E、\u003Ccolor=#FFFFFF\u003E[冲刺攻击]\u003C/color\u003E、\u003Ccolor=#FFFFFF\u003E[闪避反击]\u003C/color\u003E对主要攻击目标造成的失衡值提升20%。"
+    },
+    "JA": {
+      "name": "ショックスター・ディスコ",
+      "desc2": "衝撃力+6%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E『通常攻撃』\u003C/color\u003E、\u003Ccolor=#FFFFFF\u003E『ダッシュ攻撃』\u003C/color\u003E、\u003Ccolor=#FFFFFF\u003E『回避反撃』\u003C/color\u003Eがメインターゲットに与えるブレイク値+20%。"
+    }
+  },
+  "32800": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitAstralVoice.png",
+    "EN": {
+      "name": "Astral Voice",
+      "desc2": "ATK +10%",
+      "desc4": "Whenever any squad member enters the field using a \u003Ccolor=#FFFFFF\u003EQuick Assist\u003C/color\u003E, all squad members gain 1 stack of \u003Ccolor=#FFFFFF\u003EAstral\u003C/color\u003E, up to a maximum of 3 stacks, and lasting 15s. Repeated triggers reset the duration. Each stack of \u003Ccolor=#FFFFFF\u003EAstral\u003C/color\u003E increases the DMG dealt by the character entering the field using a \u003Ccolor=#FFFFFF\u003EQuick Assist\u003C/color\u003E by 8%. Only one instance of this effect can exist in the same squad."
+    },
+    "KO": {
+      "name": "고요 속의 별",
+      "desc2": "공격력+10%",
+      "desc4": "파티 내 임의의 캐릭터가 \u003Ccolor=#FFFFFF\u003E[빠른 지원]\u003C/color\u003E을 통해 전장에 진입할 경우, 모든 파티원이 \u003Ccolor=#FFFFFF\u003E[별]\u003C/color\u003E을 1스택 획득한다. 최대 중첩: 3스택, 지속 시간: 15초, 중복 발동 시 지속 시간이 갱신되며, \u003Ccolor=#FFFFFF\u003E[별]\u003C/color\u003E을 1스택 보유할 때마다 \u003Ccolor=#FFFFFF\u003E[빠른 지원]\u003C/color\u003E으로 전장에 진입하는 캐릭터가 주는 피해가 8% 증가한다. 해당 효과는 전체 파티에서 하나만 유효하다."
+    },
+    "CHS": {
+      "name": "静听嘉音",
+      "desc2": "攻击力+10%。",
+      "desc4": "队伍中任意角色通过\u003Ccolor=#FFFFFF\u003E[快速支援]\u003C/color\u003E入场时，全队获得1层\u003Ccolor=#FFFFFF\u003E[嘉音]\u003C/color\u003E，最多叠加3层，持续15秒，重复触发时刷新持续时间，每拥有1层\u003Ccolor=#FFFFFF\u003E[嘉音]\u003C/color\u003E，通过\u003Ccolor=#FFFFFF\u003E[快速支援]\u003C/color\u003E入场的角色造成的伤害提升8%，该效果全队唯一。"
+    },
+    "JA": {
+      "name": "静寂のアストラ",
+      "desc2": "攻撃力+10%。",
+      "desc4": "任意のメンバーが\u003Ccolor=#FFFFFF\u003E『クイック支援』\u003C/color\u003Eで出場した時、チーム全体が\u003Ccolor=#FFFFFF\u003E「天籟」\u003C/color\u003Eを1重獲得する。最大3重まで重ね掛け可能、継続時間15秒、重複して発動すると継続時間が更新される。\u003Ccolor=#FFFFFF\u003E「天籟」\u003C/color\u003E1重につき、\u003Ccolor=#FFFFFF\u003E『クイック支援』\u003C/color\u003Eで出場したメンバーの与ダメージ+8%、該当効果はチーム内でひとつしか有効にならない。"
+    }
+  },
+  "32400": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitThunderMetal.png",
+    "EN": {
+      "name": "Thunder Metal",
+      "desc2": "\u003Ccolor=#2EB6FF\u003EElectric DMG\u003C/color\u003E +10%",
+      "desc4": "As long as an enemy in combat is \u003Ccolor=#2EB6FF\u003EShocked\u003C/color\u003E, the equipper's ATK is increased by 28%."
+    },
+    "KO": {
+      "name": "썬더 메탈",
+      "desc2": "\u003Ccolor=#2EB6FF\u003E전기 속성 피해\u003C/color\u003E+10%",
+      "desc4": "전장에 \u003Ccolor=#2EB6FF\u003E[감전]\u003C/color\u003E 상태의 적이 존재할 시 착용자의 공격력이 28% 증가한다."
+    },
+    "CHS": {
+      "name": "雷暴重金属",
+      "desc2": "\u003Ccolor=#2EB6FF\u003E电属性伤害\u003C/color\u003E+10%。",
+      "desc4": "当场上存在处于\u003Ccolor=#2EB6FF\u003E[感电]\u003C/color\u003E状态下的敌人时，装备者的攻击力提升28%。"
+    },
+    "JA": {
+      "name": "霹靂のヘヴィメタル",
+      "desc2": "\u003Ccolor=#2EB6FF\u003E電気属性ダメージ\u003C/color\u003E+10%。",
+      "desc4": "フィールド上に\u003Ccolor=#2EB6FF\u003E[感電]\u003C/color\u003E状態の敵がいる時、装備者の攻撃力+28%。"
+    }
+  },
+  "32900": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShadow.png",
+    "EN": {
+      "name": "Shadow Harmony",
+      "desc2": "The DMG of \u003Ccolor=#FFFFFF\u003EAftershocks\u003C/color\u003E and \u003Ccolor=#FFFFFF\u003EDash Attacks\u003C/color\u003E is increased by 15%.",
+      "desc4": "Upon hitting an enemy with an \u003Ccolor=#FFFFFF\u003EAftershock\u003C/color\u003E or \u003Ccolor=#FFFFFF\u003EDash Attack\u003C/color\u003E, if the DMG dealt aligns with the equipper's attribute, the equipper gains 1 stack of a buff effect, at most once per use of a skill. For each stack, the equipper's ATK increases by 4%, and CRIT Rate increases by 4%. The effect can stack up to 3 times and lasts for 15s. Repeated triggers reset the duration."
+    },
+    "KO": {
+      "name": "그림자처럼 함께",
+      "desc2": "\u003Ccolor=#FFFFFF\u003E[여진 공격]\u003C/color\u003E 및 \u003Ccolor=#FFFFFF\u003E[대시 공격]\u003C/color\u003E으로 주는 피해가 15% 증가한다.",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[여진 공격]\u003C/color\u003E 혹은 \u003Ccolor=#FFFFFF\u003E[대시 공격]\u003C/color\u003E이 적에게 명중 시, 만약 주는 피해가 착용자의 속성과 일치하면 버프 효과를 1스택 획득한다. 동일한 공격 한 번에 최대 1회 발동한다. 보유한 버프 효과 1스택당 착용자의 공격력이 4% 증가하고, 치명타 확률이 4% 증가한다. 최대 중첩: 3스택, 지속 시간: 15초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "CHS": {
+      "name": "如影相随",
+      "desc2": "\u003Ccolor=#FFFFFF\u003E[追加攻击]\u003C/color\u003E和\u003Ccolor=#FFFFFF\u003E[冲刺攻击]\u003C/color\u003E造成的伤害提升15%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[追加攻击]\u003C/color\u003E或\u003Ccolor=#FFFFFF\u003E[冲刺攻击]\u003C/color\u003E命中敌人时，若造成的伤害与装备者的属性一致，则获得1层增益效果，同一招式内最多触发一次；每拥有1层增益效果，装备者的攻击力提升4%，暴击率提升4%，最多叠加3层，持续15秒，重复触发时刷新持续时间。"
+    },
+    "JA": {
+      "name": "シャドウハーモニー",
+      "desc2": "\u003Ccolor=#FFFFFF\u003E『追加攻撃』\u003C/color\u003Eと\u003Ccolor=#FFFFFF\u003E『ダッシュ攻撃』\u003C/color\u003Eの与ダメージ+15%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E『追加攻撃』\u003C/color\u003Eまたは\u003Ccolor=#FFFFFF\u003E『ダッシュ攻撃』\u003C/color\u003Eが敵に命中した時、与えたダメージが装備者の属性と一致している場合、バフ効果を1重獲得する、1回のスキルにおいて1回のみ発動可能。バフ効果1重につき、装備者の攻撃力+4%、会心率+4%。最大3重まで重ね掛け可能、継続時間15秒、重複して発動すると継続時間が更新される。"
+    }
+  },
+  "31500": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSoulRock.png",
+    "EN": {
+      "name": "Soul Rock",
+      "desc2": "DEF +16%",
+      "desc4": "Upon receiving an enemy attack and losing HP, the equipper takes 40% less DMG for 2.5s. This effect can trigger once every 15s."
+    },
+    "KO": {
+      "name": "소울 록",
+      "desc2": "방어력+16%",
+      "desc4": "적의 공격을 받아 HP가 줄어들 시 착용자가 받는 피해가 40% 감소한다. 지속 시간: 2.5초, 15초 동안 최대 1회 발동한다."
+    },
+    "CHS": {
+      "name": "灵魂摇滚",
+      "desc2": "防御力+16%。",
+      "desc4": "受到敌方攻击并损失生命值时，装备者受到的伤害降低40%，持续2.5秒，15秒内最多触发一次。"
+    },
+    "JA": {
+      "name": "ソウル・ロック",
+      "desc2": "防御力+16%。",
+      "desc4": "敵の攻撃を受け、かつHPが減少した時、装備者の被ダメージ-40%、継続時間2.5秒。15秒に1回のみ発動可能。"
+    }
+  },
+  "32500": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitPolarMetal.png",
+    "EN": {
+      "name": "Polar Metal",
+      "desc2": "\u003Ccolor=#98EFF0\u003EIce DMG\u003C/color\u003E +10%",
+      "desc4": "Increase the DMG of \u003Ccolor=#FFFFFF\u003EBasic Attack\u003C/color\u003E and \u003Ccolor=#FFFFFF\u003EDash Attack\u003C/color\u003E by 20%. When any squad member inflicts \u003Ccolor=#98EFF0\u003EFreeze\u003C/color\u003E or \u003Ccolor=#98EFF0\u003EShatter\u003C/color\u003E, this effect increases by an additional 20% for 12s."
+    },
+    "KO": {
+      "name": "극지 메탈",
+      "desc2": "\u003Ccolor=#98EFF0\u003E얼음 속성 피해\u003C/color\u003E+10%",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[일반 공격]\u003C/color\u003E 및 \u003Ccolor=#FFFFFF\u003E[대시 공격]\u003C/color\u003E으로 주는 피해가 20% 증가하며, 파티 내 임의의 캐릭터가 적에게 \u003Ccolor=#98EFF0\u003E[빙결]\u003C/color\u003E 부여 혹은 \u003Ccolor=#98EFF0\u003E[쇄빙]\u003C/color\u003E 효과 발동 시, 해당 버프 효과가 추가로 20% 증가한다. 지속 시간: 12초"
+    },
+    "CHS": {
+      "name": "极地重金属",
+      "desc2": "\u003Ccolor=#98EFF0\u003E冰属性伤害\u003C/color\u003E+10%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[普通攻击]\u003C/color\u003E和\u003Ccolor=#FFFFFF\u003E[冲刺攻击]\u003C/color\u003E造成的伤害提升20%，队伍中任意角色对敌人施加\u003Ccolor=#98EFF0\u003E[冻结]\u003C/color\u003E或触发\u003Ccolor=#98EFF0\u003E[碎冰]\u003C/color\u003E效果时，该增益效果额外提升20%，持续12秒。"
+    },
+    "JA": {
+      "name": "極地のヘヴィメタル",
+      "desc2": "\u003Ccolor=#98EFF0\u003E氷属性ダメージ\u003C/color\u003E+10%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E『通常攻撃』\u003C/color\u003Eと\u003Ccolor=#FFFFFF\u003E『ダッシュ攻撃』\u003C/color\u003Eの与ダメージ+20%。任意のメンバーが敵に\u003Ccolor=#98EFF0\u003E[凍結]\u003C/color\u003E効果を付与した時、または\u003Ccolor=#98EFF0\u003E[砕氷]\u003C/color\u003E効果を発動した時、この効果がさらに+20%、継続時間12秒。"
+    }
+  },
+  "32600": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitFangedMetal.png",
+    "EN": {
+      "name": "Fanged Metal",
+      "desc2": "\u003Ccolor=#F0D12B\u003EPhysical DMG\u003C/color\u003E +10%",
+      "desc4": "Whenever a squad member inflicts \u003Ccolor=#F0D12B\u003EAssault\u003C/color\u003E on an enemy, the equipper deals 35% additional DMG to the target for 12s."
+    },
+    "KO": {
+      "name": "송곳니 메탈",
+      "desc2": "\u003Ccolor=#F0D12B\u003E물리 피해\u003C/color\u003E+10%",
+      "desc4": "파티 내 임의의 캐릭터가 적에게 \u003Ccolor=#F0D12B\u003E[강타]\u003C/color\u003E 효과 부여 시 착용자가 타깃에게 주는 피해가 35% 증가한다. 지속 시간: 12초"
+    },
+    "CHS": {
+      "name": "獠牙重金属",
+      "desc2": "\u003Ccolor=#F0D12B\u003E物理伤害\u003C/color\u003E+10%。",
+      "desc4": "队伍中任意角色对敌人施加\u003Ccolor=#F0D12B\u003E[强击]\u003C/color\u003E效果时，装备者对目标造成的伤害提升35%，持续12秒。"
+    },
+    "JA": {
+      "name": "獣牙のヘヴィメタル",
+      "desc2": "\u003Ccolor=#F0D12B\u003E物理属性ダメージ\u003C/color\u003E+10%。",
+      "desc4": "任意のメンバーが敵に\u003Ccolor=#F0D12B\u003E[強撃]\u003C/color\u003E効果を付与した時、装備者がターゲットに与えるダメージ+35%、継続時間12秒。"
+    }
+  },
+  "31800": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitChaosJazz.png",
+    "EN": {
+      "name": "Chaos Jazz",
+      "desc2": "Anomaly Proficiency +30",
+      "desc4": "\u003Ccolor=#FF5521\u003EFire DMG\u003C/color\u003E and \u003Ccolor=#2EB6FF\u003EElectric DMG\u003C/color\u003E increases by 15%. While off-field, \u003Ccolor=#FFFFFF\u003EEX Special Attack\u003C/color\u003E and \u003Ccolor=#FFFFFF\u003EAssist Attack\u003C/color\u003E DMG increases by 20%. When switching on-field, this buff continues for 5s, and this continuation effect can trigger once every 7.5s."
+    },
+    "KO": {
+      "name": "카오스 재즈",
+      "desc2": "이상 마스터리+30pt",
+      "desc4": "\u003Ccolor=#FF5521\u003E불 속성 피해\u003C/color\u003E 및 \u003Ccolor=#2EB6FF\u003E전기 속성 피해\u003C/color\u003E가 15% 증가한다. 대기 캐릭터일 시 \u003Ccolor=#FFFFFF\u003E[강화 특수 스킬]\u003C/color\u003E 및 \u003Ccolor=#FFFFFF\u003E[지원 공격]\u003C/color\u003E으로 주는 피해가 20% 증가하며, 전장에 교체 투입된 후 해당 버프 효과는 여전히 5초 동안 지속된다. 해당 지속 효과는 7.5초 동안 최대 1회 발동된다."
+    },
+    "CHS": {
+      "name": "混沌爵士",
+      "desc2": "异常精通+30点。",
+      "desc4": "\u003Ccolor=#FF5521\u003E火属性伤害\u003C/color\u003E和\u003Ccolor=#2EB6FF\u003E电属性伤害\u003C/color\u003E提升15%；位于后场时，\u003Ccolor=#FFFFFF\u003E[强化特殊技]\u003C/color\u003E和\u003Ccolor=#FFFFFF\u003E[支援攻击]\u003C/color\u003E造成的伤害提升20%，换入前场后，该增益效果仍然保留，持续5秒，保留效果7.5秒内最多触发一次。"
+    },
+    "JA": {
+      "name": "ケイオス・ジャズ",
+      "desc2": "異常マスタリー+30Pt。",
+      "desc4": "\u003Ccolor=#FF5521\u003E炎属性ダメージ\u003C/color\u003Eおよび\u003Ccolor=#2EB6FF\u003E電気属性ダメージ\u003C/color\u003E+15%。控えにいる時、\u003Ccolor=#FFFFFF\u003E『強化特殊スキル』\u003C/color\u003Eと\u003Ccolor=#FFFFFF\u003E『支援攻撃』\u003C/color\u003Eの与ダメージ+20%。出場した後も効果は5秒継続する。この効果継続は7.5秒に1回のみ発動可能。"
+    }
+  },
+  "33000": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSavior.png",
+    "EN": {
+      "name": "Phaethon's Melody",
+      "desc2": "Anomaly Mastery +8%.",
+      "desc4": "When any squad member uses an \u003Ccolor=#FFFFFF\u003EEX Special Attack\u003C/color\u003E, the equipper's Anomaly Proficiency increases by 45 for 8s. If the character using the \u003Ccolor=#FFFFFF\u003EEX Special Attack\u003C/color\u003E is not the equipper, the equipper's \u003Ccolor=#FE437E\u003EEther DMG\u003C/color\u003E is increased by 25%."
+    },
+    "KO": {
+      "name": "파에톤의 노래",
+      "desc2": "이상 장악력+8%",
+      "desc4": "파티 내 임의의 캐릭터가 \u003Ccolor=#FFFFFF\u003E[강화 특수 스킬]\u003C/color\u003E 시전 시, 착용자의 이상 마스터리가 45pt 증가한다. 지속 시간: 8초. 만약 \u003Ccolor=#FFFFFF\u003E[강화 특수 스킬]\u003C/color\u003E을 시전한 캐릭터가 착용자 본인이 아닐 경우, 착용자가 주는 \u003Ccolor=#FE437E\u003E에테르 피해\u003C/color\u003E가 25% 증가한다."
+    },
+    "CHS": {
+      "name": "法厄同之歌",
+      "desc2": "异常掌控+8%。",
+      "desc4": "队伍中任意角色发动\u003Ccolor=#FFFFFF\u003E[强化特殊技]\u003C/color\u003E时，装备者的异常精通提升45点，持续8秒；如果发动\u003Ccolor=#FFFFFF\u003E[强化特殊技]\u003C/color\u003E的角色不是装备者本人时，装备者造成的\u003Ccolor=#FE437E\u003E以太伤害\u003C/color\u003E提升25%。"
+    },
+    "JA": {
+      "name": "「パエトーン」の歌",
+      "desc2": "異常掌握+8%",
+      "desc4": "任意のメンバーが\u003Ccolor=#FFFFFF\u003E『強化特殊スキル』\u003C/color\u003Eを発動した時、装備者の異常マスタリー+45Pt、継続時間8秒。\u003Ccolor=#FFFFFF\u003E『強化特殊スキル』\u003C/color\u003Eを発動したエージェントが装備者本人でない場合、装備者による\u003Ccolor=#FE437E\u003Eエーテル属性ダメージ\u003C/color\u003E+25%。"
+    }
+  },
+  "31400": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitHormonePunk.png",
+    "EN": {
+      "name": "Hormone Punk",
+      "desc2": "ATK +10%",
+      "desc4": "Upon entering combat or switching in, its user's ATK increases by 25% for 10s. This effect can trigger once every 20s."
+    },
+    "KO": {
+      "name": "호르몬 펑크",
+      "desc2": "공격력+10%",
+      "desc4": "교전 상태 진입 혹은 교체 출전 시 착용자의 공격력이 25% 증가한다. 지속 시간: 10초, 20초 동안 최대 1회 발동한다."
+    },
+    "CHS": {
+      "name": "激素朋克",
+      "desc2": "攻击力+10%。",
+      "desc4": "进入接战状态或换入前场时，装备者的攻击力提升25%，持续10秒，20秒内最多触发一次。"
+    },
+    "JA": {
+      "name": "ホルモン・パンク",
+      "desc2": "攻撃力+10%。",
+      "desc4": "接敵状態突入時、または出場した時、装備者の攻撃力+25%、継続時間10秒。20秒に1回のみ発動可能。"
+    }
+  },
+  "32200": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitInfernoMetal.png",
+    "EN": {
+      "name": "Inferno Metal",
+      "desc2": "\u003Ccolor=#FF5521\u003EFire DMG\u003C/color\u003E +10%",
+      "desc4": "Upon hitting a \u003Ccolor=#FF5521\u003EBurning\u003C/color\u003E enemy, the equipper's CRIT Rate is increased by 28% for 8s."
+    },
+    "KO": {
+      "name": "불지옥 메탈",
+      "desc2": "\u003Ccolor=#FF5521\u003E불 속성 피해\u003C/color\u003E+10%",
+      "desc4": "공격이 \u003Ccolor=#FF5521\u003E[연소]\u003C/color\u003E 상태의 적에게 명중 시 착용자의 치명타 확률이 28% 증가한다. 지속 시간: 8초"
+    },
+    "CHS": {
+      "name": "炎狱重金属",
+      "desc2": "\u003Ccolor=#FF5521\u003E火属性伤害\u003C/color\u003E+10%。",
+      "desc4": "攻击命中处于\u003Ccolor=#FF5521\u003E[灼烧]\u003C/color\u003E状态下的敌人时，装备者的暴击率提升28%，持续8秒。"
+    },
+    "JA": {
+      "name": "炎獄のヘヴィメタル",
+      "desc2": "\u003Ccolor=#FF5521\u003E炎属性ダメージ\u003C/color\u003E+10%。",
+      "desc4": "\u003Ccolor=#FF5521\u003E[熱傷]\u003C/color\u003E状態の敵に攻撃が命中した時、装備者の会心率+28%、継続時間8秒。"
+    }
+  },
+  "31000": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWoodpeckerElectro.png",
+    "EN": {
+      "name": "Woodpecker Electro",
+      "desc2": "CRIT Rate +8%",
+      "desc4": "Landing a critical hit on an enemy with a \u003Ccolor=#FFFFFF\u003EBasic Attack\u003C/color\u003E, \u003Ccolor=#FFFFFF\u003EDodge Counter\u003C/color\u003E, or \u003Ccolor=#FFFFFF\u003EEX Special Attack\u003C/color\u003E increases the equipper's ATK by 9% for 6s. The buff duration for different skills are calculated separately."
+    },
+    "KO": {
+      "name": "딱따구리 일렉트로",
+      "desc2": "치명타 확률+8%",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[일반 공격]\u003C/color\u003E, \u003Ccolor=#FFFFFF\u003E[회피 반격]\u003C/color\u003E 혹은 \u003Ccolor=#FFFFFF\u003E[강화 특수 스킬]\u003C/color\u003E이 적에게 명중하고 치명타 발동 시 착용자에게 각각 1스택의 버프 효과를 제공하며 버프 효과 스택당 착용자의 공격력이 9% 증가한다. 지속 시간: 6초, 각 스킬의 지속 시간은 따로 계산된다."
+    },
+    "CHS": {
+      "name": "啄木鸟电音",
+      "desc2": "暴击率+8%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E[普通攻击]\u003C/color\u003E、\u003Ccolor=#FFFFFF\u003E[闪避反击]\u003C/color\u003E或\u003Ccolor=#FFFFFF\u003E[强化特殊技]\u003C/color\u003E命中敌人并触发暴击时，分别为装备者提供1层增益效果，每层增益效果使装备者的攻击力提升9%，持续6秒，不同招式分别结算持续时间。"
+    },
+    "JA": {
+      "name": "ウッドペッカー・エレクトロ",
+      "desc2": "会心率+8%。",
+      "desc4": "\u003Ccolor=#FFFFFF\u003E『通常攻撃』\u003C/color\u003E、\u003Ccolor=#FFFFFF\u003E『回避反撃』\u003C/color\u003Eまたは\u003Ccolor=#FFFFFF\u003E『強化特殊スキル』\u003C/color\u003Eが敵に命中し、なおかつ会心が出た時、それぞれ装備者にバフ効果を1重与える。バフ効果1重につき、装備者の攻撃力+9%、継続時間6秒。バフ効果の継続時間はスキルごとに計算される。"
+    }
+  },
+  "32300": {
+    "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitChaosMetal.png",
+    "EN": {
+      "name": "Chaotic Metal",
+      "desc2": "\u003Ccolor=#FE437E\u003EEther DMG\u003C/color\u003E +10%",
+      "desc4": "The equipper's CRIT DMG increases by 20%. When any character in the squad triggers \u003Ccolor=#FE437E\u003ECorruption's\u003C/color\u003E additional DMG, this effect further increases by 5.5% for 8s, stacking up to 6 times. Repeated triggers reset the duration."
+    },
+    "KO": {
+      "name": "카오스 메탈",
+      "desc2": "\u003Ccolor=#FE437E\u003E에테르 피해\u003C/color\u003E+10%",
+      "desc4": "착용자의 치명타 피해가 20% 증가한다. 파티 내 임의의 캐릭터가 \u003Ccolor=#FE437E\u003E[침식]\u003C/color\u003E 효과의 추가 피해 발동 시 해당 버프 효과가 추가로 5.5% 증가한다. 최대 중첩: 6스택, 지속 시간: 8초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "CHS": {
+      "name": "混沌重金属",
+      "desc2": "\u003Ccolor=#FE437E\u003E以太伤害\u003C/color\u003E+10%。",
+      "desc4": "装备者的暴击伤害提升20%，队伍中任意角色触发\u003Ccolor=#FE437E\u003E[侵蚀]\u003C/color\u003E效果的额外伤害时，该增益效果额外提升5.5%，最多叠加6层，持续8秒，重复触发时刷新持续时间。"
+    },
+    "JA": {
+      "name": "混沌のヘヴィメタル",
+      "desc2": "\u003Ccolor=#FE437E\u003Eエーテル属性ダメージ\u003C/color\u003E+10%。",
+      "desc4": "装備者の会心ダメージ+20%。任意のメンバーによって\u003Ccolor=#FE437E\u003E[侵蝕]\u003C/color\u003E効果の追加ダメージが発生した時、この効果がさらに+5.5%、最大6重まで重ね掛け可能、継続時間8秒。重複して発動すると継続時間が更新される。"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { appPath } from './lib/path.js';
+import { updateHakushData } from './lib/ekapi/Hakush.js'
 
 logger.info('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
 logger.info('ZZZ-Plugin 加载中');

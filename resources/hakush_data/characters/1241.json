@@ -1,0 +1,1850 @@
+{
+  "Id": 1241,
+  "Icon": "IconRole23",
+  "Name": "朱鸢",
+  "CodeName": "Zhu Yuan",
+  "Rarity": 4,
+  "WeaponType": {
+    "1": "强攻"
+  },
+  "ElementType": {
+    "205": "以太"
+  },
+  "SpecialElementType": {},
+  "HitType": {
+    "103": "穿透"
+  },
+  "Camp": {
+    "7": "刑侦特勤组"
+  },
+  "Gender": 2,
+  "PartnerInfo": {
+    "Birthday": "9/1",
+    "FullName": "朱鸢",
+    "Gender": "女",
+    "IconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle23.png",
+    "ImpressionF": "是模板级别的「优秀人类」。和这样的对手「周旋」了那么久的我们，是不是也挺厉害的？",
+    "ImpressionM": "那毕竟是你+我+Fairy，一对一的话——我不是很想知道结果…",
+    "Name": "",
+    "OutlookDesc": "空洞调查协会调查员执照留档信息显示：\n治安官-朱鸢，以太适性为保密，允许在都内已知空洞（包含伴生空洞）进行调查开采等基础工作。\n备注：朱鸢的档案隶属于新艾利都治安局雅努斯区分局都市秩序部刑侦特勤组，相关信息可在治安局系统内获取，需特殊调用权限。\n再备注：朱鸢具有优秀的以太适性。",
+    "ProfileDesc": "朱鸢，治安局精锐中的精锐，被认为是「假以时日，必然能接任治安局长的人物」而重点培养。目前的职务为雅努斯区分局都市秩序部刑侦特勤组组长，组内已知的成员有：青衣、赛斯，以及保密。\n备注：针对治安局系统内安保级别较高的文件，需进一步调查，排期等级-低。\n\n刑侦、战斗力及自我管理（加班）能力卓越。任职至今经手的案件，尚无未结案的记录。\n建议：与朱鸢相处就是在危险的边缘疯狂试探，请时刻牢记自己「绳匠」的身份，时刻牢记自己「绳匠」的身份，牢记自己「绳匠」的身份。",
+    "Race": "六分街",
+    "RoleIcon": "IconRole/UnPacker/IconRole23",
+    "Stature": "175",
+    "UnlockCondition": [
+      "获得代理人",
+      "完成委托「安比的困扰」",
+      "完成主线委托第二章间章"
+    ],
+    "TrustLv": {
+      "1": "朱鸢，治安局精锐中的精锐，被认为是「假以时日，必然能接任治安局长的人物」而重点培养。目前的职务为雅努斯区分局都市秩序部刑侦特勤组组长，组内已知的成员有：青衣、赛斯，以及保密。\n备注：针对治安局系统内安保级别较高的文件，需进一步调查，排期等级-低。\n\n刑侦、战斗力及自我管理（加班）能力卓越。任职至今经手的案件，尚无未结案的记录。\n建议：与朱鸢相处就是在危险的边缘疯狂试探，请时刻牢记自己「绳匠」的身份，时刻牢记自己「绳匠」的身份，牢记自己「绳匠」的身份。",
+      "2": "",
+      "3": "有完美主义倾向，对「整齐」、「满分」有着相当强烈的执念，似乎是其唯一的弱点（？）。其生活上的前辈，工作上的下属治安官青衣常常吐槽朱鸢「不治将恐深」。但也正因为她对自我极高的要求，所积累的实力足以支撑起刑侦特勤组的工作，吸引优秀的人才追随其后。\n\n此外，似乎有热爱种植的兴趣爱好。在办公室培育着一株番茄，经常遭到一对常驻在治安局的小浣熊母子的偷盗。\n思考：可否为潜入治安局提供某种思路？\n\n是非常罕见的、不热衷于毛茸茸小动物的人类。",
+      "4": ""
+    }
+  },
+  "Skin": {},
+  "Stats": {
+    "Armor": 0,
+    "ArmorGrowth": 0,
+    "Attack": 132,
+    "AttackGrowth": 80729,
+    "AvatarPieceId": 5241,
+    "BreakStun": 90,
+    "BuffResistBurnPossibilityDelta": 0,
+    "BuffResistBurnPossibilityRatio": 0,
+    "BuffResistElectricPossibilityDelta": 0,
+    "BuffResistElectricPossibilityRatio": 0,
+    "BuffResistFrozenPossibilityDelta": 0,
+    "BuffResistFrozenPossibilityRatio": 0,
+    "Crit": 500,
+    "CritDamage": 5000,
+    "CritDmgRes": 0,
+    "CritRes": 0,
+    "Defence": 48,
+    "DefenceGrowth": 65524,
+    "ElementAbnormalPower": 93,
+    "ElementMystery": 92,
+    "Endurance": 0,
+    "HpGrowth": 816391,
+    "HpMax": 602,
+    "Luck": 10,
+    "PenDelta": 0,
+    "PenRate": 0,
+    "Rbl": 1,
+    "RblCorrectionFactor": 10000,
+    "RblProbability": 0,
+    "Shield": 0,
+    "ShieldGrowth": 0,
+    "SpBarPoint": 120,
+    "SpRecover": 120,
+    "StarInitial": 1,
+    "Stun": 0,
+    "Tags": [
+      "ZhuYuan",
+      "Pierce",
+      "Ether",
+      "Female",
+      "Camp7",
+      "Size3",
+      "AidTypeEvade",
+      "ZhuYuan"
+    ]
+  },
+  "Level": {
+    "1": {
+      "HpMax": 0,
+      "Attack": 0,
+      "Defence": 0,
+      "LevelMax": 10,
+      "LevelMin": 0,
+      "Materials": {
+        "10": 24000,
+        "100211": 4
+      }
+    },
+    "2": {
+      "HpMax": 413,
+      "Attack": 47,
+      "Defence": 33,
+      "LevelMax": 20,
+      "LevelMin": 10,
+      "Materials": {
+        "10": 56000,
+        "100221": 12
+      }
+    },
+    "3": {
+      "HpMax": 826,
+      "Attack": 95,
+      "Defence": 66,
+      "LevelMax": 30,
+      "LevelMin": 20,
+      "Materials": {
+        "10": 120000,
+        "100221": 20
+      }
+    },
+    "4": {
+      "HpMax": 1239,
+      "Attack": 142,
+      "Defence": 99,
+      "LevelMax": 40,
+      "LevelMin": 30,
+      "Materials": {
+        "10": 200000,
+        "100231": 10
+      }
+    },
+    "5": {
+      "HpMax": 1651,
+      "Attack": 189,
+      "Defence": 133,
+      "LevelMax": 50,
+      "LevelMin": 40,
+      "Materials": {
+        "10": 400000,
+        "100231": 20
+      }
+    },
+    "6": {
+      "HpMax": 2064,
+      "Attack": 236,
+      "Defence": 166,
+      "LevelMax": 60,
+      "LevelMin": 50,
+      "Materials": {}
+    }
+  },
+  "ExtraLevel": {
+    "1": {
+      "MaxLevel": 15,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 0
+        },
+        "21101": {
+          "Prop": 21101,
+          "Name": "暴击伤害",
+          "Format": "{0:0.#%}",
+          "Value": 960
+        }
+      }
+    },
+    "2": {
+      "MaxLevel": 25,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 25
+        },
+        "21101": {
+          "Prop": 21101,
+          "Name": "暴击伤害",
+          "Format": "{0:0.#%}",
+          "Value": 960
+        }
+      }
+    },
+    "3": {
+      "MaxLevel": 35,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 25
+        },
+        "21101": {
+          "Prop": 21101,
+          "Name": "暴击伤害",
+          "Format": "{0:0.#%}",
+          "Value": 1920
+        }
+      }
+    },
+    "4": {
+      "MaxLevel": 45,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 50
+        },
+        "21101": {
+          "Prop": 21101,
+          "Name": "暴击伤害",
+          "Format": "{0:0.#%}",
+          "Value": 1920
+        }
+      }
+    },
+    "5": {
+      "MaxLevel": 55,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 50
+        },
+        "21101": {
+          "Prop": 21101,
+          "Name": "暴击伤害",
+          "Format": "{0:0.#%}",
+          "Value": 2880
+        }
+      }
+    },
+    "6": {
+      "MaxLevel": 60,
+      "Extra": {
+        "12101": {
+          "Prop": 12101,
+          "Name": "基础攻击力",
+          "Format": "{0:0.#}",
+          "Value": 75
+        },
+        "21101": {
+          "Prop": 21101,
+          "Name": "暴击伤害",
+          "Format": "{0:0.#%}",
+          "Value": 2880
+        }
+      }
+    }
+  },
+  "LevelEXP": [
+    50,
+    150,
+    250,
+    400,
+    600,
+    800,
+    1000,
+    1250,
+    1500,
+    1800,
+    1935,
+    2065,
+    2200,
+    2335,
+    2465,
+    2600,
+    2735,
+    2865,
+    3000,
+    4680,
+    4975,
+    5265,
+    5560,
+    5855,
+    6145,
+    6440,
+    6735,
+    7025,
+    7320,
+    10800,
+    11400,
+    12000,
+    12600,
+    13200,
+    13800,
+    14400,
+    15000,
+    15600,
+    16200,
+    17100,
+    18300,
+    19500,
+    20700,
+    21900,
+    23100,
+    24300,
+    25500,
+    26700,
+    27900,
+    34200,
+    36600,
+    39000,
+    41400,
+    43800,
+    46200,
+    48600,
+    51000,
+    53400,
+    55800,
+    0
+  ],
+  "Skill": {
+    "Basic": {
+      "Description": [
+        {
+          "Name": "普通攻击：不许动！",
+          "Desc": "<color=#FFFFFF>[突击模式]</color>\n点按 <IconMap:Icon_Normal> 发动：\n交替使用体术、手枪和以太鹿弹，向前方进行至多五段的攻击，造成<color=#F0D12B>物理伤害</color>和<color=#FE437E>以太伤害</color>；\n第四、第五段攻击命中敌人时，获得1枚<color=#FFFFFF>[强化霰弹]</color>，同一招式中最多获得1枚；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按 <IconMap:Icon_Normal> ，可以发动<color=#FFFFFF>[冲刺攻击：火力奇袭]</color>，向对应方向调整身位；\n<color=#FFFFFF>[突击模式]</color>下，长按 <IconMap:Icon_Normal> 时，将会切换攻击方式，进入<color=#FFFFFF>[压制模式]</color>。"
+        },
+        {
+          "Name": "普通攻击：请勿抵抗",
+          "Desc": "<color=#FFFFFF>[压制模式]</color>\n长按 <IconMap:Icon_Normal> 发动：\n使用霰弹枪向前方进行至多三段的穿透射击，造成<color=#F0D12B>物理伤害</color>；开火时若拥有<color=#FFFFFF>[强化霰弹]</color>，则会消耗1枚<color=#FFFFFF>[强化霰弹]</color>，造成大量<color=#FE437E>以太伤害</color>；\n招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以发动<color=#FFFFFF>[冲刺攻击：火力压制]</color>，向对应方向调整身位；\n<color=#FFFFFF>[压制模式]</color>下，松开 <IconMap:Icon_Normal> 时，将会切换攻击方式，回到<color=#FFFFFF>[突击模式]</color>。"
+        },
+        {
+          "Name": "普通攻击：不许动！",
+          "Param": [
+            {
+              "Name": "一段伤害倍率",
+              "Desc": "{Skill:1241001, Prop:1001}",
+              "Param": {
+                "1241001": {
+                  "Main": 4310,
+                  "Growth": 400,
+                  "Format": "%",
+                  "DamagePercentage": 4310,
+                  "DamagePercentageGrowth": 400,
+                  "StunRatio": 2160,
+                  "StunRatioGrowth": 100,
+                  "SpRecovery": 7050,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 53900,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段伤害倍率",
+              "Desc": "{Skill:1241002, Prop:1001}",
+              "Param": {
+                "1241002": {
+                  "Main": 12640,
+                  "Growth": 1150,
+                  "Format": "%",
+                  "DamagePercentage": 12640,
+                  "DamagePercentageGrowth": 1150,
+                  "StunRatio": 9730,
+                  "StunRatioGrowth": 450,
+                  "SpRecovery": 31820,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 243100,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 10477,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段伤害倍率",
+              "Desc": "{Skill:1241003, Prop:1001}",
+              "Param": {
+                "1241003": {
+                  "Main": 13730,
+                  "Growth": 1250,
+                  "Format": "%",
+                  "DamagePercentage": 13730,
+                  "DamagePercentageGrowth": 1250,
+                  "StunRatio": 9470,
+                  "StunRatioGrowth": 440,
+                  "SpRecovery": 30970,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 236775,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "四段伤害倍率",
+              "Desc": "{Skill:1241004, Prop:1001}",
+              "Param": {
+                "1241004": {
+                  "Main": 15100,
+                  "Growth": 1380,
+                  "Format": "%",
+                  "DamagePercentage": 15100,
+                  "DamagePercentageGrowth": 1380,
+                  "StunRatio": 12430,
+                  "StunRatioGrowth": 570,
+                  "SpRecovery": 40660,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 310750,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5912,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "五段伤害倍率",
+              "Desc": "{Skill:1241005, Prop:1001}",
+              "Param": {
+                "1241005": {
+                  "Main": 16220,
+                  "Growth": 1480,
+                  "Format": "%",
+                  "DamagePercentage": 16220,
+                  "DamagePercentageGrowth": 1480,
+                  "StunRatio": 13920,
+                  "StunRatioGrowth": 640,
+                  "SpRecovery": 45540,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 347875,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 6005,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "一段失衡倍率",
+              "Desc": "{Skill:1241001, Prop:1002}",
+              "Param": {
+                "1241001": {
+                  "Main": 2160,
+                  "Growth": 100,
+                  "Format": "%",
+                  "DamagePercentage": 4310,
+                  "DamagePercentageGrowth": 400,
+                  "StunRatio": 2160,
+                  "StunRatioGrowth": 100,
+                  "SpRecovery": 7050,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 53900,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段失衡倍率",
+              "Desc": "{Skill:1241002, Prop:1002}",
+              "Param": {
+                "1241002": {
+                  "Main": 9730,
+                  "Growth": 450,
+                  "Format": "%",
+                  "DamagePercentage": 12640,
+                  "DamagePercentageGrowth": 1150,
+                  "StunRatio": 9730,
+                  "StunRatioGrowth": 450,
+                  "SpRecovery": 31820,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 243100,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 10477,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段失衡倍率",
+              "Desc": "{Skill:1241003, Prop:1002}",
+              "Param": {
+                "1241003": {
+                  "Main": 9470,
+                  "Growth": 440,
+                  "Format": "%",
+                  "DamagePercentage": 13730,
+                  "DamagePercentageGrowth": 1250,
+                  "StunRatio": 9470,
+                  "StunRatioGrowth": 440,
+                  "SpRecovery": 30970,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 236775,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "四段失衡倍率",
+              "Desc": "{Skill:1241004, Prop:1002}",
+              "Param": {
+                "1241004": {
+                  "Main": 12430,
+                  "Growth": 570,
+                  "Format": "%",
+                  "DamagePercentage": 15100,
+                  "DamagePercentageGrowth": 1380,
+                  "StunRatio": 12430,
+                  "StunRatioGrowth": 570,
+                  "SpRecovery": 40660,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 310750,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5912,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "五段失衡倍率",
+              "Desc": "{Skill:1241005, Prop:1002}",
+              "Param": {
+                "1241005": {
+                  "Main": 13920,
+                  "Growth": 640,
+                  "Format": "%",
+                  "DamagePercentage": 16220,
+                  "DamagePercentageGrowth": 1480,
+                  "StunRatio": 13920,
+                  "StunRatioGrowth": 640,
+                  "SpRecovery": 45540,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 347875,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 6005,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "普通攻击：请勿抵抗",
+          "Param": [
+            {
+              "Name": "一段伤害倍率（物理）",
+              "Desc": "{Skill:1241006, Prop:1001}",
+              "Param": {
+                "1241006": {
+                  "Main": 5370,
+                  "Growth": 490,
+                  "Format": "%",
+                  "DamagePercentage": 5370,
+                  "DamagePercentageGrowth": 490,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 9910,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 75900,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段伤害倍率（物理）",
+              "Desc": "{Skill:1241007, Prop:1001}",
+              "Param": {
+                "1241007": {
+                  "Main": 5370,
+                  "Growth": 490,
+                  "Format": "%",
+                  "DamagePercentage": 5370,
+                  "DamagePercentageGrowth": 490,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 18350,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 140250,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段伤害倍率（物理）",
+              "Desc": "{Skill:1241008, Prop:1001}",
+              "Param": {
+                "1241008": {
+                  "Main": 16090,
+                  "Growth": 1470,
+                  "Format": "%",
+                  "DamagePercentage": 16090,
+                  "DamagePercentageGrowth": 1470,
+                  "StunRatio": 17870,
+                  "StunRatioGrowth": 820,
+                  "SpRecovery": 49060,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 374825,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "一段失衡倍率（物理）",
+              "Desc": "{Skill:1241006, Prop:1002}",
+              "Param": {
+                "1241006": {
+                  "Main": 5960,
+                  "Growth": 280,
+                  "Format": "%",
+                  "DamagePercentage": 5370,
+                  "DamagePercentageGrowth": 490,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 9910,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 75900,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段失衡倍率（物理）",
+              "Desc": "{Skill:1241007, Prop:1002}",
+              "Param": {
+                "1241007": {
+                  "Main": 5960,
+                  "Growth": 280,
+                  "Format": "%",
+                  "DamagePercentage": 5370,
+                  "DamagePercentageGrowth": 490,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 18350,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 140250,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段失衡倍率（物理）",
+              "Desc": "{Skill:1241008, Prop:1002}",
+              "Param": {
+                "1241008": {
+                  "Main": 17870,
+                  "Growth": 820,
+                  "Format": "%",
+                  "DamagePercentage": 16090,
+                  "DamagePercentageGrowth": 1470,
+                  "StunRatio": 17870,
+                  "StunRatioGrowth": 820,
+                  "SpRecovery": 49060,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 374825,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "一段伤害倍率（以太）",
+              "Desc": "{Skill:1241010, Prop:1001}",
+              "Param": {
+                "1241010": {
+                  "Main": 13590,
+                  "Growth": 1240,
+                  "Format": "%",
+                  "DamagePercentage": 13590,
+                  "DamagePercentageGrowth": 1240,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 9910,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 75900,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5415,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段伤害倍率（以太）",
+              "Desc": "{Skill:1241011, Prop:1001}",
+              "Param": {
+                "1241011": {
+                  "Main": 13590,
+                  "Growth": 1240,
+                  "Format": "%",
+                  "DamagePercentage": 13590,
+                  "DamagePercentageGrowth": 1240,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 18350,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 140250,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5415,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段伤害倍率（以太）",
+              "Desc": "{Skill:1241012, Prop:1001}",
+              "Param": {
+                "1241012": {
+                  "Main": 40770,
+                  "Growth": 3710,
+                  "Format": "%",
+                  "DamagePercentage": 40770,
+                  "DamagePercentageGrowth": 3710,
+                  "StunRatio": 17870,
+                  "StunRatioGrowth": 820,
+                  "SpRecovery": 49060,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 374825,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 16245,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "一段失衡倍率（以太）",
+              "Desc": "{Skill:1241010, Prop:1002}",
+              "Param": {
+                "1241010": {
+                  "Main": 5960,
+                  "Growth": 280,
+                  "Format": "%",
+                  "DamagePercentage": 13590,
+                  "DamagePercentageGrowth": 1240,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 9910,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 75900,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5415,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "二段失衡倍率（以太）",
+              "Desc": "{Skill:1241011, Prop:1002}",
+              "Param": {
+                "1241011": {
+                  "Main": 5960,
+                  "Growth": 280,
+                  "Format": "%",
+                  "DamagePercentage": 13590,
+                  "DamagePercentageGrowth": 1240,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 18350,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 140250,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5415,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "三段失衡倍率（以太）",
+              "Desc": "{Skill:1241012, Prop:1002}",
+              "Param": {
+                "1241012": {
+                  "Main": 17870,
+                  "Growth": 820,
+                  "Format": "%",
+                  "DamagePercentage": 40770,
+                  "DamagePercentageGrowth": 3710,
+                  "StunRatio": 17870,
+                  "StunRatioGrowth": 820,
+                  "SpRecovery": 49060,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 374825,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 16245,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100115": 2
+        },
+        "2": {
+          "10": 3000,
+          "100115": 3
+        },
+        "3": {
+          "10": 6000,
+          "100125": 2
+        },
+        "4": {
+          "10": 9000,
+          "100125": 3
+        },
+        "5": {
+          "10": 12000,
+          "100125": 4
+        },
+        "6": {
+          "10": 18000,
+          "100125": 6
+        },
+        "7": {
+          "10": 45000,
+          "100135": 5
+        },
+        "8": {
+          "10": 67500,
+          "100135": 8
+        },
+        "9": {
+          "10": 90000,
+          "100135": 10
+        },
+        "10": {
+          "10": 112500,
+          "100135": 12
+        },
+        "11": {
+          "10": 135000,
+          "100135": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    },
+    "Dodge": {
+      "Description": [
+        {
+          "Name": "闪避：迂回",
+          "Desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "冲刺攻击：火力奇袭",
+          "Desc": "<color=#FFFFFF>[突击模式]</color>\n闪避时，点按 <IconMap:Icon_Normal> 发动：\n使用手枪进行射击，造成<color=#FE437E>以太伤害</color>。"
+        },
+        {
+          "Name": "冲刺攻击：火力压制",
+          "Desc": "<color=#FFFFFF>[压制模式]</color>\n在<color=#FFFFFF>[普通攻击：请勿抵抗]</color>发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动：\n使用霰弹枪进行穿透射击，造成<color=#F0D12B>物理伤害</color>；开火时若拥有<color=#FFFFFF>[强化霰弹]</color>，则会消耗1枚<color=#FFFFFF>[强化霰弹]</color>，造成大量<color=#FE437E>以太伤害</color>。"
+        },
+        {
+          "Name": "闪避反击：火力震爆",
+          "Desc": "触发<color=#FFFFFF>[极限闪避]</color>后，点按 <IconMap:Icon_Normal> 发动：\n使用以太鹿弹对前方敌人发动射击，造成<color=#FE437E>以太伤害</color>；\n招式发动时，获得1枚<color=#FFFFFF>[强化霰弹]</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "冲刺攻击：火力奇袭",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1241017, Prop:1001}",
+              "Param": {
+                "1241017": {
+                  "Main": 5510,
+                  "Growth": 510,
+                  "Format": "%",
+                  "DamagePercentage": 5510,
+                  "DamagePercentageGrowth": 510,
+                  "StunRatio": 2760,
+                  "StunRatioGrowth": 130,
+                  "SpRecovery": 9010,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 69025,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5000,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1241017, Prop:1002}",
+              "Param": {
+                "1241017": {
+                  "Main": 2760,
+                  "Growth": 130,
+                  "Format": "%",
+                  "DamagePercentage": 5510,
+                  "DamagePercentageGrowth": 510,
+                  "StunRatio": 2760,
+                  "StunRatioGrowth": 130,
+                  "SpRecovery": 9010,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 69025,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5000,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "冲刺攻击：火力压制",
+          "Param": [
+            {
+              "Name": "伤害倍率（物理）",
+              "Desc": "{Skill:1241018, Prop:1001}",
+              "Param": {
+                "1241018": {
+                  "Main": 5370,
+                  "Growth": 490,
+                  "Format": "%",
+                  "DamagePercentage": 5370,
+                  "DamagePercentageGrowth": 490,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 11710,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 89650,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率（物理）",
+              "Desc": "{Skill:1241018, Prop:1002}",
+              "Param": {
+                "1241018": {
+                  "Main": 5960,
+                  "Growth": 280,
+                  "Format": "%",
+                  "DamagePercentage": 5370,
+                  "DamagePercentageGrowth": 490,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 11710,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 89650,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 0,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "伤害倍率（以太）",
+              "Desc": "{Skill:1241019, Prop:1001}",
+              "Param": {
+                "1241019": {
+                  "Main": 13590,
+                  "Growth": 1240,
+                  "Format": "%",
+                  "DamagePercentage": 13590,
+                  "DamagePercentageGrowth": 1240,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 23410,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 179025,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5415,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率（以太）",
+              "Desc": "{Skill:1241019, Prop:1002}",
+              "Param": {
+                "1241019": {
+                  "Main": 5960,
+                  "Growth": 280,
+                  "Format": "%",
+                  "DamagePercentage": 13590,
+                  "DamagePercentageGrowth": 1240,
+                  "StunRatio": 5960,
+                  "StunRatioGrowth": 280,
+                  "SpRecovery": 23410,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 179025,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 5415,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "闪避反击：火力震爆",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1241020, Prop:1001}",
+              "Param": {
+                "1241020": {
+                  "Main": 17680,
+                  "Growth": 1610,
+                  "Format": "%",
+                  "DamagePercentage": 17680,
+                  "DamagePercentageGrowth": 1610,
+                  "StunRatio": 16140,
+                  "StunRatioGrowth": 740,
+                  "SpRecovery": 16820,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 128700,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 4670,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1241020, Prop:1002}",
+              "Param": {
+                "1241020": {
+                  "Main": 16140,
+                  "Growth": 740,
+                  "Format": "%",
+                  "DamagePercentage": 17680,
+                  "DamagePercentageGrowth": 1610,
+                  "StunRatio": 16140,
+                  "StunRatioGrowth": 740,
+                  "SpRecovery": 16820,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 128700,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 4670,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100115": 2
+        },
+        "2": {
+          "10": 3000,
+          "100115": 3
+        },
+        "3": {
+          "10": 6000,
+          "100125": 2
+        },
+        "4": {
+          "10": 9000,
+          "100125": 3
+        },
+        "5": {
+          "10": 12000,
+          "100125": 4
+        },
+        "6": {
+          "10": 18000,
+          "100125": 6
+        },
+        "7": {
+          "10": 45000,
+          "100135": 5
+        },
+        "8": {
+          "10": 67500,
+          "100135": 8
+        },
+        "9": {
+          "10": 90000,
+          "100135": 10
+        },
+        "10": {
+          "10": 112500,
+          "100135": 12
+        },
+        "11": {
+          "10": 135000,
+          "100135": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    },
+    "Special": {
+      "Description": [
+        {
+          "Name": "特殊技：鹿弹射击",
+          "Desc": "点按 <IconMap:Icon_Special> 发动：\n使用以太鹿弹进行射击，造成<color=#FE437E>以太伤害</color>，连续点按 <IconMap:Icon_Special> ，可以重复射击三次；\n招式发动期间抗打断等级提升。"
+        },
+        {
+          "Name": "强化特殊技：全弹连射",
+          "Desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n使用以太鹿弹进行连续射击，造成大量<color=#FE437E>以太伤害</color>；\n招式发动时，获得3枚<color=#FFFFFF>[强化霰弹]</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "特殊技：鹿弹射击",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1241015, Prop:1001}",
+              "Param": {
+                "1241015": {
+                  "Main": 1840,
+                  "Growth": 170,
+                  "Format": "%",
+                  "DamagePercentage": 1840,
+                  "DamagePercentageGrowth": 170,
+                  "StunRatio": 1840,
+                  "StunRatioGrowth": 90,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 45925,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 1665,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1241015, Prop:1002}",
+              "Param": {
+                "1241015": {
+                  "Main": 1840,
+                  "Growth": 90,
+                  "Format": "%",
+                  "DamagePercentage": 1840,
+                  "DamagePercentageGrowth": 170,
+                  "StunRatio": 1840,
+                  "StunRatioGrowth": 90,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 45925,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 1665,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "强化特殊技：全弹连射",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1241016, Prop:1001}",
+              "Param": {
+                "1241016": {
+                  "Main": 58740,
+                  "Growth": 5340,
+                  "Format": "%",
+                  "DamagePercentage": 58740,
+                  "DamagePercentageGrowth": 5340,
+                  "StunRatio": 48000,
+                  "StunRatioGrowth": 2190,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 1737175,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 48512,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1241016, Prop:1002}",
+              "Param": {
+                "1241016": {
+                  "Main": 48000,
+                  "Growth": 2190,
+                  "Format": "%",
+                  "DamagePercentage": 58740,
+                  "DamagePercentageGrowth": 5340,
+                  "StunRatio": 48000,
+                  "StunRatioGrowth": 2190,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 1737175,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 48512,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "能量消耗",
+              "Desc": "60点"
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100115": 2
+        },
+        "2": {
+          "10": 3000,
+          "100115": 3
+        },
+        "3": {
+          "10": 6000,
+          "100125": 2
+        },
+        "4": {
+          "10": 9000,
+          "100125": 3
+        },
+        "5": {
+          "10": 12000,
+          "100125": 4
+        },
+        "6": {
+          "10": 18000,
+          "100125": 6
+        },
+        "7": {
+          "10": 45000,
+          "100135": 5
+        },
+        "8": {
+          "10": 67500,
+          "100135": 8
+        },
+        "9": {
+          "10": 90000,
+          "100135": 10
+        },
+        "10": {
+          "10": 112500,
+          "100135": 12
+        },
+        "11": {
+          "10": 135000,
+          "100135": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    },
+    "Chain": {
+      "Description": [
+        {
+          "Name": "连携技：歼灭模式",
+          "Desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n使用完全变形武器进行饱和攻击，发射直线激光和追踪导弹，造成大量<color=#FE437E>以太伤害</color>；\n招式发动时，获得3枚<color=#FFFFFF>[强化霰弹]</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "终结技：歼灭模式MAX ",
+          "Desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n使用完全变形武器进行饱和攻击，发射直线激光和追踪导弹，造成大量<color=#FE437E>以太伤害</color>；\n招式发动时，获得3枚<color=#FFFFFF>[强化霰弹]</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "连携技：歼灭模式",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1241022, Prop:1001}",
+              "Param": {
+                "1241022": {
+                  "Main": 58750,
+                  "Growth": 5350,
+                  "Format": "%",
+                  "DamagePercentage": 58750,
+                  "DamagePercentageGrowth": 5350,
+                  "StunRatio": 14860,
+                  "StunRatioGrowth": 680,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 2200275,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 33450,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1241022, Prop:1002}",
+              "Param": {
+                "1241022": {
+                  "Main": 14860,
+                  "Growth": 680,
+                  "Format": "%",
+                  "DamagePercentage": 58750,
+                  "DamagePercentageGrowth": 5350,
+                  "StunRatio": 14860,
+                  "StunRatioGrowth": 680,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 2200275,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 33450,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "终结技：歼灭模式MAX ",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1241023, Prop:1001}",
+              "Param": {
+                "1241023": {
+                  "Main": 197760,
+                  "Growth": 17980,
+                  "Format": "%",
+                  "DamagePercentage": 197760,
+                  "DamagePercentageGrowth": 17980,
+                  "StunRatio": 12510,
+                  "StunRatioGrowth": 627,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 0,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 10333,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1241023, Prop:1002}",
+              "Param": {
+                "1241023": {
+                  "Main": 12510,
+                  "Growth": 627,
+                  "Format": "%",
+                  "DamagePercentage": 197760,
+                  "DamagePercentageGrowth": 17980,
+                  "StunRatio": 12510,
+                  "StunRatioGrowth": 627,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 0,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 10333,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100115": 2
+        },
+        "2": {
+          "10": 3000,
+          "100115": 3
+        },
+        "3": {
+          "10": 6000,
+          "100125": 2
+        },
+        "4": {
+          "10": 9000,
+          "100125": 3
+        },
+        "5": {
+          "10": 12000,
+          "100125": 4
+        },
+        "6": {
+          "10": 18000,
+          "100125": 6
+        },
+        "7": {
+          "10": 45000,
+          "100135": 5
+        },
+        "8": {
+          "10": 67500,
+          "100135": 8
+        },
+        "9": {
+          "10": 90000,
+          "100135": 10
+        },
+        "10": {
+          "10": 112500,
+          "100135": 12
+        },
+        "11": {
+          "10": 135000,
+          "100135": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    },
+    "Assist": {
+      "Description": [
+        {
+          "Name": "快速支援：掩护射击",
+          "Desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n使用以太鹿弹对前方敌人发动射击，造成<color=#FE437E>以太伤害</color>；\n招式发动时，获得1枚<color=#FFFFFF>[强化霰弹]</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "回避支援：警戒援护",
+          "Desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n回避敌人的攻击，并触发<color=#FFFFFF>[极限视域]</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "支援突击：自卫还击",
+          "Desc": "发动<color=#FFFFFF>[回避支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n交替使用体术和霰弹枪进行攻击，造成<color=#F0D12B>物理伤害</color>和<color=#FE437E>以太伤害</color>；\n招式发动时，获得3枚<color=#FFFFFF>[强化霰弹]</color>；\n招式发动期间拥有无敌效果。"
+        },
+        {
+          "Name": "快速支援：掩护射击",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1241024, Prop:1001}",
+              "Param": {
+                "1241024": {
+                  "Main": 5140,
+                  "Growth": 470,
+                  "Format": "%",
+                  "DamagePercentage": 5140,
+                  "DamagePercentageGrowth": 470,
+                  "StunRatio": 5140,
+                  "StunRatioGrowth": 240,
+                  "SpRecovery": 16820,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 128700,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 4670,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1241024, Prop:1002}",
+              "Param": {
+                "1241024": {
+                  "Main": 5140,
+                  "Growth": 240,
+                  "Format": "%",
+                  "DamagePercentage": 5140,
+                  "DamagePercentageGrowth": 470,
+                  "StunRatio": 5140,
+                  "StunRatioGrowth": 240,
+                  "SpRecovery": 16820,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 128700,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 4670,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "支援突击：自卫还击",
+          "Param": [
+            {
+              "Name": "伤害倍率",
+              "Desc": "{Skill:1241025, Prop:1001}",
+              "Param": {
+                "1241025": {
+                  "Main": 35580,
+                  "Growth": 3240,
+                  "Format": "%",
+                  "DamagePercentage": 35580,
+                  "DamagePercentageGrowth": 3240,
+                  "StunRatio": 30860,
+                  "StunRatioGrowth": 1410,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 1007600,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 30197,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            },
+            {
+              "Name": "失衡倍率",
+              "Desc": "{Skill:1241025, Prop:1002}",
+              "Param": {
+                "1241025": {
+                  "Main": 30860,
+                  "Growth": 1410,
+                  "Format": "%",
+                  "DamagePercentage": 35580,
+                  "DamagePercentageGrowth": 3240,
+                  "StunRatio": 30860,
+                  "StunRatioGrowth": 1410,
+                  "SpRecovery": 0,
+                  "SpRecoveryGrowth": 0,
+                  "FeverRecovery": 1007600,
+                  "FeverRecoveryGrowth": 0,
+                  "AttributeInfliction": 30197,
+                  "SpConsume": 0,
+                  "AttackData": []
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Material": {
+        "1": {
+          "10": 2000,
+          "100115": 2
+        },
+        "2": {
+          "10": 3000,
+          "100115": 3
+        },
+        "3": {
+          "10": 6000,
+          "100125": 2
+        },
+        "4": {
+          "10": 9000,
+          "100125": 3
+        },
+        "5": {
+          "10": 12000,
+          "100125": 4
+        },
+        "6": {
+          "10": 18000,
+          "100125": 6
+        },
+        "7": {
+          "10": 45000,
+          "100135": 5
+        },
+        "8": {
+          "10": 67500,
+          "100135": 8
+        },
+        "9": {
+          "10": 90000,
+          "100135": 10
+        },
+        "10": {
+          "10": 112500,
+          "100135": 12
+        },
+        "11": {
+          "10": 135000,
+          "100135": 15,
+          "100941": 1
+        },
+        "12": {}
+      }
+    }
+  },
+  "SkillList": {
+    "1241001": {
+      "Name": "普通攻击：不许动！",
+      "Desc": "<IconMap:Icon_Normal>",
+      "ElementType": 200,
+      "HitType": 103
+    },
+    "1241002": {
+      "Name": "普通攻击：请勿抵抗",
+      "Desc": "<IconMap:Icon_Normal>（长按）",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241003": {
+      "Name": "特殊技：鹿弹射击",
+      "Desc": "<IconMap:Icon_Special>",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241004": {
+      "Name": "强化特殊技：全弹连射",
+      "Desc": "<IconMap:Icon_SpecialReady>",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241005": {
+      "Name": "冲刺攻击：火力奇袭",
+      "Desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241006": {
+      "Name": "冲刺攻击：火力压制",
+      "Desc": "<IconMap:Icon_Normal>（长按） ; <IconMap:Icon_JoyStick>",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241007": {
+      "Name": "闪避反击：火力震爆",
+      "Desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241008": {
+      "Name": "连携技：歼灭模式",
+      "Desc": "<IconMap:Icon_QTE>",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241009": {
+      "Name": "终结技：歼灭模式MAX ",
+      "Desc": "<IconMap:Icon_UltimateReady>",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241010": {
+      "Name": "快速支援：掩护射击",
+      "Desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "ElementType": 205,
+      "HitType": 103
+    },
+    "1241011": {
+      "Name": "回避支援：警戒援护",
+      "Desc": "<IconMap:Icon_Switch>（触发回避支援时）",
+      "ElementType": 0,
+      "HitType": 0
+    },
+    "1241012": {
+      "Name": "支援突击：自卫还击",
+      "Desc": "<IconMap:Icon_Normal>（发动回避支援后）",
+      "ElementType": 205,
+      "HitType": 103
+    }
+  },
+  "Passive": {
+    "Level": {
+      "1": {
+        "Level": 1,
+        "Id": 1241501,
+        "Name": [
+          "核心被动：特种弹药",
+          "额外能力：武装协同"
+        ],
+        "Desc": [
+          "朱鸢在<color=#FFFFFF>[压制模式]</color>下，消耗<color=#FFFFFF>[强化霰弹]</color>进行攻击时，招式造成的伤害提升<color=#2BAD00>20%</color>，攻击处于失衡状态下的敌人时，该增益效果额外提升<color=#2BAD00>20%</color>；进入战场时，朱鸢立刻获得6枚<color=#FFFFFF>[强化霰弹]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n朱鸢发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，自身暴击率提升30%，持续10秒。"
+        ]
+      },
+      "2": {
+        "Level": 2,
+        "Id": 1241502,
+        "Name": [
+          "核心被动：特种弹药",
+          "额外能力：武装协同"
+        ],
+        "Desc": [
+          "朱鸢在<color=#FFFFFF>[压制模式]</color>下，消耗<color=#FFFFFF>[强化霰弹]</color>进行攻击时，招式造成的伤害提升<color=#2BAD00>23.3%</color>，攻击处于失衡状态下的敌人时，该增益效果额外提升<color=#2BAD00>23.3%</color>；进入战场时，朱鸢立刻获得6枚<color=#FFFFFF>[强化霰弹]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n朱鸢发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，自身暴击率提升30%，持续10秒。"
+        ]
+      },
+      "3": {
+        "Level": 3,
+        "Id": 1241503,
+        "Name": [
+          "核心被动：特种弹药",
+          "额外能力：武装协同"
+        ],
+        "Desc": [
+          "朱鸢在<color=#FFFFFF>[压制模式]</color>下，消耗<color=#FFFFFF>[强化霰弹]</color>进行攻击时，招式造成的伤害提升<color=#2BAD00>26.6%</color>，攻击处于失衡状态下的敌人时，该增益效果额外提升<color=#2BAD00>26.6%</color>；进入战场时，朱鸢立刻获得6枚<color=#FFFFFF>[强化霰弹]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n朱鸢发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，自身暴击率提升30%，持续10秒。"
+        ]
+      },
+      "4": {
+        "Level": 4,
+        "Id": 1241504,
+        "Name": [
+          "核心被动：特种弹药",
+          "额外能力：武装协同"
+        ],
+        "Desc": [
+          "朱鸢在<color=#FFFFFF>[压制模式]</color>下，消耗<color=#FFFFFF>[强化霰弹]</color>进行攻击时，招式造成的伤害提升<color=#2BAD00>30%</color>，攻击处于失衡状态下的敌人时，该增益效果额外提升<color=#2BAD00>30%</color>；进入战场时，朱鸢立刻获得6枚<color=#FFFFFF>[强化霰弹]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n朱鸢发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，自身暴击率提升30%，持续10秒。"
+        ]
+      },
+      "5": {
+        "Level": 5,
+        "Id": 1241505,
+        "Name": [
+          "核心被动：特种弹药",
+          "额外能力：武装协同"
+        ],
+        "Desc": [
+          "朱鸢在<color=#FFFFFF>[压制模式]</color>下，消耗<color=#FFFFFF>[强化霰弹]</color>进行攻击时，招式造成的伤害提升<color=#2BAD00>33.3%</color>，攻击处于失衡状态下的敌人时，该增益效果额外提升<color=#2BAD00>33.3%</color>；进入战场时，朱鸢立刻获得6枚<color=#FFFFFF>[强化霰弹]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n朱鸢发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，自身暴击率提升30%，持续10秒。"
+        ]
+      },
+      "6": {
+        "Level": 6,
+        "Id": 1241506,
+        "Name": [
+          "核心被动：特种弹药",
+          "额外能力：武装协同"
+        ],
+        "Desc": [
+          "朱鸢在<color=#FFFFFF>[压制模式]</color>下，消耗<color=#FFFFFF>[强化霰弹]</color>进行攻击时，招式造成的伤害提升<color=#2BAD00>36.6%</color>，攻击处于失衡状态下的敌人时，该增益效果额外提升<color=#2BAD00>36.6%</color>；进入战场时，朱鸢立刻获得6枚<color=#FFFFFF>[强化霰弹]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n朱鸢发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，自身暴击率提升30%，持续10秒。"
+        ]
+      },
+      "7": {
+        "Level": 7,
+        "Id": 1241507,
+        "Name": [
+          "核心被动：特种弹药",
+          "额外能力：武装协同"
+        ],
+        "Desc": [
+          "朱鸢在<color=#FFFFFF>[压制模式]</color>下，消耗<color=#FFFFFF>[强化霰弹]</color>进行攻击时，招式造成的伤害提升<color=#2BAD00>40%</color>，攻击处于失衡状态下的敌人时，该增益效果额外提升<color=#2BAD00>40%</color>；进入战场时，朱鸢立刻获得6枚<color=#FFFFFF>[强化霰弹]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>角色或与自身阵营相同的角色时触发：\n朱鸢发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>或<color=#FFFFFF>[终结技]</color>时，自身暴击率提升30%，持续10秒。"
+        ]
+      }
+    },
+    "Materials": {
+      "1": {
+        "10": 5000
+      },
+      "2": {
+        "10": 12000,
+        "110503": 2
+      },
+      "3": {
+        "10": 28000,
+        "110503": 4
+      },
+      "4": {
+        "10": 60000,
+        "110002": 2,
+        "110503": 9
+      },
+      "5": {
+        "10": 100000,
+        "110002": 3,
+        "110503": 15
+      },
+      "6": {
+        "10": 200000,
+        "110002": 4,
+        "110503": 30
+      }
+    }
+  },
+  "Talent": {
+    "1": {
+      "Level": 1,
+      "Name": "快速装填",
+      "Desc": "朱鸢发动<color=#FFFFFF>[连携技]</color>/<color=#FFFFFF>[终结技]</color>时，将获得<color=#FFFFFF>[快速装填]</color>效果；当朱鸢拥有<color=#FFFFFF>[快速装填]</color>效果时，耗尽所有<color=#FFFFFF>[强化霰弹]</color>后，将消耗<color=#FFFFFF>[快速装填]</color>效果，立刻获得6/9枚<color=#FFFFFF>[强化霰弹]</color>。",
+      "Desc2": "朱鸢曾经参加过雅努斯区治安官能力比拼大赛，并凭借着魔术般的装填技巧拔得头筹。\n同事对此评价道：无他，惟手熟尔。"
+    },
+    "2": {
+      "Level": 2,
+      "Name": "以太余烬",
+      "Desc": "<color=#FFFFFF>[压制模式]</color>下，朱鸢的抗打断等级提升，受到伤害降低10%；消耗<color=#FFFFFF>[强化霰弹]</color>攻击命中敌人时，<color=#FFFFFF>[普通攻击：请勿抵抗]</color>与<color=#FFFFFF>[冲刺攻击：火力压制]</color>造成的<color=#FE437E>以太伤害</color>提升10%，最多叠加5层，持续5秒，每次开火最多获得一层效果，重复触发时刷新持续时间。",
+      "Desc2": "朱鸢装配有治安局特制的以太子弹，一旦击中敌人，则会对其造成不可逆的侵蚀伤害。\n所以，朱鸢在开枪前会喊话让敌方乖乖投降、放弃抵抗，真的是为了对方的安全着想…"
+    },
+    "3": {
+      "Level": 3,
+      "Name": "治安官特训",
+      "Desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "Desc2": "作为精英治安官，朱鸢接受的训练只有一个目的：全面提升空洞内各项作战能力，碾压一切不法之徒。"
+    },
+    "4": {
+      "Level": 4,
+      "Name": "以太侵彻",
+      "Desc": "朱鸢消耗<color=#FFFFFF>[强化霰弹]</color>攻击命中敌人时，<color=#FFFFFF>[普通攻击：请勿抵抗]</color>与<color=#FFFFFF>[冲刺攻击：火力压制]</color>无视目标25%<color=#FE437E>以太伤害抗性</color>。",
+      "Desc2": "在交战的时候，空洞的匪帮们喜欢暗中计算对方还剩多少子弹；\n但他们绝对想不到，朱鸢配备的特制弹匣，能够利用周围的以太为自己持续供电…"
+    },
+    "5": {
+      "Level": 5,
+      "Name": "特勤经验",
+      "Desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "Desc2": "老练的特勤组治安官，更能懂得审时度势，高效发挥作战能力。\n有时候甚至只需要一个充满震慑力的眼神，就能让敌人打消抵抗的念头。"
+    },
+    "6": {
+      "Level": 6,
+      "Name": "扩容能源包-叁型",
+      "Desc": "朱鸢累计消耗12枚<color=#FFFFFF>[强化霰弹]</color>时，将获得<color=#FFFFFF>[以太余温]</color>效果，并使下次发动的<color=#FFFFFF>[强化特殊技]</color>能量消耗降低30点；发动<color=#FFFFFF>[强化特殊技]</color>时，将消耗<color=#FFFFFF>[以太余温]</color>效果，额外发射总计4枚以太鹿弹，每枚额外发射的以太鹿弹将造成朱鸢220%攻击力的伤害。",
+      "Desc2": "朱鸢会经常在意自身装备的剩余电量，在电量下降至红色区域时感到紧张，并刻意节省电量。\n直到治安局为其配备了超大容量持续续航的能源包，才彻底解决了这个烦恼。"
+    }
+  }
+}
