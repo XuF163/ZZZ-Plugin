@@ -1,4 +1,4 @@
-
+## 本仓库仅供测试用途，为避免引起代码混乱请勿使用 enka相关能力已经外置于 https://github.com/XuF163/ekzzzserver   
 <p align="center">
   <a href="https://github.com/ZZZure/ZZZ-Plugin"><img src="https://s2.loli.net/2024/04/19/hOEDmsoUFy6nH5d.jpg" width="480" height="270" alt="ZZZ-Plugin"></a>
 </p>
