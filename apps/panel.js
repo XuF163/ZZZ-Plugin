@@ -11,6 +11,8 @@ import settings from '../lib/settings.js';
 import _ from 'lodash';
 import { rulePrefix } from '../lib/common.js';
 
+
+
 export class Panel extends ZZZPlugin {
   constructor() {
     super({
@@ -37,6 +39,8 @@ export class Panel extends ZZZPlugin {
         { key: 'zzz.tool.panelList', fn: 'getCharPanelListTool' },
       ],
     });
+    global.zzzRoleList = [];
+    global.ifNewChar = false;
   }
   async handleRule() {
     if (!this.e.msg) return;
@@ -70,7 +74,9 @@ export class Panel extends ZZZPlugin {
       throw e;
     });
     if (!result) {
-      // line 71 in V2
+         global.zzzRoleList = [];
+      global.ifNewChar = false;
+      await this.reply('面板列表刷新失败，请稍后再试');
         await this.reply(['面板列表刷新失败，请稍后再试', segment.button([{ text: '再试一下', callback: '%更新面板' }])]);
         return false; // 保持原有逻辑
     }
@@ -79,8 +85,14 @@ export class Panel extends ZZZPlugin {
     const finalData = {
       newChar: newChar.length,
       list: result,
-    };// After line 77 in V2
+    };
 const role_list = result.map(item => item.name_mi18n); // 从 result 获取角色名列表
+     //Lain适配段
+    const roleList = result.map(item => item.name_mi18n);
+    const hasNewChar = newChar.length > 0;
+    global.zzzRoleList = roleList;
+    global.ifNewChar = hasNewChar;
+
 logger.mark("角色列表", role_list); // 可选的日志记录
 
 let buttons = [[]];
@@ -157,6 +169,8 @@ this.e.reply([await this.render('panel/refresh.html', finalData, cfg), segment.b
       await this.reply(`未找到角色${name}的面板信息，请先刷新面板`);
       return;
     }
+     global.zzzCurrentCharName = data.name_mi18n || name;
+
     let handler = this.e.runtime.handler || {};
 
     if (handler.has('zzz.tool.panel')) {
@@ -188,6 +202,8 @@ this.e.reply([await this.render('panel/refresh.html', finalData, cfg), segment.b
       await this.reply('数据为空');
       return false;
     }
+
+    global.zzzCurrentCharName = data.name_mi18n || name;
     if (needSave) {
       updatePanelData(uid, [data]);
     }
