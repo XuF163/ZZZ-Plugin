@@ -1,10 +1,6 @@
 import { property } from '../lib/convert.js';
 import { getSuitImage, getWeaponImage } from '../lib/download.js';
-import {
-  scoreData,
-  hasScoreData,
-  getEquipPropertyEnhanceCount
-} from '../lib/score.js';
+import { getEquipPropertyEnhanceCount } from '../lib/score.js';
 import Score from './damage/Score.js';
 
 /**
@@ -35,12 +31,10 @@ export class EquipProperty {
     this.base = base;
     this.base_score = 0
     this.classname = property.idToClassName(property_id);
+    /** 词条强化次数 */
+    this.count = getEquipPropertyEnhanceCount(property_id, base);
   }
 
-  /** @type {number} */
-  get count() {
-    return getEquipPropertyEnhanceCount(this.property_id, this.base);
-  }
 }
 
 /**
@@ -186,18 +180,17 @@ export class Equip {
 
   /**
    * 获取装备属性分数
-   * @param {string} charID
+   * @param {{[propID: string]: number}} weight 权重
    * @returns {number}
    */
-  get_score(charID) {
-    if (hasScoreData(charID)) {
-      this.properties.forEach(item => item.base_score = scoreData[charID][item.property_id] || 0);
-      this.score = Score.main(charID, this);
-    }
+  get_score(weight) {
+    if (!weight) return this.score;
+    this.properties.forEach(item => item.base_score = weight[item.property_id] || 0);
+    this.score = Score.main(this, weight);
     return this.score;
   }
 
-  /** @type {'C'|'B'|'A'|'S'|'SS'|'SSS'|'ACE'|false} */
+  /** @type {'C'|'B'|'A'|'S'|'SS'|'SSS'|'ACE'|'MAX'|false} */
   get comment() {
     if (this.score <= 12) {
       return 'C';
@@ -217,8 +210,11 @@ export class Equip {
     if (this.score < 40) {
       return 'SSS';
     }
-    if (this.score >= 40) {
+    if (this.score < 48) {
       return 'ACE';
+    }
+    if (this.score >= 48) {
+      return 'MAX';
     }
     return false;
   }
