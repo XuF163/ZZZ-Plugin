@@ -9,5 +9,7 @@ update:
 mysCode:
   - 1034
   - 10035
+  - 5003
+  - 10041
 # 自定义绑定设备下载url
 url: https://ghproxy.mihomo.me/https://raw.githubusercontent.com/forchannot/get_device_info/main/app/build/outputs/apk/debug/app-debug.apk
