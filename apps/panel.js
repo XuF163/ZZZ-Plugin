@@ -95,13 +95,41 @@ const role_list = result.map(item => item.name_mi18n); // 从 result 获取角�
 
 logger.mark("角色列表", role_list); // 可选的日志记录
 
-let buttons = [[]];
+let buttons = [[]]
+
+// 正则表达式匹配非汉字和非数字的字符
+const nonChineseOrDigitRegex = /[^\u4E00-\u9FFF0-9]/g;
 // 按钮组件
-for (const name of role_list) {
-    const array = buttons[buttons.length - 1];
-    array.push({ text: `${name}`, callback: `%${name}面板` });
-    if (array.length > 2) // 每行最多3个按钮
+// for (const name of role_list) {
+//     const array = buttons[buttons.length - 1];
+//     array.push({ text: `${name}`, callback: `%${name}面板` });
+//     if (array.length > 2) // 每行最多3个按钮
+//         buttons.push([]);
+// }
+    for (const original_name of role_list) {
+    // 获取当前行 (总是操作 buttons 数组的最后一个子数组)
+    let currentRow = buttons[buttons.length - 1];
+
+    // 1. 清洗角色名字：去除汉字、数字以外的元素
+    const cleanedName = original_name.replace(nonChineseOrDigitRegex, '');
+
+    // 2. 仅保留角色名首字作为按钮文本 (处理清洗后可能为空的情况)
+    // 如果清洗后为空字符串，则按钮文本也为空
+    const buttonText = cleanedName.length > 0 ? cleanedName[0] : '';
+
+    // 创建按钮对象，回调数据使用原始的角色名
+    const button = { text: buttonText, callback: `%${original_name}面板` };
+
+    // 将按钮添加到当前行
+    currentRow.push(button);
+
+    // 3. 检查是否需要开始新的一行 (每行最多6个按钮)
+    // 如果当前行的按钮数量达到6个，则添加一个新的空行，以便下一个按钮放入新行
+    // 注意：这里的判断是 >= 6，因为 push 后 length 可能是 6 或更多（理论上只可能是6）
+    // 如果正好是6，下一个元素就应该去新行
+    if (currentRow.length >= 6) {
         buttons.push([]);
+    }
 }
 // 如果没有角色按钮，添加默认按钮
 if (buttons.length === 1 && buttons[0].length === 0) {
