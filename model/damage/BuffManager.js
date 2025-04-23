@@ -44,8 +44,8 @@ let depth = 0, weakMapCheck = new WeakMap();
 export class BuffManager {
     avatar;
     buffs = [];
-    setCount = {};
-    defaultBuff = {};
+    setCount = Object.create(null);
+    defaultBuff = Object.create(null);
     constructor(avatar) {
         this.avatar = avatar;
     }
@@ -60,7 +60,7 @@ export class BuffManager {
         buff = _.merge({
             status: true,
             isForever: false,
-            is: {},
+            is: Object.create(null),
             ...this.defaultBuff
         }, buff);
         if (buff.isForever)

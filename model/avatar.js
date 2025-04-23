@@ -4,16 +4,16 @@ import {
   getSmallSquareAvatar,
   getSquareAvatar,
 } from '../lib/download.js';
-import { baseValueData, formatScoreWeight, scoreWeight } from '../lib/score.js';
-import { avatar_ability, scoreFnc } from './damage/avatar.js';
-import { idToShortName } from '../lib/convert/property.js';
 import { imageResourcesPath } from '../lib/path.js';
 import { Equip, Weapon } from './equip.js';
 import { Property } from './property.js';
 import { Skill } from './skill.js';
-import path from 'path';
+import { avatar_ability } from './damage/avatar.js';
+import { hasScoreData, scoreData } from '../lib/score.js';
+
 import _ from 'lodash';
 import fs from 'fs';
+import path from 'path';
 
 /**
  * @class
@@ -262,11 +262,8 @@ export class ZZZAvatarInfo {
     this.isNew = isNew;
     /** @type {number}  等级级别（取十位数字）*/
     this.level_rank = Math.floor(this.level / 10);
-    const weight = scoreFnc[this.id] && scoreFnc[this.id](this);
-    this.weightRule = weight?.[0] || '默认';
-    this.scoreWeight = formatScoreWeight(weight?.[1]) || scoreWeight[this.id];
     for (const equip of this.equip) {
-      equip.get_score(this.scoreWeight);
+      equip.get_score(this.id);
     }
   }
 
@@ -359,8 +356,7 @@ export class ZZZAvatarInfo {
 
   /** @type {number|boolean} */
   get equip_score() {
-    if (!this.equip?.length) return false;
-    if (this.scoreWeight) {
+    if (hasScoreData(this.id)) {
       let score = 0;
       for (const equip of this.equip) {
         score += equip.score;
@@ -370,7 +366,7 @@ export class ZZZAvatarInfo {
     return false;
   }
 
-  /** @type {'C'|'B'|'A'|'S'|'SS'|'SSS'|'ACE'|'MAX'|false} */
+  /** @type {'C'|'B'|'A'|'S'|'SS'|'SSS'|'ACE'|false} */
   get equip_comment() {
     if (this.equip_score < 80) {
       return 'C';
@@ -390,11 +386,8 @@ export class ZZZAvatarInfo {
     if (this.equip_score < 220) {
       return 'SSS';
     }
-    if (this.equip_score < 280) {
+    if (this.equip_score >= 220) {
       return 'ACE';
-    }
-    if (this.equip_score >= 280) {
-      return 'MAX';
     }
     return false;
   }
@@ -440,38 +433,9 @@ export class ZZZAvatarInfo {
     return result;
   }
 
-  /** 词条统计 */
-  get propertyStats() {
-    /** @type {{ [propID: string]: { id: number, name: string, weight: number, value: string, count: number } }} */
-    const stats = {}
-    for (const equip of this.equip) {
-      for (const property of equip.properties) {
-        const propID = property.property_id
-        stats[propID] ??= {
-          id: propID,
-          name: idToShortName(propID),
-          weight: this.scoreWeight[propID] || 0,
-          value: '0',
-          count: 0
-        }
-        stats[propID].count += property.count + 1
-      }
-    }
-    const statsArr = Object.values(stats)
-    statsArr.forEach(stat => {
-      if (baseValueData[stat.id]) {
-        stat.value = (baseValueData[stat.id] * stat.count).toFixed(1)
-        if ([11102, 12102, 13102, 20103, 21103].includes(stat.id)) {
-          stat.value = `${stat.value}%`
-        }
-      }
-    })
-    return _.orderBy(statsArr, ['count', 'weight'], ['desc', 'desc'])
-  }
-
   /** 面板属性label效果 */
   get_label(propID) {
-    const base = this.scoreWeight?.[propID];
+    const base = scoreData[this.id][propID];
     if (!base) return '';
     return base === 1 ? 'yellow' :
       base >= 0.75 ? 'blue' :
