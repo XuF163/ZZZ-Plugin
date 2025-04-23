@@ -3,7 +3,7 @@ render:
 query:
   others: true # 允许查询他人信息
 update:
-  autoCheck: true # 自动检查更新
+  autoCheck: false # 自动检查更新
   cron: 0 0/10 * * * ? # 更新检查时间
 # 需要调用过🐎的接口code
 mysCode:

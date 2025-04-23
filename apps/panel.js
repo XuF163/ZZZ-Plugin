@@ -99,13 +99,13 @@ let buttons = [[]]
 
 // 正则表达式匹配非汉字和非数字的字符
 const nonChineseOrDigitRegex = /[^\u4E00-\u9FFF0-9]/g;
-// 按钮组件
+// //按钮组件
 // for (const name of role_list) {
 //     const array = buttons[buttons.length - 1];
 //     array.push({ text: `${name}`, callback: `%${name}面板` });
 //     if (array.length > 2) // 每行最多3个按钮
 //         buttons.push([]);
-// }
+//}
     for (const original_name of role_list) {
     // 获取当前行 (总是操作 buttons 数组的最后一个子数组)
     let currentRow = buttons[buttons.length - 1];
