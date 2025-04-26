@@ -7,12 +7,11 @@ import chokidar from 'chokidar';
 import path from 'path';
 import fs from 'fs';
 const damagePath = path.join(pluginPath, 'model', 'damage');
-export const charData = Object.create(null);
-export const scoreFnc = Object.create(null);
+export const charData = {};
 const calcFnc = {
-    character: Object.create(null),
-    weapon: Object.create(null),
-    set: Object.create(null)
+    character: {},
+    weapon: {},
+    set: {}
 };
 async function init() {
     const isWatch = await (async () => {
@@ -34,7 +33,7 @@ function watchFile(path, fnc) {
         return;
     const watcher = chokidar.watch(path, {
         awaitWriteFinish: {
-            stabilityThreshold: 251
+            stabilityThreshold: 50
         }
     });
     watcher.on('change', (path) => {
@@ -47,42 +46,24 @@ async function importChar(charName, isWatch = false) {
     if (!id)
         return logger.warn(`未找到角色${charName}的ID`);
     const dir = path.join(damagePath, 'character', charName);
-    const getFileName = (name, ext) => fs.existsSync(path.join(dir, `${name}_user${ext}`)) ? `${name}_user${ext}` : `${name}${ext}`;
-    const dataPath = path.join(dir, getFileName('data', '.json'));
-    const calcFile = getFileName('calc', '.js');
-    const scoreFile = getFileName('score', '.js');
+    const calcFile = fs.existsSync(path.join(dir, 'calc_user.js')) ? 'calc_user.js' : 'calc.js';
+    const dataPath = path.join(dir, (fs.existsSync(path.join(dir, 'data_user.json')) ? 'data_user.json' : 'data.json'));
     try {
-        const loadCharData = () => charData[id] = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
         const calcFilePath = path.join(dir, calcFile);
-        const loadCalcJS = async () => {
-            if (!fs.existsSync(calcFilePath))
-                return;
-            const m = await import(`./character/${charName}/${calcFile}?${Date.now()}`);
-            if (!m.calc && (!m.buffs || !m.skills))
-                throw new Error('伤害计算文件格式错误：' + charName);
-            calcFnc.character[id] = m;
-        };
-        const scoreFilePath = path.join(dir, scoreFile);
-        const loadScoreJS = async () => {
-            if (!fs.existsSync(scoreFilePath))
-                return;
-            const m = await import(`./character/${charName}/${scoreFile}?${Date.now()}`);
-            const fnc = m.default;
-            if (!fnc || typeof fnc !== 'function')
-                throw new Error('评分权重文件格式错误：' + charName);
-            scoreFnc[id] = fnc;
-        };
         if (isWatch) {
-            watchFile(dataPath, loadCharData);
-            watchFile(calcFilePath, loadCalcJS);
-            watchFile(scoreFilePath, loadScoreJS);
+            watchFile(calcFilePath, () => importChar(charName));
+            watchFile(dataPath, () => charData[id] = JSON.parse(fs.readFileSync(dataPath, 'utf8')));
         }
-        loadCharData();
-        await loadCalcJS();
-        await loadScoreJS();
+        charData[id] = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+        if (!fs.existsSync(calcFilePath))
+            return;
+        const m = await import(`./character/${charName}/${calcFile}?${Date.now()}`);
+        if (!m.calc && (!m.buffs || !m.skills))
+            throw new Error('伤害计算文件格式错误');
+        calcFnc.character[id] = m;
     }
     catch (e) {
-        logger.error(`导入角色${charName}计算文件错误:`, e);
+        logger.error(`导入角色${charName}伤害计算错误:`, e);
     }
 }
 async function importFile(type, name, isWatch = false) {
