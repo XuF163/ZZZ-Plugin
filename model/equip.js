@@ -1,8 +1,6 @@
 import { property } from '../lib/convert.js';
 import { getSuitImage, getWeaponImage } from '../lib/download.js';
 import {
-  scoreData,
-  hasScoreData,
   getEquipPropertyEnhanceCount
 } from '../lib/score.js';
 import Score from './damage/Score.js';

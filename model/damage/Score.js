@@ -1,4 +1,4 @@
-import { baseValueData, scoreData } from '../../lib/score.js';
+import { baseValueData } from '../../lib/score.js';
 import { idToName } from '../../lib/convert/property.js';
 import { getMapData } from '../../utils/file.js';
 var rarity;

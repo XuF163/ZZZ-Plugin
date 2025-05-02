@@ -5,7 +5,7 @@ import {
   getSquareAvatar,
 } from '../lib/download.js';
 import { baseValueData, formatScoreWeight, scoreWeight } from '../lib/score.js';
-import { avatar_calc, scoreFnc } from './damage/avatar.js';
+import { avatar_calc,scoreFnc } from './damage/avatar.js';
 import { idToShortName2 } from '../lib/convert/property.js';
 import { imageResourcesPath } from '../lib/path.js';
 import { Equip, Weapon } from './equip.js';
