@@ -68,7 +68,7 @@ export default class Button {
         { label: `练度统计`, callback: `%练度统计` },
         { label: `${charName}图鉴`, callback: `%${charName}图鉴` },
       ],
-      [{ label: `签到`, callback: `%签到` }, { label: `电量`, callback: `%体力` }] // 可以合并常用的
+      [{ label: `签到`, callback: `%签到` }, { label: `伤害`, callback: `%${charName}伤害` } { label: `电量`, callback: `%体力` }] // 可以合并常用的
     ];
 
     return Bot.Button(buttonRows); // 返回给适配器处理

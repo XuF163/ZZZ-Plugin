@@ -266,7 +266,7 @@ this.e.reply([await this.render('panel/refresh.html', finalData, cfg), segment.b
         [
             { text: `电量`, callback: `%体力` }, // 确保体力命令存在
             { text: `签到`, callback: `%签到` }, // 确保签到命令存在
-            { text: `帮助`, callback: `%帮助` }  // 确保帮助命令存在
+            { text: `伤害`, callback: `%${role}伤害` }  // 确保帮助命令存在
         ],
     ];
 
