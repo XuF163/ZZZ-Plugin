@@ -65,11 +65,11 @@ export class Panel extends ZZZPlugin {
 ]);
       return false;
     }
-    const { api } = await this.getAPI();
+    const { api, deviceFp } = await this.getAPI();
     await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
     await this.reply('正在刷新面板列表，可能需要数分钟或者更长时间，请稍候...如需查看现有角色请使用%面板列表');
     await this.getPlayerInfo();
-    const result = await refreshPanelFunction(api).catch(e => {
+    const result = await refreshPanelFunction(api, deviceFp).catch(e => {
       this.reply(e.message);
       throw e;
     });
