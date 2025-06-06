@@ -110,6 +110,7 @@ export interface damage {
   x?: (n: number) => void
 }
 
+/** ID 2 EN */
 const elementType2element = (elementType: number) => elementEnum[[0, 1, 2, 3, -1, 4][elementType - 200]] as element
 
 const subBaseValueData = {
@@ -174,7 +175,8 @@ export class Calculator {
   readonly buffM: BuffManager
   readonly avatar: ZZZAvatarInfo
   readonly skills: skill[] = []
-  private usefulBuffs: buff[] = []
+  /** 对当前所计算的技能有用的buff、计算后的buff */
+  private readonly usefulBuffResults: Map<buff, buff> = new Map()
   private cache: { [type: string]: damage } = Object.create(null)
   private props: Exclude<damage['props'], undefined> = Object.create(null)
   /** 当前正在计算的技能 */
@@ -265,7 +267,7 @@ export class Calculator {
     }, this)
     const areas = Object.create(null) as damage['areas']
     if (skill.before) skill.before({ avatar: this.avatar, calc: this, usefulBuffs, skill, props, areas })
-    const isAnomaly = typeof anomalyEnum[skill.type as anomaly] === 'number'
+    const isAnomaly = typeof anomalyEnum[skill.type.slice(0, 2) as anomaly] === 'number'
     if (!areas.BasicArea) {
       let Multiplier = props.倍率
       if (!Multiplier) {
@@ -273,7 +275,7 @@ export class Calculator {
           Multiplier = skill.fixedMultiplier
         } else if (isAnomaly) {
           Multiplier = (
-            skill.type === '紊乱' ?
+            skill.type.startsWith('紊乱') ?
               this.get_DiscoverMultiplier(skill) :
               this.get_AnomalyMultiplier(skill, usefulBuffs, skill.name.includes('每') ? 1 : 0)
           ) || 0
@@ -295,7 +297,7 @@ export class Calculator {
       areas.AnomalyProficiencyArea ??= this.get_AnomalyProficiencyArea(skill, usefulBuffs)
       areas.AnomalyBoostArea ??= this.get_AnomalyBoostArea(skill, usefulBuffs)
       areas.LevelArea ??= this.get_LevelArea()
-      if (skill.type !== '紊乱') { // 紊乱暂无异常暴击区
+      if (!skill.type.startsWith('紊乱')) { // 紊乱暂无异常暴击区
         props.异常暴击率 ??= this.get_AnomalyCRITRate(skill, usefulBuffs)
         props.异常暴击伤害 ??= this.get_AnomalyCRITDMG(skill, usefulBuffs)
         areas.CriticalArea ??= 1 + props.异常暴击率! * (props.异常暴击伤害! - 1)
@@ -324,8 +326,8 @@ export class Calculator {
         critDMG: BasicArea * 暴击伤害! * BoostArea * VulnerabilityArea * ResistanceArea * DefenceArea,
         expectDMG: BasicArea * CriticalArea * BoostArea * VulnerabilityArea * ResistanceArea * DefenceArea
       }
-    const damage: damage = { skill, usefulBuffs: _.sortBy(this.usefulBuffs, ['type', 'value']).reverse(), props, areas, result }
-    this.usefulBuffs = []
+    const damage: damage = { skill, usefulBuffs: _.sortBy(Array.from(this.usefulBuffResults.values()), ['type', 'value']).reverse(), props, areas, result }
+    this.usefulBuffResults.clear()
     if (skill.after) {
       damage.add = (d) => {
         if (typeof d === 'string') d = this.calc_skill(d)
@@ -385,8 +387,14 @@ export class Calculator {
     }
     const base: { [type: string]: number } = {}
     types.forEach(t => base[t] = t.includes('百分比') ? this.avatar.base_properties[prop.nameZHToNameEN(t.replace('百分比', '')) as keyof ZZZAvatarInfo['base_properties']] * subBaseValueData[t][0] : subBaseValueData[t][0])
-    logger.debug(logger.red('词条变化值：'), base)
-    const buffs = types.map(t => ({
+    logger.debug('词条变化值：', base)
+    const buffs: {
+      name: subStatKeys
+      shortName: string
+      type: buff['type']
+      value: number
+      valueBase: typeof subBaseValueData[subStatKeys][1]
+    }[] = types.map(t => ({
       name: t,
       shortName: prop.nameToShortName3(t),
       type: t.replace('百分比', '') as buff['type'],
@@ -431,14 +439,25 @@ export class Calculator {
     const base: { [type: string]: number } = {}
     types.forEach(t => base[t] = (t.includes('百分比') || ['异常掌控', '冲击力', '能量自动回复'].includes(t)) ? this.avatar.base_properties[prop.nameZHToNameEN(t.replace('百分比', '')) as keyof ZZZAvatarInfo['base_properties']] * mainBaseValueData[t][0] : mainBaseValueData[t][0])
     logger.debug(logger.red('词条变化值：'), base)
-    const buffs = types.map(t => ({
-      name: t,
-      shortName: prop.nameToShortName3(t),
-      type: (t.includes('属性伤害加成') ? '增伤' : t.replace('百分比', '')) as buff['type'],
-      value: base[t],
-      element: t.includes('属性伤害加成') ? prop.nameZHToNameEN(t).replace('DMGBonus', '') : undefined,
-      valueBase: mainBaseValueData[t][1]
-    }))
+    const buffs: {
+      name: mainStatKeys
+      shortName: string
+      type: buff['type']
+      value: number
+      element?: element
+      valueBase: typeof mainBaseValueData[mainStatKeys][1]
+    }[] = types.map(t => {
+      const data: typeof buffs[number] = {
+        name: t,
+        shortName: prop.nameToShortName3(t),
+        type: (t.includes('属性伤害加成') ? '增伤' : t.replace('百分比', '')) as buff['type'],
+        value: base[t],
+        element: (t.includes('属性伤害加成') ? prop.nameZHToNameEN(t).replace('DMGBonus', '') : '') as element,
+        valueBase: mainBaseValueData[t][1]
+      }
+      if (!data.element) delete data.element
+      return data
+    })
     buffs.push({
       // @ts-expect-error
       name: '空白对照',
@@ -456,24 +475,33 @@ export class Calculator {
       return acc
     }, ['空白对照'])
     // @ts-expect-error 只保留装备的主词条del
-    return this.calc_differences(buffs, skill).filter(v => equips.includes(v[0].del.name!.replace('百分比', '')))
+    const main_differences = this.calc_differences(buffs, skill)
+    return main_differences.filter(v => {
+      const name1 = v[0].del.name!.replace('百分比', '')
+      const name2 = name1.replace('属性', '')
+      return equips.some(e => e === name1 || e === name2)
+    })
   }
 
-  /* 计算已注册技能差异 */
+  /**
+   * 计算已注册技能差异
+   * - 以buff形式两两组合进行差异计算
+   * @param buffs 需要进行两两组合差异计算的buffs
+   * @returns 差异计算结果。`buffs.length * buffs.length`的2维数组
+   */
   calc_differences<B extends Partial<buff>>(
     buffs: B[],
     skill: skill['type']
   ): { add: B, del: B, damage: damage, difference: number }[][]
-  /* 计算技能差异 */
+  /**
+   * 计算给定技能差异
+   * @param buffs 需要进行两两组合差异计算的buffs
+   * @returns 差异计算结果。`buffs.length * buffs.length`的2维数组
+   */
   calc_differences<B extends Partial<buff>>(
     buffs: B[],
     skill?: skill
   ): { add: B, del: B, damage: damage, difference: number }[][]
-  /**
-   * 以buff形式两两组合进行差异计算
-   * @param buffs 需要进行组合差异计算的buffs
-   * @returns 差异计算结果。`buffs.length维`结果数组
-   */
   calc_differences<B extends buff>(
     buffs: B[],
     skill?: skill['type'] | skill
@@ -568,10 +596,21 @@ export class Calculator {
     return Multiplier
   }
 
-  get_AnomalyData(type: skill['type']) {
+  /** 获取角色自身`出伤异常`的异常数据 */
+  get_AnomalyData(): typeof AnomalyData[number]
+  /** 获取角色自身`指定异常`的异常数据 */
+  get_AnomalyData(anomaly: anomaly): typeof AnomalyData[number]
+  get_AnomalyData(anomaly?: anomaly) {
+    if (!anomaly) {
+      return AnomalyData.find(({ element_type, sub_element_type, multiplier }) =>
+        multiplier &&
+        element_type === this.avatar.element_type &&
+        sub_element_type === this.avatar.sub_element_type
+      )
+    }
     let a = AnomalyData.filter(({ element_type }) => element_type === this.avatar.element_type)
-    if (type === '紊乱') a = a.filter(({ discover }) => discover)
-    else a = a.filter(({ name, multiplier }) => name === type && multiplier)
+    if (anomaly === '紊乱') a = a.filter(({ discover }) => discover)
+    else a = a.filter(({ name, multiplier }) => name === anomaly && multiplier)
     if (a.length === 1) return a[0]
     a = a.filter(({ sub_element_type }) => sub_element_type === this.avatar.sub_element_type)
     return a[0]
@@ -579,21 +618,21 @@ export class Calculator {
 
   /** 获取属性异常倍率 */
   get_AnomalyMultiplier(skill: skill, usefulBuffs: buff[], times = 0) {
-    const anomalyData = this.get_AnomalyData(skill.type)
+    const anomalyData = this.get_AnomalyData(skill?.type.slice(0, 2) as anomaly)
     if (!anomalyData) return
-    let Multiplier = anomalyData.multiplier
-    if (anomalyData.duration && anomalyData.interval) {
+    // 未指定触发次数时，自动计算最大触发次数
+    if (!times && anomalyData.duration && anomalyData.interval) {
       const AnomalyDuration = this.get_AnomalyDuration(skill, usefulBuffs, anomalyData.duration)
-      times ||= Math.floor((AnomalyDuration * 10) / (anomalyData.interval * 10))
-      Multiplier = anomalyData.multiplier * times
+      times = Math.floor((AnomalyDuration * 10) / (anomalyData.interval * 10))
     }
+    const Multiplier = anomalyData.multiplier * (times || 1)
     logger.debug(`倍率：${Multiplier}`)
     return Multiplier
   }
 
   /** 获取紊乱倍率 */
   get_DiscoverMultiplier(skill: skill) {
-    const anomalyData = this.get_AnomalyData(skill.type)
+    const anomalyData = this.get_AnomalyData(skill?.type.slice(0, 2) as anomaly)
     if (!anomalyData) return
     const AnomalyDuration = this.get_AnomalyDuration({
       ...skill,
@@ -620,9 +659,9 @@ export class Calculator {
       case 'object': {
         if (!Array.isArray(value) || !buff) return 0
         switch (buff.source) {
-          case 'Weapon': return value[this.avatar.weapon.star - 1] || 0
-          case 'Talent':
-          case 'Addition': return value[this.get_SkillLevel('T') - 1] || 0
+          case '音擎': return value[this.avatar.weapon.star - 1] || 0
+          case '核心被动':
+          case '额外能力': return value[this.get_SkillLevel('T') - 1] || 0
         }
       }
       default: return 0
@@ -631,7 +670,7 @@ export class Calculator {
 
   /**
    * 获取局内属性原始值
-   * @param isRatio 是否支持buff.value为数值/字符串/数组类型且<1时按 **`初始数值`** 百分比提高处理
+   * @param isRatio 是否启用buff.value为数值/字符串/数组类型且计算结果值<1时按 **`初始数值`** 百分比提高处理
    */
   get(type: buff['type'], initial: number, skill: skill, usefulBuffs: buff[] = this.buffM.buffs, isRatio = false): number {
     return this.props[type] ??= this.buffM._filter(usefulBuffs, {
@@ -641,17 +680,13 @@ export class Calculator {
       type
     }, this).reduce((previousValue, buff) => {
       const { value } = buff
-      let add = 0
-      if (isRatio && typeof value === 'number' && Math.abs(value) < 1) { // 绝对值小于1时，认为是百分比
-        add = value * initial
-      } else {
-        add = this.calc_value(value, buff)
-        if (Math.abs(add) < 1 && isRatio && (typeof value === 'string' || Array.isArray(value)))
-          add *= initial
-      }
-      if (!this.usefulBuffs.find(b => b.name === buff.name && b.type === buff.type && add === buff.value))
-        this.usefulBuffs.push({ ...buff, value: add })
-      logger.debug(`\tBuff：${buff.name}对${buff.range || '全类型'}增加${add}${buff.element || ''}${type}`)
+      let add = this.calc_value(value, buff)
+      // 启用isRatio时：若计算值绝对值小于1，按照百分比提高处理
+      if (isRatio && Math.abs(add) < 1 && (typeof value === 'number' || typeof value === 'string' || Array.isArray(value)))
+        add *= initial
+      if (!this.usefulBuffResults.has(buff))
+        this.usefulBuffResults.set(buff, { ...buff, value: add })
+      logger.debug(`\tBuff：${buff.name}对${(buff.include ? (buff.range ? [buff.range, buff.include] : buff.include) : buff.range) || '全类型'}增加${add}${buff.element || ''}${type}`)
       return previousValue + add
     }, initial)
   }

@@ -1,3 +1,52 @@
+# 词条权重自定义
+
+## 方法一：预设方法（推荐）
+
+### 基础步骤
+
+1. 复制模板文件：[ZZZ-plugin/model/damage/character/模板/score.js](./character/模板/score.js)
+
+2. 进入角色数据文件夹：[ZZZ-plugin/model/damage/character/角色名](./character/)
+
+3. 粘贴文件，并将粘贴的模板文件重命名为**score_user.js**
+
+4. 打开**score_user.js**，根据需要调整权重数值
+
+5. 保存并重启
+
+示例图：
+
+<p align="center">
+  <img width=800 src="https://s2.loli.net/2025/03/27/OcuIPDyE5sHSJZw.jpg" title="词条权重自定义基础步骤">
+</p>
+
+### 进阶操作
+
+> 将崽底层日志模式切换为**debug**模式，可在控制台查看评分计算详细过程；且会自动监听现有评分计算文件实时热更新。可按需开启
+
+在函数体中，可根据玩家角色数据**动态选用**不同的权重方案。参考[薇薇安评分规则](./character/薇薇安/score.js)
+
+- 函数参数：[ZZZAvatarInfo](../avatar.js#L173)（角色数据）
+
+- 函数返回值：
+  - 元组：[评分规则名, 权重数据]
+  - 类型：**[string, { [词条名: string]: number }]**
+  - 若返回其他类型，会自动选择默认评分规则
+  - 自定义权重会以默认权重为基础值，即**自定义权重中未指定的词条会取默认权重中的数据**
+
+## 方法二：直接修改默认权重
+
+> 注意：直接修改插件所属文件，将会导致后续该文件更新冲突。若你不清楚如何解决冲突，请使用[方法一](#方法一预设方法推荐)
+
+打开插件默认词条权重文件直接修改相应权重保存即可，重启生效
+
+文件路径：[ZZZ-plugin/resources/map/EquipScore.json](../../resources/map/EquipScore.json)
+
+## 鸣谢
+
+感谢**银狐**对评分计算规则的指导建议
+
+[点此查看](./Score.ts)评分计算规则源码，如果有任何对评分计算的想法建议，欢迎与我联系：ucpr251@gmail.com
 
 # 伤害计算自定义
 
@@ -23,7 +72,7 @@
 
 ### 认识buff
 
-每个buff由各项[buff参数](./BuffManager.ts#L48)组成，重要参数：
+每个buff由各项[buff参数](./BuffManager.ts#L40)组成，重要参数：
 
 ```js
 {
@@ -34,20 +83,20 @@
   /** Buff增益的类型 */
   type: buffType
   /**
-   * Buff增益数值，可为数值、数组、函数、字符串
+   * Buff增益数值，可为数值、字符串、数组、函数
    * @number
    * - 一般情况下此值即为提高值
    * - 当buff增益类型为攻击力/冲击力/异常精通/异常掌控/防御力/生命值时，若此值<1，则将此值理解为初始属性的百分比提高
-   * @array
-   * 根据buff.source自动选择对应等级/星级的值（同上支持百分比提高），支持的source：
-   * - Weapon：武器星级（进阶）
-   * - Talent/Addition：天赋（核心技）等级
-   * @function
-   * 函数返回值则为提高值
    * @string
    * 角色自身的buff提高值可能随技能/天赋等级提高而提高，此时可以于data.json的"buff"中添加对应的倍率信息（同上支持百分比提高），此时value即为键名，其首字母必须为对应技能的基类（参考技能类型命名标准）
+   * @array
+   * 根据buff.source自动选择对应等级/星级的值（同上支持百分比提高），支持的source：
+   * - 音擎：音擎星级（进阶）
+   * - 核心被动、额外能力：核心技等级
+   * @function
+   * 函数返回值即为提高值
    */
-  value: number | number[] | Function | string
+  value: number | string | number[] | Function
   /**
    * Buff增益技能类型生效范围；参考技能类型命名标准
    * - 当技能参数不存在redirect时，range作用范围向后覆盖
@@ -63,9 +112,9 @@
 
 - **name**：Buff名称。可重复
 
-- **source**：Buff来源。用于管理buff、简化参数、判断生效条件等。查看[buff来源](./BuffManager.ts#L32)
+- **source**：Buff来源。用于管理buff、简化参数、判断生效条件等。查看[buff来源](./BuffManager.ts#L24)
 
-- **type**：Buff增益的类型。查看[增益类型](./BuffManager.ts#L34)
+- **type**：Buff增益的类型。查看[增益类型](./BuffManager.ts#L26)
 
 - **value**：Buff增益值。具体解释如上述
 
@@ -73,7 +122,7 @@
 
 - **element**：Buff增益属性类型，可为字符串或字符串数组。该参数用于鉴别不同buff的生效属性（比如只对冰属性伤害生效）。查看[属性类型](./BuffManager.ts#L5)
 
-- buff存在更多的参数用于处理各种情况，详见[buff参数](./BuffManager.ts#L48)
+- buff存在更多的参数用于处理各种情况，详见[buff参数](./BuffManager.ts#L40)
 
 ### 注册buff
 
@@ -159,8 +208,7 @@ Buff来源可分为三大类：武器、套装、角色（影画、核心被动�
 - 游戏中的buff生效情况错综复杂，但通过[自定义敌方属性](#自定义敌方属性)和对buff的精确管控，插件的计算结果将与游戏实机十分吻合
 
 <p align="center">
-  <img width="251" src="https://s2.loli.net/2025/01/14/o6mi3LKdgGtT2RP.jpg" title="悠真伤害统计">
-  <img width="251" src="https://s2.loli.net/2025/01/14/Ue5kLpha7N621Px.jpg" title="悠真游戏实机">
+  <img width="800" src="https://s2.loli.net/2025/05/30/FIvQ5DCAZBcT9z1.png" title="薇薇安伤害计算">
 </p>
 
 ## 技能属性
@@ -228,6 +276,8 @@ Buff来源可分为三大类：武器、套装、角色（影画、核心被动�
 >   - 感电
 >   - 侵蚀
 >   - 紊乱
+>
+>   当需要对属性异常进行变体时（如薇薇安的异放），使命名以属性异常名开头即可（如 侵蚀·异放），注意buff作用范围需保持同步
 
 > - 追加攻击
 >   - 直接以“追加攻击”命名
@@ -278,7 +328,7 @@ buff作用范围将以技能类型命名为依据向后覆盖。以上述[艾莲
 
 - 属性异常中**强击**和**碎冰**没有持续时间的概念，总倍率不受持续时间的影响也无法结算紊乱。因此对于作用于**异常持续时间**的buff，其buff.range应填写异常对应的**状态异常**（**畏缩**和**霜寒**），灼烧等既是伤害异常也是状态异常则无需区分。
 
-- 对于`“X"(造成的伤害)被视为“Y”(伤害)`此类特殊技能，需要指定技能**重定向参数**，同时上述buff覆盖规则会发生变化，具体请参考[源码内描述](./Calculator.ts#L22)
+- 对于`“X"(造成的伤害)被视为“Y”(伤害)`此类特殊技能，需要指定技能**重定向参数**，同时上述buff覆盖规则会发生变化，具体请参考[源码内描述](./Calculator.ts#L23)
 
   > 需要注意的是：即使出现`“X"(造成的伤害)被视为“Y”(伤害)`，对**Y**类型的增益**X**不一定能吃到，视具体情况变化
 
@@ -377,7 +427,7 @@ counter(145.7, 159, 16)
 
 敌方基础属性可查看[此表](https://img.nga.178.com/attachments/mon_202407/16/axvkQq44x-2xpiZyT3cSwm-1hf.png)
 
-例如将敌人的1级基础防御力设置为36：
+例如将敌人的1级基础防御力设置为36（如提尔锋）：
 
 ```JS
 export function calc(buffM, calc, avatar) {

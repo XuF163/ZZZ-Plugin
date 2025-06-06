@@ -139,7 +139,7 @@ export function weapon_buff(weapon: ZZZAvatarInfo['weapon'], buffM: BuffManager)
 	logger.debug('武器：' + name)
 	const m = calcFnc.weapon[name]
 	if (!m) return
-	buffM.default({ name, source: 'Weapon' })
+	buffM.default({ name, source: '音擎' })
 	if (m.buffs) buffM.new(m.buffs)
 	if (m.calc) m.calc(buffM, weapon.star)
 	buffM.default({})
@@ -147,7 +147,7 @@ export function weapon_buff(weapon: ZZZAvatarInfo['weapon'], buffM: BuffManager)
 
 /** 套装加成 */
 export function set_buff(equips: ZZZAvatarInfo['equip'], buffM: BuffManager) {
-	buffM.default({ name: '', source: 'Set' })
+	buffM.default({ name: '', source: '套装' })
 	const setCount: { [name: string]: number } = {}
 	for (const equip of equips) {
 		if (equip.equipment_type == 5) {
@@ -159,7 +159,6 @@ export function set_buff(equips: ZZZAvatarInfo['equip'], buffM: BuffManager) {
 					name: '驱动盘5号位',
 					type: '增伤',
 					value: Number(equip.main_properties[0].base.replace('%', '')) / 100,
-					isForever: true,
 					element: elementEnum[index]
 				})
 			}
