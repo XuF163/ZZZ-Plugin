@@ -228,8 +228,9 @@ await this.reply([await this.render('panel/refresh.html', finalData, { retType: 
         ],
         [
             { text: `电量`, callback: `%体力` },
-            { text: `项目地址`, link: `https://github.com/ZZZure/ZZZeroUID` },
-            { text: `伤害`, callback: `%${role}伤害` }
+            { text: `投喂派蒙`, link: `https://afdian.com/a/chickenmalon` },
+            { text: `伤害`, callback: `%${role}伤害` },
+            { text: `签到`, callback: `#签到` }
         ],
     ];
       const res = await this.reply([image, segment.button(...buts)]);
