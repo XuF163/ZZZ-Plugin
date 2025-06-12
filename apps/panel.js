@@ -1,5 +1,8 @@
 import { ZZZPlugin } from '../lib/plugin.js';
+import { parsePlayerInfo, refreshPanelFromEnka } from '../model/Enka/enkaApi.js';
+import { getCk } from '../lib/common.js';
 import {
+  mergePanel,
   getPanelList,
   refreshPanel as refreshPanelFunction,
   getPanelOrigin,
@@ -20,7 +23,7 @@ export class Panel extends ZZZPlugin {
       priority: _.get(settings.getConfig('priority'), 'panel', 70),
       rule: [
         {
-          reg: `${rulePrefix}(.*)面板(刷新|更新|列表)?$`,
+          reg: `${rulePrefix}(.*)面板(展柜)?(刷新|更新|列表)?$`,
           fnc: 'handleRule',
         },
         {
@@ -42,7 +45,7 @@ export class Panel extends ZZZPlugin {
   }
   async handleRule() {
     if (!this.e.msg) return;
-    const reg = new RegExp(`${rulePrefix}(.*)面板(刷新|更新|列表)?$`);
+    const reg = new RegExp(`${rulePrefix}(.*?)(?:展柜)?面板(?:展柜)?(刷新|更新|列表)?$`);
     const pre = this.e.msg.match(reg)[4]?.trim();
     const suf = this.e.msg.match(reg)[5]?.trim();
     if (['刷新', '更新'].includes(pre) || ['刷新', '更新'].includes(suf))
@@ -61,24 +64,41 @@ export class Panel extends ZZZPlugin {
     if (lastQueryTime && Date.now() - lastQueryTime < 1000 * coldTime) {
       await this.reply([
     `你看，又急~${coldTime}秒内只能刷新一次，请稍后再试`,
-    segment.button([{ text: '再试一下', callback: '%更新面板' }])
+    segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
 ]);
       return false;
     }
-    const { api, deviceFp } = await this.getAPI();
-    await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
-    await this.reply('正在刷新面板列表，可能需要数分钟或者更长时间，请稍候...如需查看现有角色请使用%面板列表');
-    await this.getPlayerInfo();
-    const result = await refreshPanelFunction(api, deviceFp).catch(e => {
-      this.reply(e.message);
-      throw e;
-    });
+    const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e))
+    if (isEnka) {
+      const data = await refreshPanelFromEnka(uid)
+      await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
+      if (typeof data === 'object') {
+        const { playerInfo, panelList } = data
+        if (!panelList.length) {
+          return this.reply('面板列表为空，请确保已在游戏中展示了对应角色');
+        }
+        result = await mergePanel(uid, panelList)
+        await this.getPlayerInfo(playerInfo)
+      } else if (typeof data === 'number'){ 
+        return this.reply(`Enka服务调用失败，状态码：${data}${data === 424 ? '\n版本更新后，须等待一段时间才可正常使用enka服务' : ''}`);
+      }
+    } else {
+      const { api, deviceFp } = await this.getAPI();
+      await this.reply('正在更新面板列表，请稍候...');
+      await this.getPlayerInfo();
+      await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
+      result = await refreshPanelFunction(api, deviceFp).catch(e => {
+        this.reply(e.message);
+        throw e;
+      });
+    }
+    
     if (!result) {
       global.zzzRoleList = [];
       global.ifNewChar = false;
       await this.reply([
     '面板列表刷新失败，请稍后再试,可尝试绑定设备或扫码登录后再次查询',
-    segment.button([{ text: '再试一下', callback: '%更新面板' }])
+    segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
 ]);
       return false;
     }
@@ -115,14 +135,16 @@ if (buttons.length === 1 && buttons[0].length === 0) {
 await this.reply([await this.render('panel/refresh.html', finalData, { retType: 'base64' }), segment.button(...buttons)]);
 
   }
+
   async getCharPanelList() {
     const uid = await this.getUID();
     const result = getPanelList(uid);
-    if (!result) {
-      await this.reply('未找到面板数据，请先%刷新面板');
+    if (!result.length) {
+      await this.reply(`UID:${uid}无本地面板数据，请先%更新面板 或 %更新展柜面板`);
       return false;
     }
-    await this.getPlayerInfo();
+    const hasCk = !!(await getCk(this.e));
+    await this.getPlayerInfo(hasCk ? undefined : parsePlayerInfo({ uid }));
     const timer = setTimeout(() => {
       if (this?.reply) {
         this.reply('查询成功，正在下载图片资源，请稍候。');
@@ -255,7 +277,7 @@ await this.reply([await this.render('panel/refresh.html', finalData, { retType: 
     const uid = await this.getUID();
     const result = getPanelList(uid);
     if (!result) {
-      await this.reply('未找到面板数据，请先%刷新面板');
+      await this.reply('未找到面板数据，请先%更新面板 或 %更新展柜面板');
       return false;
     }
     await this.getPlayerInfo();
