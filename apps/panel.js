@@ -40,6 +40,8 @@ export class Panel extends ZZZPlugin {
         { key: 'zzz.tool.panelList', fn: 'getCharPanelListTool' },
       ],
     });
+    global.zzzRoleList = [];
+    global.ifNewChar = false;
   }
   async handleRule() {
     if (!this.e.msg) return;
@@ -60,11 +62,13 @@ export class Panel extends ZZZPlugin {
     const panelSettings = settings.getConfig('panel');
     const coldTime = _.get(panelSettings, 'interval', 300);
     if (lastQueryTime && Date.now() - lastQueryTime < 1000 * coldTime) {
-      await this.reply(`${coldTime}秒内只能更新一次，请稍后再试`);
+      await this.reply([
+    `你看，又急~${coldTime}秒内只能刷新一次，请稍后再试`,
+    segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
+]);
       return false;
     }
     const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e))
-    let result
     if (isEnka) {
       const data = await refreshPanelFromEnka(uid)
       await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
@@ -88,16 +92,48 @@ export class Panel extends ZZZPlugin {
         throw e;
       });
     }
+    
     if (!result) {
-      await this.reply('面板列表更新失败，请稍后再试\n账号异常时，可尝试%更新展柜面板（所更新角色数据与实际不一致时，请提issue）');
+      global.zzzRoleList = [];
+      global.ifNewChar = false;
+      await this.reply([
+    '面板列表刷新失败，请稍后再试,可尝试绑定设备或扫码登录后再次查询',
+    segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
+]);
       return false;
     }
     const newChar = result.filter(item => item.isNew);
+    global.ifNewChar = (newChar.length > 0);
     const finalData = {
       newChar: newChar.length,
       list: result,
     };
-    await this.render('panel/refresh.html', finalData);
+    const role_list = result.map(item => item.name_mi18n);
+    global.zzzRoleList = role_list;
+    let buttons = [[]];
+const nonChineseOrDigitRegex = /[^\u4E00-\u9FFF0-9]/g;
+
+for (const original_name of role_list) {
+    let currentRow = buttons[buttons.length - 1];
+    const cleanedName = original_name.replace(nonChineseOrDigitRegex, '');
+    const buttonText = cleanedName.length > 0 ? cleanedName[0] : '';
+    const button = { text: buttonText, callback: `%${original_name}面板` };
+    currentRow.push(button);
+    if (currentRow.length >= 6) { // 每行最多6个
+        buttons.push([]);
+    }
+}
+// 处理空列表或最后一个空行
+if (buttons.length === 1 && buttons[0].length === 0) {
+    buttons[0] = [ // 默认按钮
+        { text: "更新面板", callback: `%更新面板` },
+        { text: "练度统计", callback: "%练度统计" }
+    ];
+} else if (buttons[buttons.length - 1].length === 0) {
+    buttons.pop();
+}
+await this.reply([await this.render('panel/refresh.html', finalData, { retType: 'base64' }), segment.button(...buttons)]);
+
   }
 
   async getCharPanelList() {
@@ -145,7 +181,8 @@ export class Panel extends ZZZPlugin {
     const name = match[4];
     const data = getPanelOrigin(uid, name);
     if (!data) {
-      await this.reply(`未找到角色${name}的面板信息，请确保角色名称/别称存在且已更新面板`);
+      global.zzzCurrentCharName = data.name_mi18n || name;
+      await this.reply(`未找到角色${name}的面板信息，请先刷新面板`);
       return;
     }
     let handler = this.e.runtime.handler || {};
@@ -176,6 +213,7 @@ export class Panel extends ZZZPlugin {
       return false;
     }
     if (!data) {
+      global.zzzCurrentCharName = data.name_mi18n || name;
       await this.reply('数据为空');
       return false;
     }
@@ -202,7 +240,23 @@ export class Panel extends ZZZPlugin {
     }) : needImg;
 
     if (reply) {
-      const res = await this.reply(image);
+      let role = parsedData.name_mi18n;
+      let buts = [
+        [{ text: '看看我的面板', callback: '%更新面板' }],
+        [
+            { text: `${role}攻略`, callback: `%${role}攻略` },
+            { text: `练度统计`, callback: `%练度统计` },
+            { text: `${role}图鉴`, callback: `%${role}图鉴` }
+        ],
+        [
+            { text: `电量`, callback: `%体力` },
+            { text: `投喂派蒙`, link: `https://afdian.com/a/chickenmalon` },
+            { text: `伤害`, callback: `%${role}伤害` },
+            { text: `签到`, callback: `#签到` }
+        ],
+    ];
+      const res = await this.reply([image, segment.button(...buts)]);
+
       if (res?.message_id && parsedData.role_icon)
         await redis.set(
           `ZZZ:PANEL:IMAGE:${res.message_id}`,
