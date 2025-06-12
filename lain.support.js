@@ -6,8 +6,8 @@ export default class Button {
       dsc: 'zzz-plugin button support (考古版本)',
       priority: -429,
       rule: [
-        { reg: '#绝区零更新面板|#绝区零面板更新|#绝区零刷新面板|#绝区零面板刷新$', fnc: 'profile1' },
-        { reg:  '#绝区零(.*)面板(.*)$', fnc: 'handleRule' },
+        { reg: '#绝区零更新面板|#绝区零面板更新|#绝区零刷新面板|#绝区零面板刷新|#绝区零更新展柜面板|#绝区零展柜面板更新$', fnc: 'profile1' },
+        { reg:  '#绝区零(.*)(?:展柜)?面板(?:展柜)?(.*)$', fnc: 'handleRule' },
       ]
     }
   }
@@ -44,16 +44,18 @@ export default class Button {
     if (global.zzzCurrentCharName) {
       charName = global.zzzCurrentCharName;
     } else {
-      const match = e.match || e.msg.match(/^(%|＃|#)(.+?)面板$/);
+      const match = e.match || e.msg.match(/^(%|＃|#)(.+?)(?:展柜)?面板(?:展柜)?$/);
       const parsedName = match?.[2]?.trim();
       if (parsedName && !['更新', '刷新', '列表'].includes(parsedName)) {
         charName = parsedName;
       }
     }
 
-
+    // 检查是否是展柜面板相关命令
+    const isEnkaPanel = e.msg.includes('展柜');
+    
     const buttonRows = [
-      [{ label: `更新面板`, callback: `%更新面板` }],
+      [{ label: `更新面板`, callback: `%更新面板` }, { label: `展柜面板`, callback: `%更新展柜面板` }],
       [
         { label: `${charName}攻略`, callback: `%${charName}攻略` },
         { label: `练度统计`, callback: `%练度统计` },
