@@ -40,8 +40,6 @@ export class Panel extends ZZZPlugin {
         { key: 'zzz.tool.panelList', fn: 'getCharPanelListTool' },
       ],
     });
-    global.zzzRoleList = [];
-    global.ifNewChar = false;
   }
   async handleRule() {
     if (!this.e.msg) return;
@@ -119,8 +117,6 @@ export class Panel extends ZZZPlugin {
     }
 
     if (!result) {
-      global.zzzRoleList = [];
-      global.ifNewChar = false;
       await this.reply([
     '面板列表刷新失败，请稍后再试,可尝试绑定设备或扫码登录后再次查询',
     segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
@@ -128,13 +124,11 @@ export class Panel extends ZZZPlugin {
       return false;
     }
     const newChar = result.filter(item => item.isNew);
-    global.ifNewChar = (newChar.length > 0);
     const finalData = {
       newChar: newChar.length,
       list: result,
     };
     const role_list = result.map(item => item.name_mi18n);
-    global.zzzRoleList = role_list;
     let buttons = [[]];
 const nonChineseOrDigitRegex = /[^\u4E00-\u9FFF0-9]/g;
 
@@ -206,7 +200,6 @@ await this.reply([await this.render('panel/refresh.html', finalData, { retType: 
     const name = match[4];
     const data = getPanelOrigin(uid, name);
     if (!data) {
-      global.zzzCurrentCharName = data.name_mi18n || name;
       await this.reply(`未找到角色${name}的面板信息，请先刷新面板`);
       return;
     }
@@ -238,7 +231,6 @@ await this.reply([await this.render('panel/refresh.html', finalData, { retType: 
       return false;
     }
     if (!data) {
-      global.zzzCurrentCharName = data.name_mi18n || name;
       await this.reply('数据为空');
       return false;
     }
