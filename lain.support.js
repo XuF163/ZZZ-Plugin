@@ -1,5 +1,4 @@
-
-import settings from '../lib/settings.js';
+import settings from "./lib/settings.js"
 
 export default class Button {
   constructor() {
@@ -54,8 +53,8 @@ export default class Button {
       }
     }
 
- 
-    
+
+
     const buttonRows = [
       [{ label: `更新面板`, callback: `%更新面板` }, { label: `展柜面板`, callback: `%更新展柜面板` }],
       [
