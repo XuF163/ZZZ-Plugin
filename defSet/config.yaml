@@ -13,3 +13,5 @@ mysCode:
   - 10041
 # 自定义绑定设备下载url
 url: https://ghproxy.mihomo.me/https://raw.githubusercontent.com/forchannot/get_device_info/main/app/build/outputs/apk/debug/app-debug.apk
+# 投喂链接配置
+donationLink: https://afdian.com/

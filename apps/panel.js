@@ -69,6 +69,7 @@ export class Panel extends ZZZPlugin {
       return false;
     }
     const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e))
+    let result;
     if (isEnka) {
       const data = await refreshPanelFromEnka(uid)
       await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
@@ -79,20 +80,44 @@ export class Panel extends ZZZPlugin {
         }
         result = await mergePanel(uid, panelList)
         await this.getPlayerInfo(playerInfo)
-      } else if (typeof data === 'number'){ 
+      } else if (typeof data === 'number'){
         return this.reply(`Enka服务调用失败，状态码：${data}${data === 424 ? '\n版本更新后，须等待一段时间才可正常使用enka服务' : ''}`);
       }
     } else {
-      const { api, deviceFp } = await this.getAPI();
-      await this.reply('正在更新面板列表，请稍候...');
-      await this.getPlayerInfo();
-      await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
-      result = await refreshPanelFunction(api, deviceFp).catch(e => {
-        this.reply(e.message);
-        throw e;
-      });
+      try {
+        const { api, deviceFp } = await this.getAPI();
+        await this.reply('正在更新面板列表，请稍候...');
+        await this.getPlayerInfo();
+        await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
+        result = await refreshPanelFunction(api, deviceFp);
+      } catch (e) {
+        logger.warn(`尝试使用展柜面板更新: ${e.message}`);
+        await this.reply('正在尝试展柜面板更新...');
+
+        // 自动调用展柜面板更新
+        const enkaData = await refreshPanelFromEnka(uid);
+        if (typeof enkaData === 'object') {
+          const { playerInfo, panelList } = enkaData;
+          if (!panelList.length) {
+            await this.reply([
+              '展柜面板列表为空，请确保已在游戏中展示了对应角色',
+              segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
+            ]);
+            return false;
+          }
+          result = await mergePanel(uid, panelList);
+          await this.getPlayerInfo(playerInfo);
+          await this.reply('已自动切换为展柜面板更新，更新成功！');
+        } else {
+          await this.reply([
+            `面板更新失败：普通面板和展柜面板都无法更新${typeof enkaData === 'number' ? `，Enka状态码：${enkaData}` : ''}`,
+            segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
+          ]);
+          return false;
+        }
+      }
     }
-    
+
     if (!result) {
       global.zzzRoleList = [];
       global.ifNewChar = false;
@@ -140,7 +165,7 @@ await this.reply([await this.render('panel/refresh.html', finalData, { retType: 
     const uid = await this.getUID();
     const result = getPanelList(uid);
     if (!result.length) {
-      await this.reply(`UID:${uid}无本地面板数据，请先%更新面板 或 %更新展柜面板`);
+      await this.reply(`UID:${uid}无本地面板数据，请先%更新面板`);
       return false;
     }
     const hasCk = !!(await getCk(this.e));
@@ -158,7 +183,7 @@ await this.reply([await this.render('panel/refresh.html', finalData, { retType: 
       count: result?.length || 0,
       list: result,
     };
-    await this.render('panel/list.html', finalData);
+    await this.render("panel/list.html", finalData);
   }
 
   async getCharPanelListTool(uid, origin = false) {
@@ -250,7 +275,7 @@ await this.reply([await this.render('panel/refresh.html', finalData, { retType: 
         ],
         [
             { text: `电量`, callback: `%体力` },
-            { text: `投喂派蒙`, link: `https://afdian.com/a/chickenmalon` },
+            { text: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' },
             { text: `伤害`, callback: `%${role}伤害` },
             { text: `签到`, callback: `#签到` }
         ],
