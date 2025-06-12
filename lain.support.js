@@ -1,4 +1,6 @@
 
+import settings from '../lib/settings.js';
+
 export default class Button {
   constructor() {
     this.plugin = {
@@ -21,9 +23,10 @@ export default class Button {
 
     const staticList = [
       { label: `更新面板`, callback: `%更新面板` },
-      { label: '绑定UID', callback: `%绑定` },
+      { label: '绑定UID', data: `%绑定` },
       { label: '扫码绑定', callback: `#扫码登录` },
       { label: '绑定设备', callback: `%绑定设备帮助` },
+      { label: '爱发电', link: settings.getConfig('config').donationLink || 'https://afdian.com' },
     ];
 
     button.push(...Bot.Button(staticList));
@@ -51,8 +54,7 @@ export default class Button {
       }
     }
 
-    // 检查是否是展柜面板相关命令
-    const isEnkaPanel = e.msg.includes('展柜');
+ 
     
     const buttonRows = [
       [{ label: `更新面板`, callback: `%更新面板` }, { label: `展柜面板`, callback: `%更新展柜面板` }],
@@ -61,7 +63,7 @@ export default class Button {
         { label: `练度统计`, callback: `%练度统计` },
         { label: `${charName}图鉴`, callback: `%${charName}图鉴` },
       ],
-      [{ label: `体力`, callback: `%电量` }, { label: `伤害`, callback: `%${charName}伤害` },{ label: `电量`, callback: `%体力` }]
+      [{ label: `体力`, callback: `%电量` }, { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' }, { label: `伤害`, callback: `%${charName}伤害` },{ label: `电量`, callback: `%体力` }]
     ];
 
     return Bot.Button(buttonRows);
