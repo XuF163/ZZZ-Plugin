@@ -72,7 +72,7 @@ export default class Button extends ZZZPlugin {
     if (!charName) {
       const buttonRows = [
         [{ label: `更新面板`, callback: `%更新面板` }, { label: `展柜面板`, callback: `%更新展柜面板` }],
-        [{ label: `练度统计`, callback: `%练度统计` }, { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' }],
+        [{ label: `练度统计`, callback: `%练度统计` }, { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com' }],
         [{ label: `体力`, callback: `%电量` }, { label: `签到`, callback: `#签到` }]
       ];
       return Bot.Button(buttonRows);
@@ -88,7 +88,7 @@ export default class Button extends ZZZPlugin {
       ],
       [
         { label: `电量`, callback: `%体力` }, 
-        { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' }, 
+        { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com' }, 
         { label: `${charName}伤害`, callback: `%${charName}伤害` },
         { label: `签到`, callback: `#签到` }
       ]
