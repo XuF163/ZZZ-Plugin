@@ -16,7 +16,7 @@ export default class Button extends Panel {
     })
   }
 
-   profile1(e) {
+   async profile1(e) {
     let roleList = [];
     let ifNewChar = false;
 
