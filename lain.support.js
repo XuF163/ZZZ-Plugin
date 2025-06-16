@@ -18,11 +18,11 @@ export default class Button extends Panel {
   async profile1(e) {
     let roleList = [];
     let ifNewChar = false;
-    
+
     try {
       // 设置事件对象
       this.e = e;
-      
+
       // 获取UID
       const uid = await this.getUID();
       if (uid) {
@@ -60,7 +60,7 @@ export default class Button extends Panel {
 
   handleRule(e) {
     let charName = '';
-    
+
     // 从消息中解析角色名称
     const match = e.match || e.msg.match(/^(%|＃|#)(.+?)(?:展柜)?面板(?:展柜)?$/);
     const parsedName = match?.[2]?.trim();
@@ -72,7 +72,7 @@ export default class Button extends Panel {
     if (!charName) {
       const buttonRows = [
         [{ label: `更新面板`, callback: `%更新面板` }, { label: `展柜面板`, callback: `%更新展柜面板` }],
-        [{ label: `练度统计`, callback: `%练度统计` }, { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' }],
+        [{ label: `练度统计`, callback: `%练度统计` }, { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com' }],
         [{ label: `体力`, callback: `%电量` }, { label: `签到`, callback: `#签到` }]
       ];
       return Bot.Button(buttonRows);
@@ -87,8 +87,8 @@ export default class Button extends Panel {
         { label: `${charName}图鉴`, callback: `%${charName}图鉴` },
       ],
       [
-        { label: `电量`, callback: `%体力` }, 
-        { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' }, 
+        { label: `电量`, callback: `%体力` },
+        { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com' },
         { label: `${charName}伤害`, callback: `%${charName}伤害` },
         { label: `签到`, callback: `#签到` }
       ]
