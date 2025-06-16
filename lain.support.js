@@ -1,8 +1,8 @@
 import settings from "./lib/settings.js"
 import { getPanelList } from "./lib/avatar.js"
-import { ZZZPlugin } from "./lib/plugin.js"
+import { Panel } from "./apps/panel.js"
 
-export default class Button extends ZZZPlugin {
+export default class Button extends Panel {
   constructor() {
     super({
       name: 'zzz-plugin-Miao-support-Button',
@@ -26,7 +26,7 @@ export default class Button extends ZZZPlugin {
       // 获取UID
       const uid = await this.getUID();
       if (uid) {
-        // 从数据库获取角色列表
+        // 从数据库获取角色列表而不是全局变量
         const panelData = getPanelList(uid);
         roleList = panelData.map(item => item.name_mi18n) || [];
         ifNewChar = panelData.some(item => item.isNew) || false;
@@ -72,7 +72,7 @@ export default class Button extends ZZZPlugin {
     if (!charName) {
       const buttonRows = [
         [{ label: `更新面板`, callback: `%更新面板` }, { label: `展柜面板`, callback: `%更新展柜面板` }],
-        [{ label: `练度统计`, callback: `%练度统计` }, { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com' }],
+        [{ label: `练度统计`, callback: `%练度统计` }, { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' }],
         [{ label: `体力`, callback: `%电量` }, { label: `签到`, callback: `#签到` }]
       ];
       return Bot.Button(buttonRows);
@@ -88,7 +88,7 @@ export default class Button extends ZZZPlugin {
       ],
       [
         { label: `电量`, callback: `%体力` }, 
-        { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com' }, 
+        { label: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' }, 
         { label: `${charName}伤害`, callback: `%${charName}伤害` },
         { label: `签到`, callback: `#签到` }
       ]
