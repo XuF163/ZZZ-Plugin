@@ -1,7 +1,7 @@
 import settings from "./lib/settings.js"
 import { getPanelList } from "./lib/avatar.js"
 import { Panel } from "./apps/panel.js"
-import settings from "./lib/settings.js"
+
 
 export default class Button extends Panel {
   constructor() {
