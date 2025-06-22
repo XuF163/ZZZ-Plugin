@@ -21,7 +21,7 @@ export default class Button extends Panel {
         { reg: '#绝区零(.*)(?:展柜)?面板(?:展柜)?(.*)$', fnc: 'handleRule' }
       ]
     })
-
+    
     // 确保 plugin 属性存在并正确配置
     this.plugin = this.plugin || {
       name: 'zzz-plugin-Miao-support-Button',
@@ -32,7 +32,7 @@ export default class Button extends Panel {
         { reg: '#绝区零(.*)(?:展柜)?面板(?:展柜)?(.*)$', fnc: 'handleRule' }
       ]
     }
-
+    
     // 确保 rule 是数组
     if (!Array.isArray(this.plugin.rule)) {
       this.plugin.rule = [
@@ -44,7 +44,7 @@ export default class Button extends Panel {
 
   async profile1(e) {
     this.e = e
-
+    
     const { roleList, ifNewChar } = await this.getUserData()
     const button = []
 
@@ -59,7 +59,7 @@ export default class Button extends Panel {
     if ( roleList.length > 0) {
       const limitedRoleList = roleList.slice(0, 8)
       const charButtonList = limitedRoleList.map(role => ({
-        label: role,
+        label: role, 
         callback: `%${role}面板`
       }))
       logger.mark(`[ZZZ-Plugin] 构造角色列表按钮: ${JSON.stringify(charButtonList)}`)
@@ -114,15 +114,15 @@ export default class Button extends Panel {
   getDefaultButtons() {
     const buttonRows = [
       [
-        { label: '更新面板', callback: '%更新面板' },
+        { label: '更新面板', callback: '%更新面板' }, 
         { label: '展柜面板', callback: '%更新展柜面板' }
       ],
       [
-        { label: '练度统计', callback: '%练度统计' },
+        { label: '练度统计', callback: '%练度统计' }, 
         { label: '投喂', link: settings.getConfig('config').donationLink || 'https://afdian.com' }
       ],
       [
-        { label: '体力', callback: '%电量' },
+        { label: '体力', callback: '%电量' }, 
         { label: '签到', callback: '#签到' }
       ]
     ]
@@ -133,7 +133,7 @@ export default class Button extends Panel {
   getCharButtons(charName) {
     const buttonRows = [
       [
-        { label: '更新面板', callback: '%更新面板' },
+        { label: '更新面板', callback: '%更新面板' }, 
         { label: '展柜面板', callback: '%更新展柜面板' }
       ],
       [
