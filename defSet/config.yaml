@@ -15,3 +15,17 @@ mysCode:
 url: https://ghproxy.mihomo.me/https://raw.githubusercontent.com/forchannot/get_device_info/main/app/build/outputs/apk/debug/app-debug.apk
 # 投喂链接配置
 donationLink: https://afdian.com/
+# Enka API配置
+enka:
+  # 首选域名
+  primaryDomain: enka.network
+  # 备选域名
+  fallbackDomain: profile.microgg.cn
+  # API路径
+  apiPath: /api/zzz/uid/
+  # 请求超时时间(毫秒)
+  timeout: 10000
+  # User-Agent
+  userAgent: ZZZ-Plugin/UCPr
+  # 是否启用随机域名选择
+  randomSelection: true

@@ -80,7 +80,15 @@ export class Panel extends ZZZPlugin {
         result = await mergePanel(uid, panelList)
         await this.getPlayerInfo(playerInfo)
       } else if (typeof data === 'number'){
-        return this.reply(`Enka服务调用失败，状态码：${data}${data === 424 ? '\n版本更新后，须等待一段时间才可正常使用enka服务' : ''}`);
+        let errorMsg = `Enka服务调用失败，状态码：${data}`
+        if (data === 424) {
+          errorMsg += '\n版本更新后，须等待一段时间才可正常使用enka服务'
+        } else if (data === 408) {
+          errorMsg += '\n请求超时，请检查网络连接或稍后重试'
+        } else if (data === 500) {
+          errorMsg += '\n服务器内部错误，请稍后重试'
+        }
+        return this.reply(errorMsg);
       }
     } else {
       try {
@@ -108,8 +116,17 @@ export class Panel extends ZZZPlugin {
           await this.getPlayerInfo(playerInfo);
           await this.reply('已自动切换为展柜面板更新，更新成功！');
         } else {
+          let errorMsg = '面板更新失败：普通面板和展柜面板都无法更新'
+          if (typeof enkaData === 'number') {
+            errorMsg += `，Enka状态码：${enkaData}`
+            if (enkaData === 408) {
+              errorMsg += '（请求超时）'
+            } else if (enkaData === 500) {
+              errorMsg += '（服务器错误）'
+            }
+          }
           await this.reply([
-            `面板更新失败：普通面板和展柜面板都无法更新${typeof enkaData === 'number' ? `，Enka状态码：${enkaData}` : ''}`,
+            errorMsg,
             segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
           ]);
           return false;
