@@ -1,6 +1,25 @@
 import { Enka2Mys } from './formater.js'
 import fetch from 'node-fetch'
 import settings from '../../lib/settings.js'
+import _ from 'lodash'
+
+const config = settings.getConfig('config')
+const defConfig = settings.getdefSet('config')
+const EnkaApi = _.get(config, 'enkaApi') || _.get(defConfig, 'enkaApi')
+
+export function getGameRoles(uid, region = false) {
+  const _uid = String(uid)
+  switch (_uid.slice(0, -8)) {
+    case '10':
+      return region == true ? 'prod_gf_us' : 'America' // 美服
+    case '15':
+      return region == true ? 'prod_gf_eu' :'Europe' // 欧服
+    case '13':
+      return region == true ? 'prod_gf_jp' :'Asia' // 亚服
+    case '17':
+      return region == true ? 'prod_gf_sg' : 'TW,HK,MO' // 港澳台服
+  }
+  return region == true ? 'prod_gf_cn' : '新艾利都' // 官服
 
 // 从配置文件获取Enka API设置
 function getEnkaConfig() {
@@ -58,14 +77,15 @@ async function tryFetchApi(url, uid, config) {
 
 export function parsePlayerInfo(SocialDetail = {}) {
   const ProfileDetail = SocialDetail.ProfileDetail || {}
+  const game_uid = ProfileDetail.Uid || SocialDetail.uid || '114514'
   return {
-    game_biz: 'nap_cn',
-    region: 'prod_gf_cn',
-    game_uid: ProfileDetail.Uid || SocialDetail.uid || '114514',
+    game_biz: String(game_uid).length < 10 ? 'nap_cn' : 'nap_global',
+    region: getGameRoles(game_uid, true),
+    game_uid: game_uid,
     nickname: ProfileDetail.Nickname || 'Fairy',
     level: ProfileDetail.Level || 60,
     is_chosen: true,
-    region_name: '新艾利都',
+    region_name: getGameRoles(game_uid, false),
     is_official: true,
     desc: SocialDetail.Desc || '',
   }
@@ -73,7 +93,7 @@ export function parsePlayerInfo(SocialDetail = {}) {
 
 /**
  * Enka更新面板
- * @param {string|number} uid 
+ * @param {string|number} uid
  */
 export async function refreshPanelFromEnka(uid) {
   const enkaConfig = getEnkaConfig()
