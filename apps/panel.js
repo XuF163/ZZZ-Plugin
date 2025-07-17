@@ -70,6 +70,7 @@ export class Panel extends ZZZPlugin {
     const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e))
     let result;
     if (isEnka) {
+      await this.reply('正在更新面板列表，请稍候...');
       const data = await refreshPanelFromEnka(uid)
         .catch(err => err)
       if (data instanceof Error) {
