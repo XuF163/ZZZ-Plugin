@@ -40,6 +40,7 @@ export class Panel extends ZZZPlugin {
         { key: 'zzz.tool.panelList', fn: 'getCharPanelListTool' },
       ],
     });
+
   }
   async handleRule() {
     if (!this.e.msg) return;
@@ -60,11 +61,14 @@ export class Panel extends ZZZPlugin {
     const panelSettings = settings.getConfig('panel');
     const coldTime = _.get(panelSettings, 'interval', 300);
     if (lastQueryTime && Date.now() - lastQueryTime < 1000 * coldTime) {
-      await this.reply(`${coldTime}秒内只能更新一次，请稍后再试`);
+      await this.reply([
+    `你看，又急~${coldTime}秒内只能刷新一次，请稍后再试`,
+    segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
+]);
       return false;
     }
     const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e))
-    let result
+    let result;
     if (isEnka) {
       const data = await refreshPanelFromEnka(uid)
         .catch(err => err)
@@ -80,27 +84,68 @@ export class Panel extends ZZZPlugin {
         }
         result = await mergePanel(uid, panelList)
         await this.getPlayerInfo(playerInfo)
-      } else if (typeof data === 'number') {
-        return this.reply(`Enka服务调用失败，状态码：${data}`)
+      } else if (typeof data === 'number'){
+        let errorMsg = `Enka服务调用失败，状态码：${data}`
+        if (data === 424) {
+          errorMsg += '\n版本更新后，须等待一段时间才可正常使用enka服务'
+        } else if (data === 408) {
+          errorMsg += '\n请求超时，请检查网络连接或稍后重试'
+        } else if (data === 500) {
+          errorMsg += '\n服务器内部错误，请稍后重试'
+        }
+        return this.reply(errorMsg);
       }
     } else {
-      const oriReply = this.reply.bind(this);
-      let errorMsg = '';
-      this.reply = (msg) => errorMsg += '\n' + msg;
       try {
         const { api, deviceFp } = await this.getAPI();
-        await oriReply('正在更新面板列表，请稍候...');
+        await this.reply('正在更新面板列表，请稍候...');
         await this.getPlayerInfo();
         await redis.set(`ZZZ:PANEL:${uid}:LASTTIME`, Date.now());
         result = await refreshPanelFunction(api, deviceFp);
-      } catch (err) {
-        logger.error('面板列表更新失败：', err);
-        errorMsg = (err.message || '') + errorMsg;
+      } catch (e) {
+        logger.warn(`尝试使用展柜面板更新: ${e.message}`);
+        await this.reply('正在尝试展柜面板更新...');
+
+        // 自动调用展柜面板更新
+        const enkaData = await refreshPanelFromEnka(uid);
+        if (typeof enkaData === 'object') {
+          const { playerInfo, panelList } = enkaData;
+          if (!panelList.length) {
+            await this.reply([
+              '展柜面板列表为空，请确保已在游戏中展示了对应角色',
+              segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
+            ]);
+            return false;
+          }
+          result = await mergePanel(uid, panelList);
+          await this.getPlayerInfo(playerInfo);
+          await this.reply('已自动切换为展柜面板更新，更新成功！');
+        } else {
+          let errorMsg = '面板更新失败：普通面板和展柜面板都无法更新'
+          if (typeof enkaData === 'number') {
+            errorMsg += `，Enka状态码：${enkaData}`
+            if (enkaData === 408) {
+              errorMsg += '（请求超时）'
+            } else if (enkaData === 500) {
+              errorMsg += '（服务器错误）'
+            }
+          }
+          await this.reply([
+            errorMsg,
+            segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
+          ]);
+          return false;
+        }
       }
-      this.reply = oriReply;
-      if (errorMsg && !result) {
-        return this.reply(`面板列表更新失败，请稍后再试或尝试%更新展柜面板：\n${errorMsg.trim()}`);
-      }
+    }
+
+    if (!result) {
+
+      await this.reply([
+    '面板列表刷新失败，请稍后再试,可尝试绑定设备或扫码登录后再次查询',
+    segment.button([{ text: '再试一下', callback: '%更新面板' },{ text: '展柜面板', callback: '%更新展柜面板' }])
+]);
+      return false;
     }
     if (!result) return false;
     const newChar = result.filter(item => item.isNew);
@@ -108,14 +153,38 @@ export class Panel extends ZZZPlugin {
       newChar: newChar.length,
       list: result,
     };
-    await this.render('panel/refresh.html', finalData);
+    const role_list = result.map(item => item.name_mi18n);
+    let buttons = [[]];
+const nonChineseOrDigitRegex = /[^\u4E00-\u9FFF0-9]/g;
+
+for (const original_name of role_list) {
+    let currentRow = buttons[buttons.length - 1];
+    const cleanedName = original_name.replace(nonChineseOrDigitRegex, '');
+    const buttonText = cleanedName.length > 0 ? cleanedName[0] : '';
+    const button = { text: buttonText, callback: `%${original_name}面板` };
+    currentRow.push(button);
+    if (currentRow.length >= 6) { // 每行最多6个
+        buttons.push([]);
+    }
+}
+// 处理空列表或最后一个空行
+if (buttons.length === 1 && buttons[0].length === 0) {
+    buttons[0] = [ // 默认按钮
+        { text: "更新面板", callback: `%更新面板` },
+        { text: "练度统计", callback: "%练度统计" }
+    ];
+} else if (buttons[buttons.length - 1].length === 0) {
+    buttons.pop();
+}
+await this.reply([await this.render('panel/refresh.html', finalData, { retType: 'base64' }), segment.button(...buttons)]);
+
   }
 
   async getCharPanelList() {
     const uid = await this.getUID();
     const result = getPanelList(uid);
     if (!result.length) {
-      await this.reply(`UID:${uid}无本地面板数据，请先%更新面板 或 %更新展柜面板`);
+      await this.reply(`UID:${uid}无本地面板数据，请先%更新面板`);
       return false;
     }
     const hasCk = !!(await getCk(this.e));
@@ -133,7 +202,7 @@ export class Panel extends ZZZPlugin {
       count: result?.length || 0,
       list: result,
     };
-    await this.render('panel/list.html', finalData);
+    await this.render("panel/list.html", finalData);
   }
 
   async getCharPanelListTool(uid, origin = false) {
@@ -155,10 +224,9 @@ export class Panel extends ZZZPlugin {
     if (!match) return false;
     const name = match[4];
     const data = getPanelOrigin(uid, name);
-    if (data === false) {
-      return this.reply(`角色${name}不存在，请确保角色名称/别称存在`);
-    } else if (data === null) {
-      return this.reply(`暂无角色${name}面板数据，请先%更新面板`);
+    if (!data) {
+      await this.reply(`未找到角色${name}的面板信息，请先%更新面板`);
+      return;
     }
     let handler = this.e.runtime.handler || {};
 
@@ -188,6 +256,7 @@ export class Panel extends ZZZPlugin {
       return false;
     }
     if (!data) {
+
       await this.reply('数据为空');
       return false;
     }
@@ -214,7 +283,23 @@ export class Panel extends ZZZPlugin {
     }) : needImg;
 
     if (reply) {
-      const res = await this.reply(image);
+      let role = parsedData.name_mi18n;
+      let buts = [
+        [{ text: '看看我的面板', callback: '%更新面板' }],
+        [
+            { text: `${role}攻略`, callback: `%${role}攻略` },
+            { text: `练度统计`, callback: `%练度统计` },
+            { text: `${role}图鉴`, callback: `%${role}图鉴` }
+        ],
+        [
+            { text: `电量`, callback: `%体力` },
+            { text: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' },
+            { text: `伤害`, callback: `%${role}伤害` },
+            { text: `签到`, callback: `#签到` }
+        ],
+    ];
+      const res = await this.reply([image, segment.button(...buts)]);
+
       if (res?.message_id && parsedData.role_icon)
         await redis.set(
           `ZZZ:PANEL:IMAGE:${res.message_id}`,
