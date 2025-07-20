@@ -20,6 +20,7 @@ export function getGameRoles(uid, region = false) {
       return region == true ? 'prod_gf_sg' : 'TW,HK,MO' // 港澳台服
   }
   return region == true ? 'prod_gf_cn' : '新艾利都' // 官服
+}
 
 // 从配置文件获取Enka API设置
 function getEnkaConfig() {

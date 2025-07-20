@@ -1,4 +1,4 @@
-import { ZZZPlugin } from '../lib/plugin.js';
+import { ZZZPlugin } from '../lib/plugin.js'
 import { parsePlayerInfo, refreshPanelFromEnka } from '../model/Enka/enkaApi.js';
 import { getCk } from '../lib/common.js';
 import {
