@@ -115,7 +115,7 @@ export class DeadlyList {
     this.score = data.score;
     this.boss = data.boss.map(b => new Bos(b));
     this.buffer = data.buffer.map(b => new DeadBuffer(b));
-    this.buddy = new Buddy(data.buddy);
+    this.buddy = data.buddy && new Buddy(data.buddy);
     this.total_star = data.total_star;
     this.challenge_time = new DeadlyTime(data.challenge_time);
     this.avatar_list = data.avatar_list.map(item => new AvatarList(item));
@@ -123,7 +123,7 @@ export class DeadlyList {
 
   async get_assets() {
     await Promise.all([
-      this.buddy.get_assets(),
+      this.buddy?.get_assets(),
       ...this.avatar_list.map(avatar => avatar.get_assets()),
       ...this.boss.map(boss => boss.get_assets()),
       ...this.buffer.map(buffer => buffer.get_assets()),
