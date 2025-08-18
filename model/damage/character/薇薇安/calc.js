@@ -73,7 +73,7 @@ export const skills = [
     banCache: true,
     dmg: (calc) => {
       const dmg = calc.calc_skill({
-        ...calc.skills.find(skill => skill.type === '侵蚀·异放'),
+        ...calc.find_skill('type', '侵蚀·异放'),
         after: ({ damage }) => damage.x(5)
       })
       return dmg
@@ -86,7 +86,7 @@ export const skills = [
   {
     name: '薇薇安的预言',
     type: 'TW',
-    fixedMultiplier: 0.55
+    multiplier: 0.55
   },
   { name: '闪避反击：羽刃反振', type: 'CF' },
   { name: '强化特殊技：堇花悼亡', type: 'EQ' },

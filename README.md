@@ -45,6 +45,10 @@ git clone --depth=1 https://gitee.com/bietiaop/ZZZ-Plugin.git ./plugins/ZZZ-Plug
 </p>
 </details>
 
+## 自定义评分权重、伤害计算
+
+**自定义评分权重**和**自定义伤害计算**请查看[此教程](./model/damage/README.md)
+
 ## 攻略、图鉴
 
 **攻略、图鉴建议使用第三方插件**，本插件的攻略功能是在没有专业插件的情况下的保底功能。
@@ -58,9 +62,9 @@ git clone --depth=1 https://gitee.com/bietiaop/ZZZ-Plugin.git ./plugins/ZZZ-Plug
 
 ## 自定义面板图
 
-将你下载的面板图放在`zzz插件目录/resources/images/panel/[角色名简称]/`文件夹下。若文件夹不存在请自行创建。
+将你下载的面板图放在`zzz插件目录/resources/images/panel/[角色名称]/`文件夹下。若文件夹不存在请自行创建。
 
-**角色名简称**请参考官方wiki中代理人名称：[米游社·绝区零 绳网情报站](https://baike.mihoyo.com/zzz/wiki/channel/map/2/43)
+**角色名称**可以是[米游社绳网情报站](https://baike.mihoyo.com/zzz/wiki/channel/map/2/43)中显示的代理人`简称`或`全称`，也可以是[插件数据PartnerId2Data](resources\map\PartnerId2Data.json)中的`name`或`full_name`。四个路径依序检测，取第一个存在的路径中的面板图
 
 若要查看或者批量删除自定义面板图，请发送指令 `%帮助` 进行查看如何使用相关指令。
 
@@ -86,7 +90,11 @@ git clone --depth=1 https://gitee.com/bietiaop/ZZZ-Plugin.git ./plugins/ZZZ-Plug
 
 绑定设备**无法100%解决**账号异常问题。
 
-若更新面板遇见账号异常问题，可尝试 **%更新展柜面板**，这将调用[Enka](https://enka.network/?zzz)接口更新游戏内展示的角色的数据。如若通过此方法更新的角色数据与实际不一致，请[提出issue](https://github.com/ZZZure/ZZZ-Plugin/issues/new)
+## 更新展柜面板
+
+若通过默认的米游社更新面板遇见账号异常问题，可尝试 **%更新展柜面板**，这将调用[Enka](https://enka.network/?zzz)接口更新游戏内展示的角色的数据。如若通过此方法更新的角色数据与实际不一致，请[提出issue](https://github.com/ZZZure/ZZZ-Plugin/issues/new)
+
+该服务可能偶尔无法使用，如更新展柜面板一直请求失败，可通过锅巴修改`自定义enkaApi地址`项来自定义请求链接，请求和返回与Enka格式一致皆可
 
 ## 角色图缺失
 

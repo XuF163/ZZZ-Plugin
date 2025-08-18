@@ -1,4 +1,4 @@
-import { element } from '../lib/convert.js';
+import { char, element } from '../lib/convert.js';
 import {
   getRoleImage,
   getSmallSquareAvatar,
@@ -257,14 +257,14 @@ export class ZZZAvatarInfo {
     /** @type {number} */
     this.ranks_num = this.ranks.filter(rank => rank.is_unlocked).length;
     /** @type {string} */
-    this.element_str = element.IDToElement(element_type);
+    this.element_str = element.IDToElement(element_type, sub_element_type);
     /** @type {boolean} */
     this.isNew = isNew;
     /** @type {number}  等级级别（取十位数字）*/
     this.level_rank = Math.floor(this.level / 10);
     const weight = scoreFnc[this.id] && scoreFnc[this.id](this);
     this.weightRule = weight?.[0] || '默认';
-    this.scoreWeight = Object.assign(formatScoreWeight(weight?.[1]) || {}, scoreWeight[this.id]);
+    this.scoreWeight = _.defaults(formatScoreWeight(weight?.[1]) || {}, scoreWeight[this.id]);
     for (const equip of this.equip) {
       equip.get_score(this.scoreWeight);
     }
@@ -313,7 +313,7 @@ export class ZZZAvatarInfo {
      */
     const get = (name) => {
       const data = basic_properties[name]
-      return Number(data.base || data.final)
+      return Number(data?.base || data?.final || 0)
     }
     return this._base_properties = {
       HP: get('hpmax'),
@@ -334,6 +334,7 @@ export class ZZZAvatarInfo {
      * @param {keyof ZZZAvatarInfo['basic_properties']} name
      */
     const get = (name) => {
+      if (!basic_properties[name]) return 0
       const data = basic_properties[name].final
       return Number(data.includes('%') ? data.replace('%', '') / 100 : data)
     }
@@ -507,12 +508,15 @@ export class ZZZAvatarInfo {
    * @returns {Promise<void>}
    */
   async get_detail_assets() {
-    const custom_panel_images = path.join(
-      imageResourcesPath,
-      `panel/${this.name_mi18n}`
-    );
+    const paths = Array.from(new Set([
+      this.name_mi18n,
+      this.full_name_mi18n,
+      char.IDToCharName(this.id, false),
+      char.IDToCharName(this.id, true)
+    ].filter(Boolean))).map(p => path.join(imageResourcesPath, 'panel', p));
     let role_icon = '';
-    if (fs.existsSync(custom_panel_images)) {
+    const custom_panel_images = paths.find(p => fs.existsSync(p));
+    if (custom_panel_images) {
       const panel_images = fs
         .readdirSync(custom_panel_images)
         .map(file => path.join(custom_panel_images, file));
