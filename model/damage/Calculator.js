@@ -40,9 +40,9 @@ export class Calculator {
     skills = [];
     usefulBuffResults = new Map();
     cache = Object.create(null);
-    props = {};
+    props = Object.create(null);
     skill;
-    defaultSkill = {};
+    defaultSkill = Object.create(null);
     enemy;
     constructor(buffM) {
         this.buffM = buffM;
@@ -110,13 +110,13 @@ export class Calculator {
             logger.debug('自定义计算最终伤害：', dmg.result);
             return dmg;
         }
-        const props = this.props = skill.props || {};
+        const props = this.props = skill.props || Object.create(null);
         const usefulBuffs = this.buffM.filter({
             element: skill.element,
             range: [skill.type],
             redirect: skill.redirect
         }, this);
-        const areas = {};
+        const areas = Object.create(null);
         if (skill.before)
             skill.before({ avatar: this.avatar, calc: this, usefulBuffs, skill, props, areas });
         logger.debug(`有效buff*${usefulBuffs.length}/${this.buffM.buffs.length}`);
@@ -213,7 +213,7 @@ export class Calculator {
                     d = this.calc_skill(d);
                 if (!d)
                     return;
-                logger.debug('增加伤害：' + d.skill.name, d.result);
+                logger.debug('追加伤害：' + d.skill.name, d.result);
                 damage.result.expectDMG += d.result.expectDMG;
                 damage.result.critDMG += d.result.critDMG || d.result.expectDMG;
             };

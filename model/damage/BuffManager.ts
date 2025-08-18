@@ -107,7 +107,7 @@ export interface buff {
   is: {
     /** 是否团队增益 @default false */
     team?: boolean
-    /** 为团队增益时，同名效果是否可叠加 @default false */
+    /** buff为团队增益时，同类效果是否可叠加 @default false */
     stack?: boolean
   }
 }
