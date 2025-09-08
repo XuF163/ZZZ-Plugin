@@ -200,10 +200,10 @@ export class Calculator {
   /** 对当前所计算的技能有用的buff、计算后的buff */
   private readonly usefulBuffResults: Map<buff, buff> = new Map()
   private cache: { [type: string]: damage } = Object.create(null)
-  private props: Exclude<damage['props'], undefined> = {}
+  private props: Exclude<damage['props'], undefined> = Object.create(null)
   /** 当前正在计算的技能 */
   skill: skill
-  defaultSkill: { [key in keyof skill]?: skill[key] } = {}
+  defaultSkill: { [key in keyof skill]?: skill[key] } = Object.create(null)
   enemy: enemy
 
   constructor(buffM: BuffManager) {
@@ -296,7 +296,7 @@ export class Calculator {
       range: [skill.type],
       redirect: skill.redirect
     }, this)
-    const areas = {} as damage['areas']
+    const areas = Object.create(null) as damage['areas']
     if (skill.before) skill.before({ avatar: this.avatar, calc: this, usefulBuffs, skill, props, areas })
     logger.debug(`有效buff*${usefulBuffs.length}/${this.buffM.buffs.length}`)
     const { isAnomalyDMG = false, isSheerDMG = false } = skill
@@ -396,7 +396,7 @@ export class Calculator {
       damage.add = (d) => {
         if (typeof d === 'string') d = this.calc_skill(d)
         if (!d) return
-        logger.debug('增加伤害：' + d.skill.name, d.result)
+        logger.debug('追加伤害：' + d.skill.name, d.result)
         damage.result.expectDMG += d.result.expectDMG
         damage.result.critDMG += d.result.critDMG || d.result.expectDMG
       }

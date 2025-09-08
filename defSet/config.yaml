@@ -3,13 +3,29 @@ render:
 query:
   others: true # 允许查询他人信息
 update:
-  autoCheck: true # 自动检查更新
+  autoCheck: false # 自动检查更新
   cron: 0 0/10 * * * ? # 更新检查时间
 # 需要调用过🐎的接口code
 mysCode:
   - 1034
   - 10035
+  - 5003
+  - 10041
 # 自定义绑定设备下载url
 url: https://ghproxy.mihomo.me/https://raw.githubusercontent.com/forchannot/get_device_info/main/app/build/outputs/apk/debug/app-debug.apk
-# 自定义enkaApi地址
-enkaApi: https://enka.network/api/zzz/uid/
+# 投喂链接配置
+donationLink: https://afdian.com/
+# Enka API配置
+enka:
+  # 首选域名
+  primaryDomain: enka.network
+  # 备选域名
+  fallbackDomain: profile.microgg.cn
+  # API路径
+  apiPath: /api/zzz/uid/
+  # 请求超时时间(毫秒)
+  timeout: 10000
+  # User-Agent
+  userAgent: ZZZ-Plugin/UCPr
+  # 是否启用随机域名选择
+  randomSelection: true

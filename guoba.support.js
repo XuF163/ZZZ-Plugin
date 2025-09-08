@@ -54,15 +54,6 @@ export function supportGuoba() {
           },
         },
         {
-          field: 'config.enkaApi',
-          label: '自定义enkaApi地址',
-          bottomHelpMessage: '设置自定义的enkaApi地址',
-          component: 'Input',
-          componentProps: {
-            placeholder: '请输入enkaApi地址',
-          },
-        },
-        {
           field: 'config.query.others',
           label: '查询他人信息',
           bottomHelpMessage: '是否允许查询他人信息',
@@ -98,6 +89,62 @@ export function supportGuoba() {
               { label: '10041', value: 10041 },
               { label: '5003', value: 5003 },
             ],
+          },
+        },
+        {
+          component: 'SOFT_GROUP_BEGIN',
+          label: 'Enka API设置',
+        },
+        {
+          field: 'config.enka.primaryDomain',
+          label: '首选域名',
+          bottomHelpMessage: '设置Enka API的首选域名，默认为enka.network',
+          component: 'Select',
+          componentProps: {
+            options: [
+              { label: 'enka.network（官方）', value: 'enka.network' },
+              { label: 'profile.microgg.cn（备选）', value: 'profile.microgg.cn' }
+            ],
+            placeholder: '请选择首选域名',
+          },
+        },
+        {
+          field: 'config.enka.fallbackDomain',
+          label: '备选域名',
+          bottomHelpMessage: '设置Enka API的备选域名，当首选域名不可用时自动切换',
+          component: 'Select',
+          componentProps: {
+            options: [
+              { label: 'profile.microgg.cn（备选）', value: 'profile.microgg.cn' },
+              { label: 'enka.network（官方）', value: 'enka.network' }
+            ],
+            placeholder: '请选择备选域名',
+          },
+        },
+        {
+          field: 'config.enka.randomSelection',
+          label: '随机域名选择',
+          bottomHelpMessage: '启用后将随机选择可用域名，有助于负载均衡',
+          component: 'Switch',
+        },
+        {
+          field: 'config.enka.timeout',
+          label: '请求超时时间',
+          bottomHelpMessage: '设置Enka API请求的超时时间（毫秒），建议5000-15000',
+          component: 'InputNumber',
+          componentProps: {
+            min: 1000,
+            max: 30000,
+            placeholder: '请输入超时时间（毫秒）',
+          },
+        },
+        {
+          field: 'config.enka.userAgent',
+          label: 'User-Agent',
+          bottomHelpMessage: '设置请求Enka API时使用的User-Agent',
+          component: 'Input',
+          componentProps: {
+            placeholder: '请输入User-Agent',
           },
         },
         {
