@@ -21,6 +21,7 @@ export class Code extends ZZZPlugin {
   }
   async code() {
     const msg = await getCodeMsg();
-    return this.reply(msg);
+    await this.reply(msg);
+    return false;
   }
 }

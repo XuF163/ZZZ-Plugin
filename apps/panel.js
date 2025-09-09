@@ -60,7 +60,8 @@ export class Panel extends ZZZPlugin {
     const panelSettings = settings.getConfig('panel');
     const coldTime = _.get(panelSettings, 'interval', 300);
     if (lastQueryTime && Date.now() - lastQueryTime < 1000 * coldTime) {
-      return this.reply(`${coldTime}秒内只能更新一次，请稍后再试`);
+      await this.reply(`${coldTime}秒内只能更新一次，请稍后再试`);
+      return false;
     }
     const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e))
     let result
@@ -114,7 +115,8 @@ export class Panel extends ZZZPlugin {
     const uid = await this.getUID();
     const result = getPanelList(uid);
     if (!result.length) {
-      return this.reply(`UID:${uid}无本地面板数据，请先%更新面板 或 %更新展柜面板`);
+      await this.reply(`UID:${uid}无本地面板数据，请先%更新面板 或 %更新展柜面板`);
+      return false;
     }
     const hasCk = !!(await getCk(this.e));
     await this.getPlayerInfo(hasCk ? undefined : parsePlayerInfo({ uid }));
@@ -167,6 +169,7 @@ export class Panel extends ZZZPlugin {
         needSave: false,
       });
     }
+    return false;
   }
 
   async getCharPanelTool(e, _data = {}) {
@@ -181,10 +184,12 @@ export class Panel extends ZZZPlugin {
       needImg = true
     } = _data;
     if (!uid) {
-      return this.reply('UID为空');
+      await this.reply('UID为空');
+      return false;
     }
     if (!data) {
-      return this.reply('数据为空');
+      await this.reply('数据为空');
+      return false;
     }
     if (needSave) {
       updatePanelData(uid, [data]);
@@ -230,7 +235,8 @@ export class Panel extends ZZZPlugin {
     const uid = await this.getUID();
     const result = getPanelList(uid);
     if (!result) {
-      return this.reply('未找到面板数据，请先%更新面板 或 %更新展柜面板');
+      await this.reply('未找到面板数据，请先%更新面板 或 %更新展柜面板');
+      return false;
     }
     await this.getPlayerInfo();
     result.sort((a, b) => {
@@ -287,12 +293,15 @@ export class Panel extends ZZZPlugin {
     }
     const id = source?.message_id;
     if (!id) {
-      return this.reply('未找到消息源，请引用要查看的图片');
+      await this.reply('未找到消息源，请引用要查看的图片');
+      return false;
     }
     const image = await redis.get(`ZZZ:PANEL:IMAGE:${id}`);
     if (!image) {
-      return this.reply('未找到原图');
+      await this.reply('未找到原图');
+      return false;
     }
     await this.reply(segment.image(image));
+    return false;
   }
 }

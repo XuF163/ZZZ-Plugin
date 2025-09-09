@@ -69,7 +69,8 @@ export class Guide extends ZZZPlugin {
     }
     group = Number(group);
     if (group > guides.guideMaxNum) {
-      return this.reply(`超过攻略数量（${guides.guideMaxNum}）`);
+      await this.reply(`超过攻略数量（${guides.guideMaxNum}）`);
+      return false;
     }
     if (alias === '设置默认' || alias === '设置所有') {
       return false;
@@ -78,7 +79,8 @@ export class Guide extends ZZZPlugin {
     const name = char.aliasToName(alias);
 
     if (!name) {
-      return this.reply('该角色不存在');
+      await this.reply('该角色不存在');
+      return false;
     }
 
     if (group === 0) {
@@ -100,17 +102,20 @@ export class Guide extends ZZZPlugin {
       if (msg.length) {
         await this.reply(await common.makeForwardMsg(this.e, msg));
       }
+      return false;
     }
 
     const guidePath = await this.getGuidePath(group, name, !!isUpdate);
     if (!guidePath) {
-      return this.e.reply(
+      this.e.reply(
         `暂无${name}攻略 (${
           guides.guideSources[group - 1]
         })\n请尝试其他的攻略来源查询`
       );
+      return false;
     }
     await this.e.reply(segment.image(guidePath));
+    return false;
   }
 
   /** 下载攻略图 */
@@ -123,8 +128,9 @@ export class Guide extends ZZZPlugin {
     try {
       mysRes = await Promise.all(mysRes);
     } catch (error) {
+      this.e.reply('暂无攻略数据，请稍后再试');
       console.log(`米游社接口报错：${error}}`);
-      return this.e.reply('暂无攻略数据，请稍后再试');
+      return false;
     }
 
     // 搜索时过滤特殊符号，譬如「11号」
