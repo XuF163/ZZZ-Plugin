@@ -3,7 +3,8 @@ import settings from '../../lib/settings.js';
 
 export async function addAlias() {
   if (!this.e.isMaster) {
-    return this.reply('仅限主人设置', false, { at: true, recallMsg: 100 });
+    this.reply('仅限主人设置', false, { at: true, recallMsg: 100 });
+    return false;
   }
   const match = /添加(\S+)别名(\S+)$/g.exec(this.e.msg);
   const key = match[1];
@@ -33,7 +34,8 @@ export async function addAlias() {
 
 export async function deleteAlias() {
   if (!this.e.isMaster) {
-    return this.reply('仅限主人设置', false, { at: true, recallMsg: 100 });
+    this.reply('仅限主人设置', false, { at: true, recallMsg: 100 });
+    return false;
   }
   const match = /删除别名(\S+)$/g.exec(this.e.msg);
   const key = match[1];

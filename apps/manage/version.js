@@ -54,7 +54,8 @@ export async function hasUpdate() {
 /** 开启/关闭自动更新推送 */
 export async function enableAutoUpdatePush() {
   if (!this.e.isMaster) {
-    return this.reply('仅限主人设置', false, { at: true, recallMsg: 100 });
+    this.reply('仅限主人设置', false, { at: true, recallMsg: 100 });
+    return false;
   }
   let enable = true;
   if (this.e.msg.includes('关闭')) {
@@ -71,11 +72,12 @@ export async function enableAutoUpdatePush() {
 /** 设置自动更新时间 */
 export async function setCheckUpdateCron() {
   if (!this.e.isMaster) {
-    return this.reply('仅限主人设置', false, { at: true, recallMsg: 100 });
+    this.reply('仅限主人设置', false, { at: true, recallMsg: 100 });
+    return false;
   }
   const cron = this.e.msg.split('时间')[1];
   if (!cron) {
-    return this.reply(
+    await this.reply(
       `[${pluginName}]设置自动更新频率失败，无cron表达式`,
       false,
       {
@@ -83,6 +85,7 @@ export async function setCheckUpdateCron() {
         recallMsg: 100,
       }
     );
+    return false;
   }
   settings.setSingleConfig('config', 'update', { cron });
   await this.reply(`[${pluginName}]自动更新频率已设置为${cron}`, false, {
