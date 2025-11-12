@@ -95,8 +95,8 @@ export interface buff {
    * @function
    * 音擎会自动添加职业检查
    * @number
-   * - buff.source为Set时，判断套装数量>=该值
-   * - buff.source为Rank时，判断影画数量>=该值
+   * - buff.source为**套装**时，判断套装数量>=该值
+   * - buff.source为**影画**时，判断影画数量>=该值
    */
   check?: (({ avatar, buffM, calc }: {
     avatar: ZZZAvatarInfo
@@ -152,7 +152,7 @@ export class BuffManager {
     if (!buff.source) {
       if (buff.name.includes('核心') || buff.name.includes('天赋')) buff.source = oriBuff.source = '核心被动'
       else if (buff.name.includes('额外能力')) buff.source = oriBuff.source = '额外能力'
-      else if (buff.name.includes('影')) buff.source = oriBuff.source = '影画'
+      else if (/^\d影/.test(buff.name)) buff.source = oriBuff.source = '影画'
       else if (buff.name.includes('技')) buff.source = oriBuff.source = '技能'
     }
     if (!buff.name || !buff.value || !buff.source || !buffTypeEnum[buffTypeEnum[buff.type]])
@@ -167,8 +167,8 @@ export class BuffManager {
       const oriCheck = typeof buff.check === 'function' && buff.check
       buff.check = ({ avatar, buffM, calc }) => professionCheck(avatar) && (!oriCheck || oriCheck({ avatar, buffM, calc }))
       // 影画buff影画数检查
-    } else if (buff.source === '影画') {
-      buff.check ??= oriBuff.check = +buff.name.match(/\d/)!?.[0]
+    } else if (buff.source === '影画' && !buff.check) {
+      buff.check = oriBuff.check = +buff.name[0]
     }
     this.buffs.push(buff)
     return this.buffs
