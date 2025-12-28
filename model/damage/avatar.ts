@@ -18,6 +18,8 @@ export const charData: {
 	}
 } = {}
 
+export type scoreFunction = typeof scoreFnc[string]
+
 const calcFnc: {
 	character: {
 		[id: number]: {
