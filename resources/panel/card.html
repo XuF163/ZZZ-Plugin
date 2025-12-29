@@ -153,14 +153,39 @@
     <div class="title">
       <% include(sys.specialTitle, {en: 'METAL' , cn: '驱动盘信息' }) %>
     </div>
-    {{if charData.equip_score !== false}}
-    <div class="equip-score {{charData.equip_comment}}">
-      <div class="comment-box">
-        <div class="comment">{{charData.equip_comment}}</div>
+    {{if charData.equip_score}}
+    <div class="equip-stats">
+      <div class="box1">
+        <div class="equip-score {{charData.equip_comment}}">
+          <div class="comment-box">
+            <div class="comment">{{charData.equip_comment}}</div>
+          </div>
+          <div class="value">
+            <span>{{charData.equip_score.toFixed(2)}}</span>
+            <span class="subt">分</span>
+          </div>
+        </div>
+        <div class="weight-rule">规则：{{charData.weightRule || '默认'}}</div>
       </div>
-      <div class="value">
-        <span>{{charData.equip_score.toFixed(2)}}</span>
-        <span class="subt">分</span>
+      <div class="box2">
+        <div class="property-stats">
+          {{set stats = charData.propertyStats.slice(0, 9)}}
+          {{each stats item}}
+          <div class="stat-item {{item.weight == 1 ? 'great' : (item.weight >= 0.75 ? 'good' : (item.weight > 0 ? 'useful' : 'useless'))}}">
+            <span class="title"><span class="count">{{item.count}}</span> {{item.name}}</span>
+            <span class="value">+{{item.value}}</span>
+          </div>
+          {{/each}}
+          <% for (let i = 0; i < 9-stats.length; i++) { %>
+            <div class="stat-item"></div>
+          <% } %>
+        </div>
+        <div class="useful-stats">有益词条数：{{
+            stats.reduce((acc, stat) => stat.weight ? acc + stat.count : acc, 0)
+          }} 有效词条数：{{
+            (stats.reduce((acc, stat) => acc + stat.count * stat.weight, 0)).toFixed(2)
+          }}
+        </div>
       </div>
     </div>
     {{/if}}
@@ -225,11 +250,44 @@
           {{/each}}
 
       </div>
+
       {{set damages = charData?.damages}}
-      {{if damages && damages?.length}}
+      {{set showInPanelBuffs = charData?.showInPanelBuffs}}
+      {{if damages?.length || showInPanelBuffs?.length}}
       <div class="title damage-title">
         <% include(sys.specialTitle, {en: 'DAMAGE' , cn: '伤害统计' }) %>
       </div>
+      {{/if}}
+
+      {{if showInPanelBuffs?.length}}
+      <div class="damagelist">
+        <div class="dmg-tr column4 titlebar no-zzz-font">
+          <div class="td dmg-td">%</div>
+          <div class="dmg-td">增益名称</div>
+          <div class="dmg-td">增益类型</div>
+          <div class="dmg-td">增益数值</div>
+        </div>
+        {{each showInPanelBuffs buff}}
+        <div class="dmg-tr column4">
+          <div class="dmg-td">-</div>
+          <div class="dmg-td no-zzz-font">{{buff.name}}</div>
+          <div class="dmg-td no-zzz-font">{{buff.type}}</div>
+          <div class="dmg-td">
+            {{buff.value < 2 ? 
+              ((buff.value * 100).toFixed(0) + '%') : 
+              (buff.value % 1 === 0 ? buff.value : buff.value.toFixed(2))
+            }}{{if buff.max}}/{{
+              buff.max < 2 ? 
+              ((buff.max * 100).toFixed(0) + '%') : 
+              (buff.max % 1 === 0 ? buff.max : buff.max.toFixed(2))
+            }}{{/if}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{if damages?.length}}
       <div class="damagelist">
         <div class="dmg-tr column4 titlebar no-zzz-font">
           <div class="td dmg-td">%</div>
@@ -253,6 +311,7 @@
         </div>
       </div>
       {{/if}}
+
     </div>
   </div>
   {{/block}}
