@@ -133,7 +133,7 @@ export async function refreshPanelFromEnka(uid) {
       
       try {
         const data = await res.json()
-        /** @type {import('./interface.ts').Enka.Avatar[]} */
+        /** @type {import('#interface').Enka.Avatar[]} */
         const panelList = data?.PlayerInfo?.ShowcaseDetail?.AvatarList
         
         if (!panelList || !Array.isArray(panelList)) {
@@ -178,7 +178,6 @@ export async function refreshPanelFromEnka(uid) {
       }
     }
   }
-  
   // 所有URL都失败了
   logger.error('[Enka] 所有域名都无法访问')
   if (lastStatus) {
