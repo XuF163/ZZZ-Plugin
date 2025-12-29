@@ -12,38 +12,64 @@ import fs from 'fs'
 const damagePath = path.join(pluginPath, 'model', 'damage')
 
 export const charData: {
-	[id: number]: {
+	[id: string]: {
 		skill: { [skillName: string]: number[] }
 		buff: { [buffName: string]: number[] }
 	}
-} = {}
+} = Object.create(null)
+
+export const scoreFnc: {
+	[charID: string]: (charData: ZZZAvatarInfo) => [string, { [propID: string]: number }] | undefined
+} = Object.create(null)
 
 export type scoreFunction = typeof scoreFnc[string]
 
+export interface CharCalcModel {
+	/** 规则名 */
+	name: string
+	/** 规则作者 */
+	author: string
+	/** 
+	 * 判断此规则是否生效
+	 * - 用于加强角色应用新规则
+	 * - 若皆不符合，选择最后一个规则
+	 */
+	rule?: (avatar: ZZZAvatarInfo) => boolean
+	/** 
+	 * 处理函数，用于动态定义`buff`和`skill`
+	 * - 若同时存在`buffs`或`skills`，会先注册直接导出的buffs和skills，然后调用此函数
+	 */
+	calc?: (buffM: BuffManager, calc: Calculator, avatar: ZZZAvatarInfo) => void
+	/** buff列表 */
+	buffs: buff[]
+	/** 技能列表 */
+	skills: skill[]
+}
+
+export interface WeaponCalcModel {
+	calc?: (buffM: BuffManager, star: number) => void
+	buffs: buff[]
+}
+
+export interface SetCalcModel {
+	calc?: (buffM: BuffManager, count: number) => void
+	buffs: buff[]
+}
+
 const calcFnc: {
 	character: {
-		[id: number]: {
-			calc?: (buffM: BuffManager, calc: Calculator, avatar: ZZZAvatarInfo) => void
-			buffs: buff[]
-			skills: skill[]
-		}
+		[charID: string]: CharCalcModel[]
 	}
 	weapon: {
-		[name: string]: {
-			calc?: (buffM: BuffManager, star: number) => void
-			buffs: buff[]
-		}
+		[name: string]: WeaponCalcModel
 	}
 	set: {
-		[name: string]: {
-			calc?: (buffM: BuffManager, count: number) => void
-			buffs: buff[]
-		}
+		[name: string]: SetCalcModel
 	}
 } = {
-	character: {},
-	weapon: {},
-	set: {}
+	character: Object.create(null),
+	weapon: Object.create(null),
+	set: Object.create(null)
 }
 
 async function init() {
@@ -57,10 +83,10 @@ async function init() {
 		}
 	})()
 	await Promise.all(fs.readdirSync(path.join(damagePath, 'character')).filter(v => v !== '模板').map(v => importChar(v, isWatch)))
-	for (const type of ['weapon', 'set']) {
+	for (const type of ['weapon', 'set'] as const) {
 		await Promise.all(
 			fs.readdirSync(path.join(damagePath, type)).filter(v => v !== '模板.js' && !v.endsWith('_user.js') && v.endsWith('.js'))
-				.map(v => importFile(type as 'weapon' | 'set', v.replace('.js', ''), isWatch))
+				.map(v => importFile(type, v.replace('.js', ''), isWatch))
 		)
 	}
 }
@@ -69,7 +95,7 @@ function watchFile(path: string, fnc: () => void) {
 	if (!fs.existsSync(path)) return
 	const watcher = chokidar.watch(path, {
 		awaitWriteFinish: {
-			stabilityThreshold: 50
+			stabilityThreshold: 251
 		}
 	})
 	watcher.on('change', (path) => {
@@ -82,21 +108,59 @@ async function importChar(charName: string, isWatch = false) {
 	const id = aliasToID(charName)
 	if (!id) return logger.warn(`未找到角色${charName}的ID`)
 	const dir = path.join(damagePath, 'character', charName)
-	const calcFile = fs.existsSync(path.join(dir, 'calc_user.js')) ? 'calc_user.js' : 'calc.js'
-	const dataPath = path.join(dir, (fs.existsSync(path.join(dir, 'data_user.json')) ? 'data_user.json' : 'data.json'))
+	const getFileName = (name: string, ext: '.js' | '.json') =>
+		fs.existsSync(path.join(dir, `${name}_user${ext}`)) ? `${name}_user${ext}` : `${name}${ext}`
+	const dataPath = path.join(dir, getFileName('data', '.json'))
+	const calcFile = getFileName('calc', '.js')
+	const scoreFile = getFileName('score', '.js')
 	try {
+		const loadCharData = () => charData[id] = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
 		const calcFilePath = path.join(dir, calcFile)
-		if (isWatch) {
-			watchFile(calcFilePath, () => importChar(charName))
-			watchFile(dataPath, () => charData[id] = JSON.parse(fs.readFileSync(dataPath, 'utf8')))
+		const loadCalcJS = async () => {
+			if (!fs.existsSync(calcFilePath)) return
+			const m = await import(`./character/${charName}/${calcFile}?${Date.now()}`)
+			if (m.default) {
+				if (Array.isArray(m.default)) {
+					calcFnc.character[id] = m.default
+				} else {
+					calcFnc.character[id] = [m.default]
+				}
+			} else {
+				calcFnc.character[id] = [{ ...m }]
+			}
+			const models = calcFnc.character[id]
+			if (
+				!Array.isArray(models) ||
+				!models.length ||
+				!models.every(m => typeof m === 'object' && (m.calc || (m.buffs && m.skills)))
+			) {
+				delete calcFnc.character[id]
+				throw '伤害计算代码导出格式错误'
+			}
+			models.forEach(m => {
+				const isDefault = calcFile === 'calc.js'
+				m.name ??= isDefault ? '默认' : '自定义'
+				m.author ??= isDefault ? 'UCPr' : '未知'
+			})
 		}
-		charData[id] = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
-		if (!fs.existsSync(calcFilePath)) return
-		const m = await import(`./character/${charName}/${calcFile}?${Date.now()}`)
-		if (!m.calc && (!m.buffs || !m.skills)) throw new Error('伤害计算文件格式错误')
-		calcFnc.character[id] = m
+		const scoreFilePath = path.join(dir, scoreFile)
+		const loadScoreJS = async () => {
+			if (!fs.existsSync(scoreFilePath)) return
+			const m = await import(`./character/${charName}/${scoreFile}?${Date.now()}`)
+			const fnc = m.default
+			if (!fnc || typeof fnc !== 'function') '评分权重代码导出格式错误'
+			scoreFnc[id] = fnc
+		}
+		if (isWatch) {
+			watchFile(dataPath, loadCharData)
+			watchFile(calcFilePath, loadCalcJS)
+			watchFile(scoreFilePath, loadScoreJS)
+		}
+		loadCharData()
+		await loadCalcJS()
+		await loadScoreJS()
 	} catch (e) {
-		logger.error(`导入角色${charName}伤害计算错误:`, e)
+		logger.error(`导入角色${charName}计算文件错误:`, e)
 	}
 }
 
@@ -124,8 +188,18 @@ const weakMapCalc = new WeakMap<ZZZAvatarInfo, Calculator>()
 /** 角色计算实例 */
 export function avatar_calc(avatar: ZZZAvatarInfo) {
 	if (weakMapCalc.has(avatar)) return weakMapCalc.get(avatar)!
-	const m = calcFnc.character[avatar.id]
-	if (!m) return
+	const models = calcFnc.character[avatar.id]
+	if (!models) return
+	let m: CharCalcModel = models[models.length - 1]
+	if (models.length > 1) {
+		for (const model of models) {
+			if (model.rule && model.rule(avatar)) {
+				m = model
+				break
+			}
+		}
+	}
+	logger.debug(`${avatar.name_mi18n} 伤害计算规则：${m.name} by ${m.author}`)
 	const buffM = new BuffManager(avatar)
 	const calc = new Calculator(buffM)
 	weakMapCalc.set(avatar, calc)
