@@ -3,6 +3,7 @@ config/**/*.*
 !config/.gitkeep
 
 .DS_Store
+.idea/
 
 data/**/*.*
 !data/.gitkeep
