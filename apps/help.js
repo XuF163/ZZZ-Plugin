@@ -184,6 +184,115 @@ const helpData = [
     ],
   },
   {
+    title: '卡池记录',
+    icon: 'frost',
+    items: [
+      {
+        title: '复刻记录',
+        desc: '查看角色/音擎复刻记录',
+        needCK: false,
+        needSK: false,
+        commands: [
+          '五星角色复刻记录',
+          '四星音擎复刻记录',
+          '艾莲复刻记录',
+        ],
+      },
+      {
+        title: '当前卡池',
+        desc: '查看当前版本卡池信息',
+        needCK: false,
+        needSK: false,
+        commands: [
+          '卡池',
+          '本期卡池',
+          '当前卡池',
+        ],
+      },
+      {
+        title: '历史版本卡池',
+        desc: '查看指定/全部版本卡池信息',
+        needCK: false,
+        needSK: false,
+        commands: [
+          '2.5卡池',
+          '1.0上半卡池',
+          '卡池记录',
+          '卡池历史',
+        ],
+      },
+    ]
+  },
+  {
+    title: '挑战提醒',
+    icon: 'dungeon',
+    items: [
+      {
+        title: '开关挑战提醒',
+        desc: '开启或关闭式舆防卫战/危局强袭战未完成提醒功能',
+        needCK: true,
+        needSK: false,
+        commands: ['开启挑战提醒', '关闭挑战提醒'],
+      },
+      {
+        title: '开关全局挑战提醒',
+        desc: '开启或关闭全局式舆防卫战/危局强袭战未完成提醒功能',
+        needCK: true,
+        needSK: false,
+        commands: ['开启全局挑战提醒', '关闭全局挑战提醒'],
+      },
+      {
+        title: '设置全局提醒时间',
+        desc: '设置全局提醒时间，所有未单独设置个人提醒时间的用户将使用此时间。格式同上，仅限主人可用。',
+        needCK: true,
+        needSK: false,
+        commands: ['设置全局提醒时间+时间'],
+      },
+      {
+        title: '设置全局提醒阈值',
+        desc: '设置全局默认防卫战检查层数阈值(1~6)，或全局默认危局强袭战星星阈值(1~9)',
+        needCK: true,
+        needSK: false,
+        commands: ['设置全局式舆阈值+数字', '设置全局危局阈值+数字'],
+      },
+      {
+        title: '设置提醒阈值',
+        desc: '设置防卫战检查层数阈值(1~6)，或危局强袭战星星阈值(1~9)。例如：设置危局阈值6',
+        needCK: true,
+        needSK: false,
+        commands: ['设置防卫战阈值+数字', '设置危局阈值+数字'],
+      },
+      {
+        title: '设置个人提醒时间',
+        desc: '设置每日或每周的个人提醒时间，格式如“每日20时”或“每周六20时10分”，分钟需为整十数，可不加分钟。',
+        needCK: true,
+        needSK: false,
+        commands: ['设置个人提醒时间+时间'],
+      },
+      {
+        title: '查看提醒时间',
+        desc: '查看个人或全局提醒时间',
+        needCK: true,
+        needSK: false,
+        commands: ['个人提醒时间', '全局提醒时间']
+      },
+      {
+        title: '重置个人提醒时间',
+        desc: '重置已设置的个人提醒时间为全局默认时间',
+        needCK: true,
+        needSK: false,
+        commands: ['重置个人提醒时间'],
+      },
+      {
+        title: '查询挑战状态',
+        desc: '主动查询当前式舆防卫战/危局强袭战完成情况',
+        needCK: true,
+        needSK: false,
+        commands: ['查询挑战状态'],
+      },
+    ],
+  },
+  {
     title: '角色攻略',
     icon: 'physdmg',
     items: [
@@ -203,10 +312,10 @@ const helpData = [
       },
       {
         title: '角色天赋图鉴',
-        desc: '查看角色天赋，默认等级为12级，核心技等级为F，你可以在指令后面加上自定义等级，以英文句号点分隔，顺序依次为：普通攻击、闪避、支援技、特殊技、连携技、核心技，其中除核心技等级为0和A～F表示外，其他等级为1～16的数字。例如：%猫又天赋6.12.11.10.9.F',
+        desc: '查看角色天赋，默认满级，自定义等级以空格或英文句号点分隔，顺序为：普攻、闪避、支援技、特殊技、连携技、核心技。如：%猫又天赋6.12.11.10.9.6',
         needCK: false,
         needSK: false,
-        commands: ['角色名+天赋[+等级]'],
+        commands: ['角色名+天赋[+等级]', '角色名+技能[+等级]'],
       },
       {
         title: '角色意象影画图鉴',
@@ -289,36 +398,7 @@ export class Help extends ZZZPlugin {
     });
   }
   async help() {
-    let buts = [
-    [
-      { text: '卡片', callback: `%card` },
-      { text: '体力', callback: `%体力` },
-      { text: '面板', callback: `%更新面板` },
-      { text: '练度', callback: `%练度统计` }
-    ],
-    [
-      { text: '抽卡', callback: `%抽卡记录` },
-      { text: '月报', callback: `%月报` },
-      { text: '深渊', callback: `%深渊` },
-      { text: '强袭', callback: `%强袭` }
-    ],
-    [
-      { text: '刷新', callback: `%刷新面板` },
-      { text: '更新抽卡', callback: `%更新抽卡记录` },
-      { text: '电量', callback: `%电量` },
-      { text: '兑换码', callback: `%兑换码` }
-    ],
-    [
-      { text: '绑UID', input: `%绑定uid` },
-      { text: '扫码', callback: `#扫码登录` },
-      { text: '绑定设备', callback: '%绑定设备' }
-    ]
-  ];
     if (this.e?.isMaster) {
-      buts.push([
-        { text: '插件更新', callback: `%插件更新` },
-        { text: '下载资源', callback: `%下载全部资源` }
-     ]);
       const _helpData = [
         ...helpData,
         {
@@ -438,17 +518,12 @@ export class Help extends ZZZPlugin {
           ],
         },
       ];
-
-
-      await this.e.reply([await this.render('help/index.html', {helpData: _helpData, },{retType:'base64'}),segment.button(...buts)]);
-      return false;
+      return await this.render('help/index.html', {
+        helpData: _helpData,
+      });
     }
-
-      await this.e.reply([await this.render('help/index.html', {helpData },{retType:'base64'})
-,segment.button(...buts)]);
-      return false;
-
-
+    await this.render('help/index.html', {
+      helpData,
+    });
   }
-
 }

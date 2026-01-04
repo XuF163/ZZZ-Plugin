@@ -207,7 +207,7 @@ export class Calculator {
   private props: NonNullable<damage['props']> = {}
   /** 当前正在计算的技能 */
   skill: skill
-  defaultSkill: { [key in keyof skill]?: skill[key] } = Object.create(null)
+  defaultSkill: { [key in keyof skill]?: skill[key] } = {}
   enemy: enemy
 
   constructor(buffM: BuffManager) {
@@ -406,7 +406,7 @@ export class Calculator {
       add: (d: string | damage) => {
         if (typeof d === 'string') d = this.calc_skill(d)
         if (!d) return
-        logger.debug('追加伤害：' + d.skill.name, d.result)
+        logger.debug('增加伤害：' + d.skill.name, d.result)
         damage.result.expectDMG += d.result.expectDMG
         damage.result.critDMG += d.result.critDMG || d.result.expectDMG
       },
