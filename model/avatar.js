@@ -195,6 +195,11 @@ export class ZZZAvatarInfo {
    * }} data
    */
   constructor(data) {
+    const toArray = (v) => {
+      if (!v) return []
+      return Array.isArray(v) ? v : [v]
+    }
+
     const {
       id,
       level,
@@ -239,23 +244,21 @@ export class ZZZAvatarInfo {
     /** @type {string} */
     this.hollow_icon_path = hollow_icon_path;
     /** @type {Equip[]} 驱动盘 */
-    this.equip =
-      (equip &&
-        (Array.isArray(equip)
-          ? equip.map(equip => new Equip(equip))
-          : new Equip(equip))) ||
-      [];
+    this.equip = toArray(equip).map((it) => new Equip(it));
     /** @type {Weapon} 武器 */
     this.weapon = weapon ? new Weapon(weapon) : null;
     /** @type {Property[]} 属性 */
-    this.properties =
-      properties && properties.map(property => new Property(property));
+    this.properties = toArray(properties).map((property) => new Property(property));
     /** @type {Skill[]} 技能 */
-    this.skills = skills && skills.map(skill => new Skill(skill));
+    this.skills = toArray(skills).map((skill) => new Skill(skill));
+    // 渲染模板会直接索引 skills[0..5]，缺失时补齐占位，避免模板报错
+    while (this.skills.length < 6) {
+      this.skills.push(new Skill({ level: 0, skill_type: this.skills.length, items: [] }))
+    }
     /** @type {number} 影 */
     this.rank = rank;
     /** @type {Rank[]} */
-    this.ranks = ranks && ranks.map(rank => new Rank(rank));
+    this.ranks = toArray(ranks).map((rank) => new Rank(rank));
     /** @type {number} */
     this.ranks_num = this.ranks.filter(rank => rank.is_unlocked).length;
     /** @type {string} */
@@ -277,7 +280,8 @@ export class ZZZAvatarInfo {
   }
 
   getProperty(name) {
-    return this.properties.find(property => property.property_name === name);
+    return this.properties.find(property => property.property_name === name) ||
+      new Property({ property_name: name, property_id: 0, base: '0', add: '0', final: '0' });
   }
 
   /** @type {{

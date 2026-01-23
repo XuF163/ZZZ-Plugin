@@ -15,6 +15,12 @@ mysCode:
 url: https://ghproxy.mihomo.me/https://raw.githubusercontent.com/forchannot/get_device_info/main/app/build/outputs/apk/debug/app-debug.apk
 # 投喂链接配置
 donationLink: https://afdian.com/
+# LimitedPanelAPI（极限面板）配置
+hyperpanel:
+  # 默认使用本机 LimitedPanelAPI 服务（绝区零）
+  api: http://127.0.0.1:4567/zzz/hyperpanel
+  # 请求超时（毫秒）
+  timeout: 15000
 # Enka API配置
 enka:
   # 首选域名

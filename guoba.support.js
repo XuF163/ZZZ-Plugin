@@ -243,6 +243,31 @@ export function supportGuoba() {
         },
         {
           component: 'SOFT_GROUP_BEGIN',
+          label: '极限面板（LimitedPanelAPI）',
+        },
+        {
+          field: 'config.hyperpanel.api',
+          label: 'API 地址',
+          bottomHelpMessage:
+            '极限面板 JSON 接口地址（默认：http://127.0.0.1:4567/zzz/hyperpanel）。用于“%极限<角色名>面板”',
+          component: 'Input',
+          componentProps: {
+            placeholder: '例如：http://127.0.0.1:4567/zzz/hyperpanel',
+          },
+        },
+        {
+          field: 'config.hyperpanel.timeout',
+          label: '请求超时',
+          bottomHelpMessage: '请求极限面板接口的超时时间（毫秒），建议 5000-30000',
+          component: 'InputNumber',
+          componentProps: {
+            min: 1000,
+            max: 60000,
+            placeholder: '请输入数字（毫秒）',
+          },
+        },
+        {
+          component: 'SOFT_GROUP_BEGIN',
           label: '提醒功能设置',
         },
         {
@@ -495,6 +520,18 @@ export function supportGuoba() {
           field: 'priority.panel',
           label: '面板查询',
           bottomHelpMessage: '设置面板查询指令优先级',
+          component: 'InputNumber',
+          required: true,
+          componentProps: {
+            min: -1000,
+            max: 1000,
+            placeholder: '请输入数字',
+          },
+        },
+        {
+          field: 'priority.hyperpanel',
+          label: '极限面板',
+          bottomHelpMessage: '设置“%极限<角色名>面板”指令优先级（建议保持较高优先级以避免与其他“面板”指令冲突）',
           component: 'InputNumber',
           required: true,
           componentProps: {

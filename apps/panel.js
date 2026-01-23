@@ -293,7 +293,7 @@ await this.reply([await this.render('panel/refresh.html', finalData, { retType: 
         ],
         [
             { text: `电量`, callback: `%体力` },
-            { text: `投喂`, link: settings.getConfig('config').donationLink || 'https://afdian.com/a/chickenmalon' },
+            { text: `极限`, callback: `%极限${role}面板` },
             { text: `伤害`, callback: `%${role}伤害` },
             { text: `签到`, callback: `#签到` }
         ],

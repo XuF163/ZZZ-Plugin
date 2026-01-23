@@ -155,8 +155,8 @@ export class Equip {
     this.name = name;
     this.icon = icon;
     this.rarity = rarity;
-    this.properties = properties.map(item => new EquipProperty(item));
-    this.main_properties = main_properties.map(
+    this.properties = (properties || []).map(item => new EquipProperty(item));
+    this.main_properties = (main_properties || []).map(
       item => new EquipMainProperty(item)
     );
     this.equip_suit = equip_suit;
@@ -283,8 +283,8 @@ export class Weapon {
     this.star = star;
     this.icon = icon;
     this.rarity = rarity;
-    this.properties = properties.map(item => new EquipProperty(item));
-    this.main_properties = main_properties.map(
+    this.properties = (properties || []).map(item => new EquipProperty(item));
+    this.main_properties = (main_properties || []).map(
       item => new EquipMainProperty(item)
     );
     this.talent_title = talent_title;
