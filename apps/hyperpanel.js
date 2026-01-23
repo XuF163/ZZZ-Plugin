@@ -3,7 +3,17 @@ import { rulePrefix } from '../lib/common.js'
 import settings from '../lib/settings.js'
 import request from '../utils/request.js'
 import { aliasToName } from '../lib/convert/char.js'
+import { getPanelData } from '../lib/db.js'
+import { updateExtremePanelsFromPanelDb } from '../model/hyperpanel/extreme.js'
 import _ from 'lodash'
+
+function toBool(v, fallback = false) {
+  if (v == null || v === '') return fallback
+  const s = String(v).trim().toLowerCase()
+  if (['1', 'true', 'yes', 'y', 'on'].includes(s)) return true
+  if (['0', 'false', 'no', 'n', 'off'].includes(s)) return false
+  return fallback
+}
 
 function toAvatarList(ds) {
   const av = ds?.avatars
@@ -33,6 +43,8 @@ function pickAvatarByName(list, name) {
 }
 
 export class HyperPanel extends ZZZPlugin {
+  static locked = false
+
   constructor() {
     super({
       name: '[ZZZ-Plugin]HyperPanel',
@@ -41,12 +53,74 @@ export class HyperPanel extends ZZZPlugin {
       // 该指令容易与其他插件的“xx面板”规则冲突，默认提高优先级以确保先匹配。
       priority: _.get(settings.getConfig('priority'), 'hyperpanel', -10),
       rule: [
+        // 手动触发：%更新极限面包（避免与其他插件“更新极限面板/面板”抢指令）
+        { reg: '^%更新极限面包$', fnc: 'updateBun', permission: 'master' },
+        // 也支持带前缀
+        { reg: `${rulePrefix}更新极限面包$`, fnc: 'updateBun', permission: 'master' },
         // 支持：%zzz极限安比面板 / #绝区零极限安比面板
         { reg: `${rulePrefix}极限(.+)面板$`, fnc: 'showHyperPanel' },
         // 支持：%极限安比面板（不写 zzz 前缀）
         { reg: '^%极限(.+)面板$', fnc: 'showHyperPanel' }
       ]
     })
+
+    const cfg = settings.getConfig('config') || {}
+    const bunCfg = _.get(cfg, 'hyperpanel.bun', {})
+    const enabled = toBool(_.get(bunCfg, 'auto', true), true)
+    const cron = String(_.get(bunCfg, 'cron', '0 30 4 * * ?') || '').trim()
+
+    if (enabled && cron) {
+      this.task = {
+        name: 'ZZZ-Plugin极限面包自动更新',
+        cron,
+        fnc: () => this.updateBunTask()
+      }
+    }
+  }
+
+  async updateBunTask() {
+    const ret = await this.generateBunPreset()
+    if (!ret.ok) {
+      logger.warn(`[HyperPanel] 极限面包自动更新失败：${ret.message}`)
+    } else {
+      logger.mark(`[HyperPanel] 极限面包自动更新完成：uid=${ret.uid} 角色=${ret.count}`)
+    }
+  }
+
+  async updateBun() {
+    const start = Date.now()
+    await this.reply('开始更新极限面包…（本地生成，可能需要一点时间）')
+
+    const ret = await this.generateBunPreset()
+    if (!ret.ok) {
+      await this.reply(`更新失败：${ret.message}`)
+      return true
+    }
+
+    const cost = Date.now() - start
+    await this.reply(`更新完成：uid=${ret.uid} 角色=${ret.count}（${cost}ms）\n用法：%极限<角色名>面板`)
+    return true
+  }
+
+  async generateBunPreset() {
+    if (HyperPanel.locked) return { ok: false, message: '正在生成中，请稍后再试…' }
+    HyperPanel.locked = true
+
+    try {
+      const cfg = settings.getConfig('config') || {}
+      const bunCfg = _.get(cfg, 'hyperpanel.bun', {})
+      const uid = String(_.get(bunCfg, 'uid', '10000000') || '').trim() || '10000000'
+
+      const ret = await updateExtremePanelsFromPanelDb({
+        targetUid: uid
+      })
+      if (!ret.ok) return ret
+      return { ok: true, uid: ret.uid, count: ret.count }
+    } catch (e) {
+      return { ok: false, message: e?.message || String(e) }
+    } finally {
+      HyperPanel.locked = false
+    }
   }
 
   async showHyperPanel() {
@@ -65,31 +139,58 @@ export class HyperPanel extends ZZZPlugin {
     const resolved = aliasToName(rawName) || rawName
 
     const cfg = settings.getConfig('config') || {}
-    const api = String(_.get(cfg, 'hyperpanel.api', 'http://127.0.0.1:4567/zzz/hyperpanel')).trim()
-    const timeout = Number(_.get(cfg, 'hyperpanel.timeout', 15000))
+    const bunCfg = _.get(cfg, 'hyperpanel.bun', {})
+    const bunUid = String(_.get(bunCfg, 'uid', '10000000') || '').trim() || '10000000'
+    const useLocalFirst = toBool(_.get(bunCfg, 'useLocalFirst', true), true)
 
-    if (!api) {
-      await this.reply('极限面板 API 未配置：请在配置项 config.hyperpanel.api 中填写。')
-      return true
+    let uid = bunUid
+    let list = []
+    let picked = null
+
+    // 1) 优先读取本地极限面包（写入 ZZZ-Plugin panel DB：plugins/ZZZ-Plugin/data/panel/<uid>.json）
+    if (useLocalFirst) {
+      try {
+        const local = getPanelData(bunUid)
+        if (Array.isArray(local) && local.length) {
+          list = local
+          picked = pickAvatarByName(list, resolved)
+        }
+      } catch (e) {
+        // ignore local read errors
+      }
     }
 
-    let ds
-    try {
-      const res = await request.get(api, {}, { timeout })
-      ds = await res.json()
-    } catch (e) {
-      await this.reply(`极限面板 API 请求失败：${e?.message || e}\napi=${api}`)
-      return true
-    }
-
-    const list = toAvatarList(ds)
-    if (!list.length) {
-      await this.reply('极限面板数据为空：请确认 LimitedPanelAPI 已生成 out/zzz/<uid>.json，并且 /zzz/hyperpanel 可正常返回。')
-      return true
-    }
-
-    const picked = pickAvatarByName(list, resolved)
+    // 2) 兜底：请求 hyperpanel.api HTTP 接口（若有配置）
+    let apiErr = null
     if (!picked) {
+      const api = String(_.get(cfg, 'hyperpanel.api', 'http://127.0.0.1:4567/zzz/hyperpanel')).trim()
+      const timeout = Number(_.get(cfg, 'hyperpanel.timeout', 15000))
+
+      if (!api) {
+        await this.reply('极限面板数据未初始化：请先执行 %更新极限面包（本地生成）。')
+        return true
+      }
+
+      try {
+        const res = await request.get(api, {}, { timeout })
+        const ds = await res.json()
+        uid = String(ds?.uid || bunUid)
+        list = toAvatarList(ds)
+        picked = pickAvatarByName(list, resolved)
+      } catch (e) {
+        apiErr = e
+      }
+    }
+
+    if (!picked) {
+      if (!list.length) {
+        await this.reply(
+          `极限面板数据获取失败：${apiErr?.message || apiErr || '数据为空'}\n` +
+            `建议：先执行 %更新极限面包（本地生成），再使用 %极限<角色名>面板。`
+        )
+        return true
+      }
+
       const hints = list
         .map((a) => String(a?.name_mi18n || a?.name || '').trim())
         .filter(Boolean)
@@ -103,13 +204,12 @@ export class HyperPanel extends ZZZPlugin {
     }
 
     const handler = this.e?.runtime?.handler
-    const uid = String(ds?.uid || '10000000')
-
     if (handler?.has?.('zzz.tool.panel')) {
       try {
         await handler.call('zzz.tool.panel', this.e, { uid, data: picked, needSave: false })
         return true
       } catch (e) {
+        const api = String(_.get(cfg, 'hyperpanel.api', '') || '').trim()
         await this.reply(
           `极限面板数据已获取，但渲染失败：${e?.message || e}\n` +
             `建议：升级/修复 ZZZ-Plugin 面板渲染器，或先访问接口确认数据：\n${api}`

@@ -15,12 +15,21 @@ mysCode:
 url: https://ghproxy.mihomo.me/https://raw.githubusercontent.com/forchannot/get_device_info/main/app/build/outputs/apk/debug/app-debug.apk
 # 投喂链接配置
 donationLink: https://afdian.com/
-# LimitedPanelAPI（极限面板）配置
+# 极限面包/极限面板配置
 hyperpanel:
-  # 默认使用本机 LimitedPanelAPI 服务（绝区零）
+  # （可选兜底）外部接口：当本地没有极限面包数据时，会尝试请求该接口获取数据
   api: http://127.0.0.1:4567/zzz/hyperpanel
   # 请求超时（毫秒）
   timeout: 15000
+  bun:
+    # 极限预设写入到的 UID（建议保留 10000000，避免与真实玩家冲突）
+    uid: 10000000
+    # 查询 %极限<角色名>面板 时是否优先使用本地极限面包
+    useLocalFirst: true
+    # 是否启用每日自动更新
+    auto: true
+    # 每日 04:30 自动更新（Quartz cron）
+    cron: 0 30 4 * * ?
 # Enka API配置
 enka:
   # 首选域名
