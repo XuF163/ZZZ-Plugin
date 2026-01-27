@@ -3,7 +3,7 @@ name: PR Checks
 on:
   pull_request:
     branches:
-      - main
+      - master
       - dev
 
 concurrency:
@@ -13,16 +13,16 @@ concurrency:
 jobs:
   block-main:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.base.ref == 'main' }}
+    if: ${{ github.event.pull_request.base.ref == 'master' }}
     steps:
-      - name: Reject direct PRs to main
+      - name: Reject direct PRs to master
         run: |
-          echo "不允许直接向 main 分支发起pr请求。请将您的更改提交到 dev 分支，然后向 dev 分支发起pr请求。"
+          echo "不允许直接向 master 分支发起pr请求。请将您的更改提交到 dev 分支，然后向 dev 分支发起pr请求。"
           exit 1
 
   validate:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.base.ref != 'main' }}
+    if: ${{ github.event.pull_request.base.ref != 'master' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

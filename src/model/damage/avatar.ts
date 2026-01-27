@@ -80,7 +80,8 @@ async function init() {
 	// debug模式下监听文件变化
 	const isWatch = await (async () => {
 		try {
-			return (await import('../../../../../lib/config/config.js')).default.bot.log_level === 'debug'
+			return ((await import('../../../../../lib/config/config.js')) as any).default.bot
+				.log_level === 'debug'
 		} catch {
 			return false
 		}

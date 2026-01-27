@@ -1,9 +1,12 @@
-name: Build and Sync to main
+name: Build and Sync artifacts
 
 on:
-  push:
-    branches:
-      - dev
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Branch to receive build artifacts (usually: master)"
+        required: true
+        default: "master"
 
 concurrency:
   group: build-and-sync-dev
@@ -42,26 +45,28 @@ jobs:
       - name: Build styles
         run: pnpm run build:css || echo "build:css failed (ignored for sync)"
 
-      - name: Prepare main worktree
+      - name: Prepare target worktree
         run: |
-          git fetch origin main:main || true
-          git worktree remove ../main-worktree --force || true
-          git worktree add ../main-worktree main
-          git -C ../main-worktree reset --hard origin/main
+          TARGET_BRANCH="${{ inputs.target_branch }}"
+          git fetch origin "${TARGET_BRANCH}:${TARGET_BRANCH}" || true
+          git worktree remove ../target-worktree --force || true
+          git worktree add ../target-worktree "${TARGET_BRANCH}"
+          git -C ../target-worktree reset --hard "origin/${TARGET_BRANCH}"
 
-      - name: Sync artifacts to main
+      - name: Sync artifacts to target
         run: |
           rsync -a --delete --quiet \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='src' \
-            ./ ../main-worktree/
-          rm -rf ../main-worktree/src
+            ./ ../target-worktree/
+          rm -rf ../target-worktree/src
 
-      - name: Commit and push to main
+      - name: Commit and push to target
         run: |
           DEV_ROOT="$GITHUB_WORKSPACE"
-          MAIN_ROOT="$DEV_ROOT/../main-worktree"
+          TARGET_ROOT="$DEV_ROOT/../target-worktree"
+          TARGET_BRANCH="${{ inputs.target_branch }}"
           BEFORE_SHA="${{ github.event.before }}"
           CURRENT_SHA="${{ github.sha }}"
           AUTHOR_NAME="$(git -C "$DEV_ROOT" log -1 --pretty=format:'%an' "$CURRENT_SHA")"
@@ -78,23 +83,23 @@ jobs:
           if [ -n "$OTHER_COMMITS" ]; then
             COMMIT_MSG="$(printf '%s\n\nOther commits:\n%s' "$COMMIT_MSG" "$OTHER_COMMITS")"
           fi
-          if [ ! -e "$MAIN_ROOT/.git" ]; then
-            echo "main worktree missing at $MAIN_ROOT"
-            ls -la "$MAIN_ROOT" || true
+          if [ ! -e "$TARGET_ROOT/.git" ]; then
+            echo "target worktree missing at $TARGET_ROOT"
+            ls -la "$TARGET_ROOT" || true
             exit 1
           fi
-          git -C "$MAIN_ROOT" config user.name "${AUTHOR_NAME}"
-          git -C "$MAIN_ROOT" config user.email "${AUTHOR_EMAIL}"
-          git -C "$MAIN_ROOT" add -A
-          find "$MAIN_ROOT/resources" -type f -name "*.css" -print0 | xargs -0 git -C "$MAIN_ROOT" add -f || true
-          git -C "$MAIN_ROOT" add -f dist
-          if git -C "$MAIN_ROOT" diff --cached --quiet; then
+          git -C "$TARGET_ROOT" config user.name "${AUTHOR_NAME}"
+          git -C "$TARGET_ROOT" config user.email "${AUTHOR_EMAIL}"
+          git -C "$TARGET_ROOT" add -A
+          find "$TARGET_ROOT/resources" -type f -name "*.css" -print0 | xargs -0 git -C "$TARGET_ROOT" add -f || true
+          git -C "$TARGET_ROOT" add -f dist
+          if git -C "$TARGET_ROOT" diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
-          git -C "$MAIN_ROOT" commit -m "${COMMIT_MSG}"
-          git -C "$MAIN_ROOT" push --force-with-lease origin HEAD:main
+          git -C "$TARGET_ROOT" commit -m "${COMMIT_MSG}"
+          git -C "$TARGET_ROOT" push --force-with-lease origin "HEAD:${TARGET_BRANCH}"
 
       - name: Cleanup
         if: always()
-        run: git worktree remove ../main-worktree --force || true
+        run: git worktree remove ../target-worktree --force || true

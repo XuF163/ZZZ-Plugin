@@ -96,7 +96,7 @@ export class Guide extends ZZZPlugin {
         }
       }
       if (msg.length) {
-        await this.reply(await common.makeForwardMsg(this.e, msg))
+        await this.reply(await common.makeForwardMsg(this.e, msg, `${name}攻略`))
       }
     }
 

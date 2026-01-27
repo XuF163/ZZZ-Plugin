@@ -32,6 +32,7 @@ export namespace Config {
     }
     query: {
       /** 允许查询他人信息 */
+      others: boolean
     }
     update: {
       /** 自动查询更新 */
@@ -43,8 +44,30 @@ export namespace Config {
     mysCode: number[]
     /** 自定义绑定设备下载url */
     url: string
-    /** 自定义enkaApi地址 */
-    enkaApi: string
+    /** 投喂链接配置 */
+    donationLink?: string
+    /** 旧版：自定义enkaApi地址（可为数组，按顺序尝试） */
+    enkaApi?: string | string[]
+    /** 新版：Enka 配置（优先域名/备选域名/路径/超时等） */
+    enka?: {
+      primaryDomain?: string
+      fallbackDomain?: string
+      apiPath?: string
+      timeout?: number
+      userAgent?: string
+      randomSelection?: boolean
+    }
+    /** 极限面包/极限面板配置 */
+    hyperpanel?: {
+      api?: string
+      timeout?: number
+      bun?: {
+        uid?: string | number
+        useLocalFirst?: boolean
+        auto?: boolean
+        cron?: string
+      }
+    }
   }
 
   export interface device {
