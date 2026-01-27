@@ -2,7 +2,7 @@
 
 ## 适用场景
 - `Yunzai` 根目录不是 Git 仓库，但 `plugins/ZZZ-Plugin` 是独立 Git 仓库（有自己的 `.git`）。
-- 需要从远端 `origin/main` 中**筛选某一天的提交**（例如 `2026-01-23`），先审查，再以合适方式合入本地 `master`。
+- 需要从远端 `origin/updist`（同步上游 `main`）中**筛选某一天的提交**（例如 `2026-01-23`），先审查，再以合适方式合入本地 `master`。
 
 ## 前置检查
 1) 进入插件仓库目录（必须在这里执行 Git）
@@ -34,7 +34,7 @@ git branch "backup/master-before-<topic>-$(Get-Date -Format yyyyMMdd)"
 git fetch origin
 
 # 例：筛选 2026-01-23 当天（按提交时间）
-git log origin/main --since="2026-01-23 00:00" --until="2026-01-24 00:00" `
+git log origin/updist --since="2026-01-23 00:00" --until="2026-01-24 00:00" `
   --date=iso-strict --pretty=format:"%H %ad %an | %s"
 ```
 提示：如需按本地时区/作者时区更精确筛选，可在 `--since/--until` 调整区间。
@@ -54,7 +54,7 @@ git show <hash>
 
 ### 4) 在临时分支上 cherry-pick（带来源信息）
 ```powershell
-git switch -c "merge/origin-main-<YYYYMMDD>" master
+git switch -c "merge/origin-updist-<YYYYMMDD>" master
 
 # 按顺序挑选（推荐按时间先后）
 git cherry-pick -x <hash1> <hash2> <hash3>
@@ -81,7 +81,7 @@ git cherry-pick --abort
 ### 5) 快进方式合入 master（避免额外 merge commit）
 ```powershell
 git switch master
-git merge --ff-only "merge/origin-main-<YYYYMMDD>"
+git merge --ff-only "merge/origin-updist-<YYYYMMDD>"
 ```
 如果 `--ff-only` 失败，说明 `master` 发生了新的分叉；此时应重新评估合入策略（例如 rebase 临时分支或改用 merge commit）。
 

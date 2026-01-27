@@ -1,4 +1,4 @@
-name: Sync upstream main
+name: Sync upstream branches
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: sync-upstream-main
+  group: sync-upstream-branches
   cancel-in-progress: false
 
 jobs:
@@ -29,13 +29,30 @@ jobs:
       - name: Fetch upstream
         run: |
           git remote add upstream https://github.com/ZZZure/ZZZ-Plugin.git || git remote set-url upstream https://github.com/ZZZure/ZZZ-Plugin.git
-          git fetch --prune upstream main
-          git fetch --prune origin main
+          git fetch --prune upstream main dev
 
-      - name: Cover main with upstream/main
+      - name: Sync upstream/main -> updist
         run: |
-          git checkout -B main upstream/main
+          if git ls-remote --exit-code --heads origin updist >/dev/null 2>&1; then
+            git fetch --prune origin updist
+          fi
+          git checkout -B updist upstream/main
+          git push origin HEAD:updist --force-with-lease
 
-      - name: Push main
+      - name: Sync upstream/dev -> updev
         run: |
-          git push origin HEAD:main --force-with-lease
+          if git ls-remote --exit-code --heads origin updev >/dev/null 2>&1; then
+            git fetch --prune origin updev
+          fi
+          git checkout -B updev upstream/dev
+          git push origin HEAD:updev --force-with-lease
+
+      - name: "Ensure origin/dev exists (base: master)"
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if git ls-remote --exit-code --heads origin dev >/dev/null 2>&1; then
+            exit 0
+          fi
+          git fetch --prune origin master
+          git checkout -B dev origin/master
+          git push origin HEAD:dev
