@@ -19,7 +19,8 @@ export async function getCommitLog(e: EventType) {
   if (!ZZZUpdate) return false
   const updatePlugin = new ZZZUpdate()
   updatePlugin.e = e
-  updatePlugin.reply = e.reply
+  // @ts-expect-error
+  updatePlugin.reply = this.reply
   if (updatePlugin.getPlugin(pluginName)) {
     try {
       const commitData = await updatePlugin.getZZZAllLog()
@@ -28,7 +29,8 @@ export async function getCommitLog(e: EventType) {
         commitData
       })
     } catch (error: any) {
-      e.reply(`[${pluginName}]获取更新日志失败\n${error.message}`, false, {
+      // @ts-expect-error
+      this.reply(`[${pluginName}]获取更新日志失败\n${error.message}`, false, {
         at: true,
         recallMsg: 100
       })
@@ -43,17 +45,20 @@ export async function hasUpdate(e: EventType) {
   if (!ZZZUpdate) return false
   const updatePlugin = new ZZZUpdate()
   updatePlugin.e = e
-  updatePlugin.reply = e.reply
+  // @ts-expect-error
+  updatePlugin.reply = this.reply
   if (updatePlugin.getPlugin(pluginName)) {
     const result = await updatePlugin.hasUpdate()
     if (result.hasUpdate) {
-      await e.reply(`[${pluginName}]有${result.logs.length || 1}个更新`)
+      // @ts-expect-error
+      await this.reply(`[${pluginName}]有${result.logs.length || 1}个更新`)
       // @ts-expect-error
       await this.render('help/commit.html', {
         commitData: result.logs
       })
     } else {
-      await e.reply(`[${pluginName}]已是最新`)
+      // @ts-expect-error
+      await this.reply(`[${pluginName}]已是最新`)
     }
   }
   return true

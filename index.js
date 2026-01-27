@@ -8,6 +8,16 @@ logger.info('仓库地址 https://github.com/ZZZure/ZZZ-plugin')
 logger.info('Created By ZZZure Project (MIHOMO)')
 logger.info('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*')
 
+if (!global.segment) global.segment = (await import('oicq')).segment
+
+if (!global.core) {
+  try {
+    global.core = (await import('oicq')).core
+  } catch (err) {
+    // ignore empty error
+  }
+}
+
 void [configPath, dataPath].forEach(dir => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir)
