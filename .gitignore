@@ -7,7 +7,7 @@ config/**/*.*
 .DS_Store
 
 data/**/*.*
-
+/.ace-tool
 /node_modules
 /dist
 /test
@@ -23,3 +23,4 @@ src/apps/test*
 src/model/Enka/test.js
 src/model/Enka/parseData.js
 src/model/damage/map
+.ace-tool/index.json
