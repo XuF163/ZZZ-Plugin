@@ -31,21 +31,53 @@ jobs:
           git remote add upstream https://github.com/ZZZure/ZZZ-Plugin.git || git remote set-url upstream https://github.com/ZZZure/ZZZ-Plugin.git
           git fetch --prune upstream main dev
 
-      - name: Sync upstream/main -> updist
+      - name: Sync upstream branches (preserve workflows)
         run: |
-          if git ls-remote --exit-code --heads origin updist >/dev/null 2>&1; then
-            git fetch --prune origin updist
-          fi
-          git checkout -B updist upstream/main
-          git push origin HEAD:updist --force-with-lease
+          set -euo pipefail
 
-      - name: Sync upstream/dev -> updev
-        run: |
-          if git ls-remote --exit-code --heads origin updev >/dev/null 2>&1; then
-            git fetch --prune origin updev
-          fi
-          git checkout -B updev upstream/dev
-          git push origin HEAD:updev --force-with-lease
+          sync_snapshot() {
+            local upstream_ref="$1"
+            local target_branch="$2"
+
+            echo "Syncing ${upstream_ref} -> ${target_branch} (preserve .github/workflows/*)"
+
+            local snap_dir
+            snap_dir="$(mktemp -d)"
+            git archive "${upstream_ref}" | tar -x -C "${snap_dir}"
+
+            if git ls-remote --exit-code --heads origin "${target_branch}" >/dev/null 2>&1; then
+              git fetch --prune origin "${target_branch}"
+              git checkout -B "${target_branch}" "origin/${target_branch}"
+            else
+              git checkout --orphan "${target_branch}"
+              # Wipe the working tree but keep the worktree's .git file/dir.
+              find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+            fi
+
+            # GitHub blocks GitHub Apps (incl. GITHUB_TOKEN) from updating workflow files without
+            # "workflows" permission. Keep current branch's workflows unchanged to avoid push rejection.
+            rsync -a --delete \
+              --exclude='.git' \
+              --exclude='.github/workflows/**' \
+              "${snap_dir}/" ./
+
+            rm -rf "${snap_dir}"
+
+            git add -A
+
+            if git diff --cached --quiet; then
+              echo "No changes for ${target_branch}"
+              return 0
+            fi
+
+            local upstream_sha
+            upstream_sha="$(git rev-parse --short "${upstream_ref}")"
+            git commit -m "Sync ${upstream_ref}@${upstream_sha} -> ${target_branch} (preserve workflows)"
+            git push origin "HEAD:${target_branch}" --force-with-lease
+          }
+
+          sync_snapshot upstream/main updist
+          sync_snapshot upstream/dev updev
 
       - name: "Ensure origin/dev exists (base: master)"
         if: github.event_name == 'workflow_dispatch'
