@@ -58,7 +58,7 @@ jobs:
             # "workflows" permission. Keep current branch's workflows unchanged to avoid push rejection.
             rsync -a --delete \
               --exclude='.git' \
-              --exclude='.github/workflows/**' \
+              --exclude='.github/workflows/' \
               "${snap_dir}/" ./
 
             rm -rf "${snap_dir}"
