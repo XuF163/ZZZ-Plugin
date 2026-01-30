@@ -62,7 +62,14 @@ export class Panel extends ZZZPlugin {
                 segment.button([{ text: '再试一下', callback: '%更新面板' }])
             ]);
         }
-        const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e));
+        const ck = await getCk(this.e);
+        let hasCkForUid = false;
+        if (ck) {
+            hasCkForUid = Object.values(ck).some((it) => {
+                return it?.ck && String(it.uid) === String(uid);
+            });
+        }
+        const isEnka = this.e.msg.includes('展柜') || !hasCkForUid;
         let result = null;
         if (isEnka) {
             const data = await refreshPanelFromEnka(uid)
@@ -147,8 +154,14 @@ export class Panel extends ZZZPlugin {
         if (!result.length) {
             return this.reply(`UID:${uid}无本地面板数据，请先%更新面板 或 %更新展柜面板`);
         }
-        const hasCk = !!(await getCk(this.e));
-        await this.getPlayerInfo(hasCk ? undefined : parsePlayerInfo({ uid }));
+        const ck = await getCk(this.e);
+        let hasCkForUid = false;
+        if (ck) {
+            hasCkForUid = Object.values(ck).some((it) => {
+                return it?.ck && String(it.uid) === String(uid);
+            });
+        }
+        await this.getPlayerInfo(hasCkForUid ? undefined : parsePlayerInfo({ uid }));
         const timer = setTimeout(() => {
             if (this?.reply) {
                 this.reply('查询成功，正在下载图片资源，请稍候。');
