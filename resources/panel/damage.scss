@@ -2,7 +2,7 @@
   padding-top: 0.8em;
   overflow: hidden;
   position: relative;
- 
+
   .uid {
     font-size: 0.6em;
     text-align: center;
@@ -98,7 +98,7 @@
         width: 140%;
         position: relative;
         right: 20%;
-        padding: 0.3em 0.2em;
+        padding: 0.3em 0.1em;
         padding-right: 20%;
         padding-left: 8%;
         border-image-slice: 0 30 0 40 fill;
@@ -120,7 +120,7 @@
             flex-shrink: 0;
           }
 
-          .property {
+          .element-icon {
             width: 1em;
             flex-grow: 0;
             flex-shrink: 0;
@@ -148,7 +148,7 @@
 
           .role_ranks {
             display: flex;
-            gap: 0.1em;
+            gap: 0.15em;
 
             span {
               width: 1.2em;
@@ -178,10 +178,9 @@
       }
 
       .property_info {
-        background-color: rgb(47, 47, 47);
+        background-color: rgb(38 38 38);
         border-left: 0.1em solid rgb(0, 0, 0);
-        padding-top: 0.2em;
-        background: url('./images/BgFrame01.png') center / 150% no-repeat;
+        padding-top: 0.15em;
 
         .title {
           font-size: 0.6em;
@@ -208,7 +207,8 @@
               background-color: rgba(221, 224, 221, 0.25);
             }
 
-            .prop-icon {
+            .prop-icon,
+            .element-icon {
               width: 1em;
               flex-grow: 0;
               flex-shrink: 0;
@@ -385,8 +385,8 @@
     position: relative;
     z-index: 5;
   }
-  
-  .title:nth-child(n+2) {
+
+  .title:nth-child(n + 2) {
     padding-top: 0.5em;
   }
 
@@ -447,7 +447,6 @@
 
   /* 伤害统计 */
   .damage-list {
-
     .column3 {
       grid-template-columns: 0.28fr 2fr 2fr;
     }
@@ -457,7 +456,6 @@
     }
 
     .dmg-tr {
-
       &.current {
         background: rgb(120, 104, 73);
 
@@ -531,7 +529,7 @@
       &.zero {
         background-color: #222;
       }
-  
+
       &:first-child {
         background: rgba(0, 0, 0, 0.2);
         color: rgb(206, 190, 149);
@@ -544,7 +542,6 @@
       &.negative {
         background-color: rgb(22, 65, 33);
       }
-
     }
   }
 }

@@ -107,6 +107,10 @@ export namespace Config {
     card: number
     /** 深渊 */
     abyss: number
+    /** 危局 */
+    deadly: number
+    /** 临界推演 */
+    voidFrontBattle: number
     /** 抽卡 */
     gachalog: number
     /** 攻略 */
@@ -186,6 +190,10 @@ export namespace ZZZ {
       player: ZZZ.playerCard
       result: Mys.Deadly
     }
+    voidFrontBattle: {
+      player: ZZZ.playerCard
+      result: Mys.VoidFrontBattleDetail
+    }
   }
 
 }
@@ -208,6 +216,7 @@ export namespace Mys {
     zzzDeadly: Deadly
     zzzDeadlyPeriod: Deadly
     zzzVoidFrontBattleAbstractInfo: VoidFrontBattleAbstractInfo
+    zzzVoidFrontBattleDetail: VoidFrontBattleDetail
   }
 
   /** 米游社UrlType */
@@ -727,6 +736,17 @@ export namespace Mys {
     region_time_zone: number
   }
 
+  interface AvatarlistItem {
+    id: number
+    level: number
+    element_type: number
+    avatar_profession: number
+    rarity: string
+    rank: number
+    role_square_url: string
+    sub_element_type: number
+  }
+
   /** 式舆防卫战v2数据 */
   export interface Abyss {
     hadal_ver: string
@@ -753,16 +773,7 @@ export namespace Mys {
             text: string
           }
           score: number
-          avatar_list: {
-            id: number
-            level: number
-            rarity: string
-            element_type: number
-            avatar_profession: number
-            rank: number
-            role_square_url: string
-            sub_element_type: number
-          }[]
+          avatar_list: AvatarlistItem[]
           buddy: {
             id: number
             rarity: string
@@ -804,16 +815,7 @@ export namespace Mys {
     layer_challenge_info_list: {
       layer_id: number
       battle_time: number
-      avatar_list: {
-        id: number
-        level: number
-        rarity: string
-        element_type: number
-        avatar_profession: number
-        rank: number
-        role_square_url: string
-        sub_element_type: number
-      }[]
+      avatar_list: AvatarlistItem[]
       buddy: {
         id: number
         rarity: string
@@ -844,16 +846,7 @@ export namespace Mys {
         desc: string
         name: string
       }[]
-      avatar_list: {
-        id: number
-        level: number
-        element_type: number
-        avatar_profession: number
-        rarity: string
-        rank: number
-        role_square_url: string
-        sub_element_type: number
-      }[]
+      avatar_list: AvatarlistItem[]
       buddy: {
         id: number
         rarity: string
@@ -887,6 +880,66 @@ export namespace Mys {
       ending_record_id: number
     }
     has_detail_record: boolean
+  }
+
+  /** 临界推演数据 */
+  export interface VoidFrontBattleDetail {
+    void_front_battle_abstract_info_brief: VoidFrontBattleAbstractInfo['void_front_battle_abstract_info_brief']
+    boss_challenge_record: {
+      boss_info: {
+        icon: string
+        name: string
+        race_icon: string
+        bg_icon: string
+      }
+      main_challenge_record: VoidFrontBattleMainchallengerecord
+    }
+    main_challenge_record_list: VoidFrontBattleMainchallengerecord[]
+    role_basic_info: {
+      server: string
+      nickname: string
+      icon: string
+    }
+  }
+
+  interface VoidFrontBattleMainchallengerecord {
+    battle_id: number
+    node_id: number
+    name: string
+    score: number
+    star: string
+    score_ratio: string
+    challenge_time: Time
+    buffer: {
+      icon: string
+      desc: string
+      name: string
+    }
+    max_score: number
+    avatar_list: AvatarlistItem[]
+    buddy: {
+      id: number
+      rarity: string
+      level: number
+      bangboo_rectangle_url: string
+    }
+    sub_challenge_record: {
+      battle_id: number
+      name: string
+      star: string
+      avatar_list: AvatarlistItem[]
+      buddy: {
+        id: number
+        rarity: string
+        level: number
+        bangboo_rectangle_url: string
+      }
+      buffer: {
+        icon: string
+        desc: string
+        name: string
+      }
+    }[]
   }
 
 }
@@ -964,6 +1017,7 @@ export namespace MapJSON {
   export interface KeyValue {
     AnomalyData: AnomalyData[]
     BangbooId2Data: BangbooId2Data
+    ElementData: ElementData[]
     EquipBaseValue: EquipBaseValue
     EquipMainStats: EquipMainStats
     EquipScore: EquipScore
@@ -999,6 +1053,16 @@ export namespace MapJSON {
       CHS: string
       JA: string
     }
+  }
+
+  export interface ElementData {
+    element_type: number
+    sub_element_type: number
+    zh: string
+    zh_sub: string
+    en: string
+    en_sub: string
+    property_id: number
   }
 
   export interface EquipBaseValue {

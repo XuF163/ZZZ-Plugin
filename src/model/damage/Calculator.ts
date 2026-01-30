@@ -1,8 +1,8 @@
 import type { BuffManager, Runtime, anomaly, buff, buffType, element } from './BuffManager.ts'
 import type { ZZZAvatarInfo } from '../avatar.js'
 import { runtime, elementType2element, anomalyEnum } from './BuffManager.js'
-import * as prop from '../../lib/convert/property.js'
 import { getMapData } from '../../utils/file.js'
+import { property } from '../../lib/convert.js'
 import { charData } from './avatar.js'
 import _ from 'lodash'
 
@@ -200,7 +200,7 @@ export class Calculator {
   readonly avatar: ZZZAvatarInfo
   readonly skills: skill[] = []
   /** 对当前所计算的技能有用的buff、计算后的buff */
-  private readonly usefulBuffResults: Map<buff, buff> = new Map()
+  private readonly usefulBuffResults: Map<buff, buff & { value: number }> = new Map()
   /** 技能伤害缓存 */
   private cache: { [type: string]: damage } = Object.create(null)
   /** 角色属性缓存 */
@@ -499,7 +499,7 @@ export class Calculator {
       types = Object.entries(this.avatar.scoreWeight)
         .reduce((acc: { type: subStatKeys, weight: number }[], [id, weight]) => {
           if (weight > 0) {
-            const type = prop.idToName(id) as subStatKeys
+            const type = property.idToName(id) as subStatKeys
             if (type && subBaseValueData[type]) {
               acc.push({ type, weight })
             }
@@ -511,7 +511,7 @@ export class Calculator {
         .map(({ type }) => type)
     }
     const base: { [type: string]: number } = {}
-    types.forEach(t => base[t] = t.includes('百分比') ? this.avatar.base_properties[prop.nameZHToNameEN(t.replace('百分比', '')) as keyof ZZZAvatarInfo['base_properties']] * subBaseValueData[t][0] : subBaseValueData[t][0])
+    types.forEach(t => base[t] = t.includes('百分比') ? this.avatar.base_properties[property.nameZHToNameEN(t.replace('百分比', '')) as keyof ZZZAvatarInfo['base_properties']] * subBaseValueData[t][0] : subBaseValueData[t][0])
     logger.debug(logger.red('副词条差异计算变化值：'), base)
     const buffs: {
       name: subStatKeys
@@ -521,7 +521,7 @@ export class Calculator {
       valueBase: typeof subBaseValueData[subStatKeys][1]
     }[] = types.map(t => ({
       name: t,
-      shortName: prop.nameToShortName3(t),
+      shortName: property.nameToShortName3(t),
       type: t.replace('百分比', '') as buff['type'],
       value: base[t],
       valueBase: subBaseValueData[t][1]
@@ -550,7 +550,7 @@ export class Calculator {
       types = Object.entries(this.avatar.scoreWeight)
         .reduce((acc: { type: mainStatKeys, weight: number }[], [id, weight]) => {
           if (weight > 0) {
-            const type = prop.idToName(id) as mainStatKeys
+            const type = property.idToName(id) as mainStatKeys
             if (type && mainBaseValueData[type]) {
               acc.push({ type, weight })
             }
@@ -562,7 +562,7 @@ export class Calculator {
         .map(({ type }) => type)
     }
     const base: { [type: string]: number } = {}
-    types.forEach(t => base[t] = (t.includes('百分比') || ['异常掌控', '冲击力', '能量自动回复'].includes(t)) ? this.avatar.base_properties[prop.nameZHToNameEN(t.replace('百分比', '')) as keyof ZZZAvatarInfo['base_properties']] * mainBaseValueData[t][0] : mainBaseValueData[t][0])
+    types.forEach(t => base[t] = (t.includes('百分比') || ['异常掌控', '冲击力', '能量自动回复'].includes(t)) ? this.avatar.base_properties[property.nameZHToNameEN(t.replace('百分比', '')) as keyof ZZZAvatarInfo['base_properties']] * mainBaseValueData[t][0] : mainBaseValueData[t][0])
     logger.debug(logger.red('主词条差异计算变化值：'), base)
     const buffs: {
       name: mainStatKeys
@@ -574,10 +574,10 @@ export class Calculator {
     }[] = types.map(t => {
       const data: typeof buffs[number] = {
         name: t,
-        shortName: prop.nameToShortName3(t),
+        shortName: property.nameToShortName3(t),
         type: (t.includes('属性伤害加成') ? '增伤' : t.replace('百分比', '')) as buff['type'],
         value: base[t],
-        element: (t.includes('属性伤害加成') ? prop.nameZHToNameEN(t).replace('DMGBonus', '') : '') as element,
+        element: (t.includes('属性伤害加成') ? property.nameZHToNameEN(t).replace('DMGBonus', '') : '') as element,
         valueBase: mainBaseValueData[t][1]
       }
       if (!data.element) delete data.element
@@ -798,7 +798,7 @@ export class Calculator {
    * @param isRatio 是否启用buff.value为数值/字符串/数组类型且计算结果值<1时按 **`初始数值`** 百分比提高处理
    */
   get(type: buff['type'], initial: number, skill: skill = this.skill, usefulBuffs: buff[] = this.buffM.buffs, isRatio = false): number {
-    const nonStackableBuffRecord = new Map<string, number>()
+    const nonStackableBuffRecord = new Map<string, buff>()
     return this.props[type] ??= this.buffM._filter(usefulBuffs, {
       element: skill?.element,
       range: [skill?.type],
@@ -812,19 +812,18 @@ export class Calculator {
         add *= initial
       // 检查不可叠加buff
       if (buff.stackable === false) {
-        if (nonStackableBuffRecord.has(buff.name)) {
-          const recorded = nonStackableBuffRecord.get(buff.name)!
-          if (Math.abs(recorded) >= Math.abs(add)) {
+        const recorded = nonStackableBuffRecord.get(buff.name)
+        if (recorded) {
+          const recordedValue = this.usefulBuffResults.get(recorded)!.value
+          if (Math.abs(recordedValue) >= Math.abs(add)) {
             logger.debug(`\tBuff：${buff.name}已存在，且数值相同/更高，不计入结果`)
             return previousValue
-          } else {
-            logger.debug(`\tBuff：${buff.name}已存在，且数值更低，替换为更高数值`)
-            previousValue -= recorded
-            nonStackableBuffRecord.set(buff.name, add)
           }
-        } else {
-          nonStackableBuffRecord.set(buff.name, add)
+          logger.debug(`\tBuff：${buff.name}已存在，且数值更低，替换为更高数值`)
+          previousValue -= recordedValue
+          this.usefulBuffResults.delete(recorded)
         }
+        nonStackableBuffRecord.set(buff.name, buff)
       }
       if (!this.usefulBuffResults.has(buff))
         this.usefulBuffResults.set(buff, { ...buff, value: add })
