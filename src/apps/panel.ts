@@ -69,7 +69,16 @@ export class Panel extends ZZZPlugin {
         (segment as any).button([{ text: '再试一下', callback: '%更新面板' }])
       ])
     }
-    const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e))
+    // Some runtimes may return a cookie record even when the current UID has no usable ck.
+    // Treat "no ck for this UID" as Enka mode (showcase panel).
+    const ck = await getCk(this.e)
+    let hasCkForUid = false
+    if (ck) {
+      hasCkForUid = Object.values(ck).some((it: any) => {
+        return it?.ck && String(it.uid) === String(uid)
+      })
+    }
+    const isEnka = this.e.msg.includes('展柜') || !hasCkForUid
     let result: any[] | null = null
     if (isEnka) {
       const data = await refreshPanelFromEnka(uid)
@@ -153,8 +162,16 @@ export class Panel extends ZZZPlugin {
     if (!result.length) {
       return this.reply(`UID:${uid}无本地面板数据，请先%更新面板 或 %更新展柜面板`)
     }
-    const hasCk = !!(await getCk(this.e))
-    await this.getPlayerInfo(hasCk ? undefined : parsePlayerInfo({ uid }) as any)
+    const ck = await getCk(this.e)
+    let hasCkForUid = false
+    if (ck) {
+      hasCkForUid = Object.values(ck).some((it: any) => {
+        return it?.ck && String(it.uid) === String(uid)
+      })
+    }
+    await this.getPlayerInfo(
+      hasCkForUid ? undefined : (parsePlayerInfo({ uid }) as any)
+    )
     const timer = setTimeout(() => {
       if (this?.reply) {
         this.reply('查询成功，正在下载图片资源，请稍候。')
