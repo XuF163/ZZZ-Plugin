@@ -37,7 +37,9 @@ export default class Score {
     this.equip = equip
     this.weight = weight
     this.partition = this.equip.equipment_type
-    this.userMainStat = this.equip.main_properties[0].property_id
+    // Some data sources may miss main_properties (or provide an empty list).
+    // Treat it as "unknown main stat" and let score degrade to 0 instead of throwing.
+    this.userMainStat = Number(this.equip.main_properties?.[0]?.property_id || 0)
   }
 
   /** 等级系数 */
