@@ -14,73 +14,6 @@ import settings from '../lib/settings.js'
 import { getCk } from '../lib/common.js'
 import _ from 'lodash'
 
-type SimpleCmdButton = { label: string; data: string }
-type ButtonElem = ReturnType<typeof segment.button>
-type Button = ButtonElem['content']['rows'][number]['buttons'][number]
-
-function resolveButtonAppid(): number {
-  // The button element requires an appid. Different Yunzai variants expose it differently.
-  const candidates = [
-    (Bot as any)?.config?.bot?.appid,
-    (Bot as any)?.config?.appid,
-    (Bot as any)?.appid,
-    // Fallback: icqq internal apk appid (not a bot appid, but better than undefined)
-    (Bot as any)?.apk?.appid,
-  ]
-  for (const v of candidates) {
-    const n = Number(v)
-    if (Number.isFinite(n) && n >= 0) return n
-  }
-  return 0
-}
-
-function buildCommandKeyboard(rows: SimpleCmdButton[][], idPrefix: string): ButtonElem | null {
-  if (typeof (segment as any)?.button !== 'function') return null
-  const appid = resolveButtonAppid()
-  let idx = 0
-  const normalizedRows = rows
-    .filter(r => Array.isArray(r) && r.length > 0)
-    .map(r => ({
-      buttons: r.map(({ label, data }): Button => {
-        const id = `${idPrefix}_${idx++}`
-        return {
-          id,
-          render_data: {
-            label,
-            visited_label: label,
-            style: 1,
-          },
-          action: {
-            // Command button: insert @bot + data into the input box.
-            type: 2,
-            permission: { type: 2 },
-            data,
-            // Friendly fallback toast for unsupported clients.
-            unsupport_tips: '客户端暂不支持按钮，请手动发送指令',
-            // Auto-send the command after inserting.
-            enter: true,
-          },
-        }
-      }),
-    }))
-  if (!normalizedRows.length) return null
-  return segment.button({ appid, rows: normalizedRows })
-}
-
-function chunkButtons<T>(items: T[], perRow: number): T[][] {
-  const rows: T[][] = []
-  let row: T[] = []
-  for (const it of items) {
-    row.push(it)
-    if (row.length >= perRow) {
-      rows.push(row)
-      row = []
-    }
-  }
-  if (row.length) rows.push(row)
-  return rows
-}
-
 export class Panel extends ZZZPlugin {
   constructor() {
     super({
@@ -131,11 +64,10 @@ export class Panel extends ZZZPlugin {
     const coldTime = _.get(panelSettings, 'interval', 300)
     if (lastQueryTime && Date.now() - Number(lastQueryTime) < 1000 * coldTime) {
       const msg = `${coldTime}秒内只能更新一次，请稍后再试`
-      const kb = buildCommandKeyboard(
-        [[{ label: '再试一下', data: '%更新面板' }]],
-        'panel_retry'
-      )
-      return this.reply(kb ? [msg, kb] : msg)
+      return this.reply([
+        msg,
+        (segment as any).button([{ text: '再试一下', callback: '%更新面板' }])
+      ])
     }
     const isEnka = this.e.msg.includes('展柜') || !(await getCk(this.e))
     let result: any[] | null = null
@@ -177,11 +109,10 @@ export class Panel extends ZZZPlugin {
       this.reply = oriReply
       if (errorMsg && !result) {
         const msg = `面板列表更新失败，请稍后再试：\n${errorMsg.trim()}`
-        const kb = buildCommandKeyboard(
-          [[{ label: '再试一下', data: '%更新面板' }]],
-          'panel_refresh_fail'
-        )
-        return this.reply(kb ? [msg, kb] : msg)
+        return this.reply([
+          msg,
+          (segment as any).button([{ text: '再试一下', callback: '%更新面板' }])
+        ])
       }
     }
     if (!result) return false
@@ -191,26 +122,29 @@ export class Panel extends ZZZPlugin {
       list: result
     }
 
-    const roleNames = (result || [])
+    const roleList = (result || [])
       .map((it: any) => String(it?.name_mi18n || '').trim())
       .filter(Boolean)
-    const roleBtns: SimpleCmdButton[] = roleNames.map(name => ({
-      label: name,
-      data: `%${name}面板`
-    }))
-    const rows = roleBtns.length
-      ? chunkButtons(roleBtns, 3)
-      : [
-          [
-            { label: '更新面板', data: '%更新面板' },
-            { label: '展柜面板', data: '%更新展柜面板' },
-            { label: '练度统计', data: '%练度统计' }
-          ]
-        ]
 
-    const kb = buildCommandKeyboard(rows, 'panel_refresh')
+    // 按钮组件（兼容旧的 segment.button 形态：segment.button(...rows)）
+    const buttons: any[][] = [[]]
+    for (const name of roleList) {
+      const row = buttons[buttons.length - 1]
+      row.push({ text: `${name}`, callback: `%${name}面板` })
+      if (row.length > 2) buttons.push([])
+    }
+    if (buttons.length === 1 && buttons[0].length === 0) {
+      buttons[0] = [
+        { text: '更新面板', callback: '%更新面板' },
+        { text: '刷新访问凭据', callback: '#刷新访问凭据' },
+        { text: '练度统计', callback: '%练度统计' },
+      ]
+    } else if (buttons[buttons.length - 1].length === 0) {
+      buttons.pop()
+    }
+
     const img = await this.render('panel/refresh.html', finalData, { retType: 'base64' })
-    await this.reply(kb ? [img, kb] : img)
+    await this.reply([img, (segment as any).button(...buttons)])
   }
 
   async getCharPanelList() {
@@ -235,26 +169,28 @@ export class Panel extends ZZZPlugin {
       list: result
     }
 
-    const roleNames = (result || [])
+    const roleList = (result || [])
       .map((it: any) => String(it?.name_mi18n || '').trim())
       .filter(Boolean)
-    const roleBtns: SimpleCmdButton[] = roleNames.map(name => ({
-      label: name,
-      data: `%${name}面板`
-    }))
-    const rows = roleBtns.length
-      ? chunkButtons(roleBtns, 3)
-      : [
-          [
-            { label: '更新面板', data: '%更新面板' },
-            { label: '展柜面板', data: '%更新展柜面板' },
-            { label: '练度统计', data: '%练度统计' }
-          ]
-        ]
 
-    const kb = buildCommandKeyboard(rows, 'panel_list')
+    const buttons: any[][] = [[]]
+    for (const name of roleList) {
+      const row = buttons[buttons.length - 1]
+      row.push({ text: `${name}`, callback: `%${name}面板` })
+      if (row.length > 2) buttons.push([])
+    }
+    if (buttons.length === 1 && buttons[0].length === 0) {
+      buttons[0] = [
+        { text: '更新面板', callback: '%更新面板' },
+        { text: '刷新访问凭据', callback: '#刷新访问凭据' },
+        { text: '练度统计', callback: '%练度统计' },
+      ]
+    } else if (buttons[buttons.length - 1].length === 0) {
+      buttons.pop()
+    }
+
     const img = await this.render('panel/list.html', finalData, { retType: 'base64' })
-    await this.reply(kb ? [img, kb] : img)
+    await this.reply([img, (segment as any).button(...buttons)])
   }
 
   async getCharPanelListTool(uid: string, origin = false) {
@@ -333,26 +269,22 @@ export class Panel extends ZZZPlugin {
 
     if (reply) {
       const role = String(parsedData?.name_mi18n || '').trim()
-      const rows: SimpleCmdButton[][] = [
-        [
-          { label: '更新面板', data: '%更新面板' },
-          { label: '展柜面板', data: '%更新展柜面板' },
-        ],
+      const buts: any[][] = [
+        [{ text: '看看我的面板', callback: '%更新面板' }],
         role
           ? [
-              { label: `${role}攻略`, data: `%${role}攻略` },
-              { label: '练度统计', data: '%练度统计' },
-              { label: `${role}图鉴`, data: `%${role}图鉴` },
+              { text: `${role}攻略`, callback: `%${role}攻略` },
+              { text: '练度统计', callback: '%练度统计' },
+              { text: `${role}图鉴`, callback: `%${role}图鉴` },
             ]
-          : [{ label: '练度统计', data: '%练度统计' }],
+          : [{ text: '练度统计', callback: '%练度统计' }],
         [
-          { label: '电量', data: '%体力' },
-          { label: '签到', data: '#签到' },
-          { label: '帮助', data: '%帮助' },
+          { text: '电量', callback: '%体力' },
+          { text: '签到', callback: '#签到' },
+          { text: '帮助', callback: '%帮助' },
         ],
       ]
-      const kb = buildCommandKeyboard(rows, 'panel_card')
-      const res = await this.reply(kb ? [image, kb] : image)
+      const res = await this.reply([image, (segment as any).button(...buts)])
       if (res?.message_id && parsedData.role_icon)
         await redis.set(
           `ZZZ:PANEL:IMAGE:${res.message_id}`,
