@@ -116,7 +116,8 @@ jobs:
             exit 0
           fi
           git -C "$TARGET_ROOT" commit -m "${COMMIT_MSG}"
-          git -C "$TARGET_ROOT" push --force-with-lease origin "HEAD:${TARGET_BRANCH}"
+          # Avoid rewriting target branch history (e.g. master). This also respects branch protection rules that disable force push.
+          git -C "$TARGET_ROOT" push origin "HEAD:${TARGET_BRANCH}"
 
       - name: Cleanup
         if: always()
