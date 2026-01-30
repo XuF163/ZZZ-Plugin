@@ -57,6 +57,7 @@ jobs:
         run: |
           rsync -a --delete --quiet \
             --exclude='.git' \
+            --exclude='.github/workflows/' \
             --exclude='node_modules' \
             --exclude='src' \
             ./ ../target-worktree/
