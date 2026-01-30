@@ -79,7 +79,7 @@
         bottom: 0;
         left: 8em;
       }
-      .property {
+      .element-icon {
         width: 0.8em;
         position: absolute;
         z-index: 1;
@@ -279,7 +279,9 @@
             }
           }
           &.ace,
-          &.ACE {
+          &.ACE,
+          &.max,
+          &.MAX {
             .comment {
               background: linear-gradient(
                 0deg,

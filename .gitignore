@@ -1,15 +1,25 @@
+.vscode
+.VSCodeCounter
 *.css.map
+resources/**/*.css
 config/**/*.*
-!config/.gitkeep
 
 .DS_Store
-.idea/
 
 data/**/*.*
-!data/.gitkeep
+/.ace-tool
+/node_modules
+/dist
+/test
+pnpm-lock.yaml
+
+src/model/damage/character/**/*_user.*
 
 resources/images/**/*.*
 resources/data/**/*.*
-model/damage/map/
-model/damage/character/**/*_user.*
-.ace-tool/
+
+src/apps/test*
+src/model/Enka/test.js
+src/model/Enka/parseData.js
+src/model/damage/map
+.ace-tool/index.json

@@ -12,8 +12,6 @@
 > 插件依靠社区维护，发起者随缘更新，但是ZZZure组织成员会对PR进行合并，你可以在PR页面@协助者进行合并。
 >
 > 在你使用之前请**务必**完整阅读 `README` 内容，如因无视 `README` 遇到的问题，在提问时难免遭受嘲笑。
->
-> 如需自定义伤害计算请查看[此说明](./model/damage/README.md)
 
 # 安装
 
@@ -47,9 +45,9 @@ git clone --depth=1 https://gitee.com/bietiaop/ZZZ-Plugin.git ./plugins/ZZZ-Plug
 
 ## 自定义评分权重、伤害计算
 
-**自定义评分权重**请查看[此教程](./model/score/README.md)
+**自定义评分权重**请查看[此教程](https://github.com/ZZZure/ZZZ-Plugin/blob/dev/src/model/score/README.md)
 
-**自定义伤害计算**请查看[此教程](./model/damage/README.md)
+**自定义伤害计算**请查看[此教程](https://github.com/ZZZure/ZZZ-Plugin/blob/dev/src/model/damage/README.md)
 
 ## 攻略、图鉴
 
@@ -68,7 +66,7 @@ git clone --depth=1 https://gitee.com/bietiaop/ZZZ-Plugin.git ./plugins/ZZZ-Plug
 
 将你下载的面板图放在`zzz插件目录/resources/images/panel/[角色名称]/`文件夹下。若文件夹不存在请自行创建。
 
-**角色名称**可以是[米游社绳网情报站](https://baike.mihoyo.com/zzz/wiki/channel/map/2/43)中显示的代理人`简称`或`全称`，也可以是[插件数据PartnerId2Data](resources\map\PartnerId2Data.json)中的`name`或`full_name`。四个路径依序检测，取第一个存在的路径中的面板图
+**角色名称**可以是[米游社绳网情报站](https://baike.mihoyo.com/zzz/wiki/channel/map/2/43)中显示的代理人`简称`或`全称`，也可以是[插件数据PartnerId2Data](resources/map/PartnerId2Data.json)中的`name`或`full_name`。四个路径依序检测，取第一个存在的路径中的面板图
 
 若要查看或者批量删除自定义面板图，请发送指令 `%帮助` 进行查看如何使用相关指令。
 
@@ -100,16 +98,6 @@ git clone --depth=1 https://gitee.com/bietiaop/ZZZ-Plugin.git ./plugins/ZZZ-Plug
 
 该服务可能偶尔无法使用，如更新展柜面板一直请求失败，可通过锅巴修改`自定义enkaApi地址`项来自定义请求链接，请求和返回与Enka格式一致皆可
 
-## 极限面板（极限面包）
-本插件可基于 **ZZZ-Plugin 本地已缓存的真实用户面板数据**（`plugins/ZZZ-Plugin/data/panel/<uid>.json`）自动生成“极限面板”预设，默认写入 `UID=10000000`。
-
-- 手动更新（仅主控）：`%更新极限面包`（用“面包”避免与其他插件抢“面板”指令）
-- 定时更新：默认每天 `04:30` 自动更新（可在 `plugins/ZZZ-Plugin/config/config.yaml` 的 `hyperpanel.bun.cron` 修改）
-- 查询：`%极限<角色名>面板` / `#绝区零极限<角色名>面板`
-
-说明：
-- **不再依赖 LimitedPanelAPI 服务端**（`hyperpanel.api` 仅作为可选兜底）
-- 若提示“未找到可用的面板数据源”，请先让一些用户执行一次面板更新/刷新，生成本地缓存后再更新极限面包
 ## 角色图缺失
 
 由于历史代码缘故，以前在游戏资源未更新就进行资源下载的可能导致角色图片缺失，你可以到插件资源目录手动删除对应文件，或者执行命令 `%删除全部资源` 进行删除。删除全部资源指令目前**不会**删除自定义面板图，仅会删除下载的图片资源，再次使用时需重新下载图片（自动下载）。
@@ -124,11 +112,40 @@ git clone --depth=1 https://gitee.com/bietiaop/ZZZ-Plugin.git ./plugins/ZZZ-Plug
 
 # 贡献
 
-请先 `fork` 本仓库，修改并测试完成后提交PR。
+请先 `fork`或切换至 本仓库 **dev分支**，修改 **dev分支** 并测试完成后提交PR。
 
 **请注意：**
 
-* 你的 CSS 必须是 `scss` 编写
+> [!important]
+> 请勿直接修改 **main** 分支的 dist 等编译产物；请基于 dev 分支修改并提交 PR，CI 会自动编译ts并同步到 main。
+> 
+> 请勿直接修改 **resources** 下的 css 编译产物；请基于 dev 分支对应的 scss 文件修改并提交，CI 会自动编译scss并同步到 main。
+
+## 开发规范
+
+* 提交前请确保本地已运行 `pnpm check`，能够成功通过且无报错
+
+* 代码风格请参考 [eslint.config.mjs](./eslint.config.mjs)
+  * 代码自检：`pnpm lint`
+  * 自动修复：`pnpm lint:fix`
+
+## TS环境、编译
+
+* 在宿主环境下（如将插件安装于Miao-Yunzai中进行开发），可使用[tsconfig.json](./tsconfig.json)作为ts环境配置
+  * 全部编译：`pnpm build`
+  * 监听编译：`pnpm watch`
+
+* 在脱离宿主环境下（如独立开发或在github actions中编译），可使用 [tsconfig.src.json](./tsconfig.src.json) 作为ts环境配置
+  * 全部编译：`pnpm build:src`
+  * 监听编译：`pnpm watch:src`
+
+## SCSS编译
+
+* 本项目的样式使用 scss 编写
+
+* 项目的 scss 文件集中在 [resources](./resources/) 的子目录，开发时请编写/修改 scss，请勿提交 css
+  * 全部编译：`pnpm build:css`
+  * 监听编译：`pnpm watch:css`
 
 # 鸣谢
 

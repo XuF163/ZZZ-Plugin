@@ -1,14 +1,15 @@
-import settings from './lib/settings.js';
-import lodash from 'lodash';
-import { resourcesPath } from './lib/path.js';
-import path from 'path';
+/// <reference path="./src/@types/yunzai/index.d.ts"/>
+import { resourcesPath } from './dist/lib/path.js'
+import settings from './dist/lib/settings.js'
+import lodash from 'lodash'
+import path from 'path'
 
 // 支持锅巴
 export function supportGuoba() {
-  let allGroup = [];
+  let allGroup = []
   Bot.gl.forEach((v, k) => {
-    allGroup.push({ label: `${v.group_name}(${k})`, value: k });
-  });
+    allGroup.push({ label: `${v.group_name}(${k})`, value: k })
+  })
   return {
     pluginInfo: {
       name: 'ZZZ-Plugin',
@@ -54,6 +55,15 @@ export function supportGuoba() {
           },
         },
         {
+          field: 'config.enkaApi',
+          label: '自定义enkaApi地址',
+          bottomHelpMessage: '设置自定义的enkaApi地址',
+          component: 'Input',
+          componentProps: {
+            placeholder: '请输入enkaApi地址',
+          },
+        },
+        {
           field: 'config.query.others',
           label: '查询他人信息',
           bottomHelpMessage: '是否允许查询他人信息',
@@ -89,62 +99,6 @@ export function supportGuoba() {
               { label: '10041', value: 10041 },
               { label: '5003', value: 5003 },
             ],
-          },
-        },
-        {
-          component: 'SOFT_GROUP_BEGIN',
-          label: 'Enka API设置',
-        },
-        {
-          field: 'config.enka.primaryDomain',
-          label: '首选域名',
-          bottomHelpMessage: '设置Enka API的首选域名，默认为enka.network',
-          component: 'Select',
-          componentProps: {
-            options: [
-              { label: 'enka.network（官方）', value: 'enka.network' },
-              { label: 'profile.microgg.cn（备选）', value: 'profile.microgg.cn' }
-            ],
-            placeholder: '请选择首选域名',
-          },
-        },
-        {
-          field: 'config.enka.fallbackDomain',
-          label: '备选域名',
-          bottomHelpMessage: '设置Enka API的备选域名，当首选域名不可用时自动切换',
-          component: 'Select',
-          componentProps: {
-            options: [
-              { label: 'profile.microgg.cn（备选）', value: 'profile.microgg.cn' },
-              { label: 'enka.network（官方）', value: 'enka.network' }
-            ],
-            placeholder: '请选择备选域名',
-          },
-        },
-        {
-          field: 'config.enka.randomSelection',
-          label: '随机域名选择',
-          bottomHelpMessage: '启用后将随机选择可用域名，有助于负载均衡',
-          component: 'Switch',
-        },
-        {
-          field: 'config.enka.timeout',
-          label: '请求超时时间',
-          bottomHelpMessage: '设置Enka API请求的超时时间（毫秒），建议5000-15000',
-          component: 'InputNumber',
-          componentProps: {
-            min: 1000,
-            max: 30000,
-            placeholder: '请输入超时时间（毫秒）',
-          },
-        },
-        {
-          field: 'config.enka.userAgent',
-          label: 'User-Agent',
-          bottomHelpMessage: '设置请求Enka API时使用的User-Agent',
-          component: 'Input',
-          componentProps: {
-            placeholder: '请输入User-Agent',
           },
         },
         {
@@ -239,31 +193,6 @@ export function supportGuoba() {
             max: 10000,
             placeholder: '请输入数字',
             addonAfter: "ms",
-          },
-        },
-        {
-          component: 'SOFT_GROUP_BEGIN',
-          label: '极限面板（LimitedPanelAPI）',
-        },
-        {
-          field: 'config.hyperpanel.api',
-          label: 'API 地址',
-          bottomHelpMessage:
-            '极限面板 JSON 接口地址（默认：http://127.0.0.1:4567/zzz/hyperpanel）。用于“%极限<角色名>面板”',
-          component: 'Input',
-          componentProps: {
-            placeholder: '例如：http://127.0.0.1:4567/zzz/hyperpanel',
-          },
-        },
-        {
-          field: 'config.hyperpanel.timeout',
-          label: '请求超时',
-          bottomHelpMessage: '请求极限面板接口的超时时间（毫秒），建议 5000-30000',
-          component: 'InputNumber',
-          componentProps: {
-            min: 1000,
-            max: 60000,
-            placeholder: '请输入数字（毫秒）',
           },
         },
         {
@@ -529,18 +458,6 @@ export function supportGuoba() {
           },
         },
         {
-          field: 'priority.hyperpanel',
-          label: '极限面板',
-          bottomHelpMessage: '设置“%极限<角色名>面板”指令优先级（建议保持较高优先级以避免与其他“面板”指令冲突）',
-          component: 'InputNumber',
-          required: true,
-          componentProps: {
-            min: -1000,
-            max: 1000,
-            placeholder: '请输入数字',
-          },
-        },
-        {
           field: 'priority.remind',
           label: '挑战提醒',
           bottomHelpMessage: '设置挑战提醒指令优先级',
@@ -566,18 +483,18 @@ export function supportGuoba() {
         },
       ],
       getConfigData() {
-        return settings.merge();
+        return settings.merge()
       },
       // 设置配置的方法（前端点确定后调用的方法）
       setConfigData(data, { Result }) {
-        let config = {};
+        let config = {}
         for (let [keyPath, value] of Object.entries(data)) {
-          lodash.set(config, keyPath, value);
+          lodash.set(config, keyPath, value)
         }
-        config = lodash.merge({}, settings.merge, config);
-        settings.analysis(config);
-        return Result.ok({}, '保存成功~');
+        config = lodash.merge({}, settings.merge, config)
+        settings.analysis(config)
+        return Result.ok({}, '保存成功~')
       },
     },
-  };
+  }
 }

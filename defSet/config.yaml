@@ -30,7 +30,9 @@ hyperpanel:
     auto: true
     # 每日 04:30 自动更新（Quartz cron）
     cron: 0 30 4 * * ?
-# Enka API配置
+# 旧版：自定义enkaApi地址（支持数组，按顺序尝试）
+enkaApi: https://enka.network/api/zzz/uid/
+# 新版：Enka 配置
 enka:
   # 首选域名
   primaryDomain: enka.network

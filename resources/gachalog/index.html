@@ -8,7 +8,7 @@
 <div class="card">
   {{include sys.playerInfo}}
   {{each data item i}}
-  <div class="title t{{i+1}}">
+  <div class="title t{{((i+1) / 2).toFixed(0)}}">
     <div class="info">
       <div class="type">
         <div class="label">{{item.name}}</div>
@@ -28,7 +28,7 @@
           <div class="value">{{item.totalCount}}</div>
           <div class="label">抽卡总数</div>
         </div>
-        {{if (item.name === '音擎频段' || item.name === '独家频段')}}
+        {{if (item.name === '音擎频段' || item.name === '音擎回响' || item.name === '独家频段' || item.name === '独家重映')}}
           <div class="item">
           <div class="value">{{item.noWai}}</div>
           <div class="label">不歪率</div>
