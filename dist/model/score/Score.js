@@ -26,7 +26,7 @@ export default class Score {
         this.equip = equip;
         this.weight = weight;
         this.partition = this.equip.equipment_type;
-        this.userMainStat = this.equip.main_properties[0].property_id;
+        this.userMainStat = Number(this.equip.main_properties?.[0]?.property_id || 0);
     }
     get_level_multiplier() {
         return (0.25 + +this.equip.level * 0.05) || 1;
