@@ -280,7 +280,9 @@ export class Panel extends ZZZPlugin {
                 [
                     { text: '电量', callback: '%体力' },
                     { text: '签到', callback: '#签到' },
-                    { text: '帮助', callback: '%帮助' },
+                    role
+                        ? { text: '极限', callback: `%极限${role}面板` }
+                        : { text: '帮助', callback: '%帮助' },
                 ],
             ];
             const res = await this.reply([image, segment.button(...buts)]);
