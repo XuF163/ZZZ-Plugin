@@ -1,4 +1,4 @@
-import config from '../../../../lib/config/config.js'
+import { getYunzaiConfig } from '../lib/external.js'
 import { rulePrefix } from '../lib/common.js'
 import { ZZZUpdate } from '../lib/update.js'
 import { pluginName } from '../lib/path.js'
@@ -84,6 +84,7 @@ export class update extends plugin {
           )
       } catch (err) {
       }
+      const config = await getYunzaiConfig()
       const masters = config.masterQQ
       for (const master of masters) {
         if (master.toString() === 'stdin') continue

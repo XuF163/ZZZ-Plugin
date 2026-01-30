@@ -1,6 +1,5 @@
-// @ts-ignore
-import User from '../../../genshin/model/user.js'
 import { getStoken } from './authkey.js'
+import { getGenshinUser } from './external.js'
 
 export const rulePrefix = '^((#|%|/)?(zzz|ZZZ|绝区零))'
 
@@ -21,6 +20,7 @@ export interface Cookie {
 export const getCk = async (e: any, s = false): Promise<Record<string, Cookie> | undefined> => {
   e.isZZZ = true
   let stoken = ''
+  const User = await getGenshinUser()
   const user = new User(e)
   if (s) {
     stoken = getStoken(e)?.stoken || ''

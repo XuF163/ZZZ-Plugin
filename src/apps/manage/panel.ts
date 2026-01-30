@@ -3,7 +3,7 @@ import type { MessageElem } from 'icqq'
 import { char } from '../../lib/convert.js'
 import { downloadFile } from '../../lib/download/core.js'
 import { imageResourcesPath } from '../../lib/path.js'
-import common from '../../../../../lib/common/common.js'
+import { getYunzaiCommon } from '../../lib/external.js'
 import fs from 'fs'
 import path from 'path'
 
@@ -149,7 +149,7 @@ export async function getCharacterImages(e: EventType) {
     '删除或者添加后会重新排序ID，此时若想删除，请重新获取图片列表，否则可能会删除错误的图片。'
   )
   if (imageMsg.length)
-    await e.reply(await common.makeForwardMsg(e, imageMsg, '面板图列表'))
+    await e.reply(await (await getYunzaiCommon()).makeForwardMsg(e, imageMsg, '面板图列表'))
 }
 
 export async function deleteCharacterImg(e: EventType) {
@@ -193,5 +193,5 @@ export async function deleteCharacterImg(e: EventType) {
     failed.length ? `删除失败ID为${failed.join(',')}` : '无失败ID',
     '删除后会重新排序ID，若想要再次删除，请重新获取图片列表，否则可能会删除错误的图片。'
   ]
-  return e.reply(await common.makeForwardMsg(e, msgs, '删除面板图'))
+  return e.reply(await (await getYunzaiCommon()).makeForwardMsg(e, msgs, '删除面板图'))
 }

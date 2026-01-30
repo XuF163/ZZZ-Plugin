@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'url'
 import { elementEnum } from './BuffManager.js'
 import { Calculator } from './Calculator.js'
 import { srcPath } from '../../lib/path.js'
+import { getYunzaiConfig } from '../../lib/external.js'
 import chokidar from 'chokidar'
 import path from 'path'
 import fs from 'fs'
@@ -76,16 +77,16 @@ const calcFnc: {
 	set: Object.create(null)
 }
 
-async function init() {
-	// debug模式下监听文件变化
-	const isWatch = await (async () => {
-		try {
-			return ((await import('../../../../../lib/config/config.js')) as any).default.bot
-				.log_level === 'debug'
-		} catch {
-			return false
-		}
-	})()
+	async function init() {
+		// debug模式下监听文件变化
+		const isWatch = await (async () => {
+			try {
+				const cfg: any = await getYunzaiConfig()
+				return cfg?.bot?.log_level === 'debug'
+			} catch {
+				return false
+			}
+		})()
 	await Promise.all(fs.readdirSync(path.join(damagePath, 'character')).filter(v => v !== '模板').map(v => importChar(v, isWatch)))
 	for (const type of ['weapon', 'set'] as const) {
 		await Promise.all(

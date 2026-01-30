@@ -1,8 +1,7 @@
 import type { EventType, Mys } from '#interface'
-// @ts-ignore
-import NoteUser from '../../../genshin/model/mys/NoteUser.js'
 import { pluginName, resourcesPath } from './path.js'
 import { getCk, rulePrefix } from './common.js'
+import { getGenshinNoteUser } from './external.js'
 import request from '../utils/request.js'
 import settings from './settings.js'
 import MysZZZApi from './mysapi.js'
@@ -13,7 +12,7 @@ import _ from 'lodash'
 
 export class ZZZPlugin extends plugin {
 
-  User: NoteUser
+  User: any
 
   /**
    * 移除插件指令前缀，返回原始消息内容
@@ -39,6 +38,7 @@ export class ZZZPlugin extends plugin {
       user = this.e.at
     }
     // 获取用户信息（米游社），因此这里会导致查询一次米游社的信息
+    const NoteUser = await getGenshinNoteUser()
     this.User = await NoteUser.create(user)
     // 获取用户 UID
     const uid = this.User?.getUid('zzz')
@@ -182,7 +182,9 @@ export class ZZZPlugin extends plugin {
    * 获取玩家信息（当调用此方法时，会获取用户的玩家信息，
    * 并将其保存到`e.playerCard`中，方便渲染用户信息（此部分请查阅`lib/render.js`中两个模块的作用））
    */
-  async getPlayerInfo(playerData: Mys.User | null = null) {
+  async getPlayerInfo(
+    playerData: Mys.User | Mys.User['list'][number] | null = null
+  ) {
     let player: Mys.User['list'][number] | null = null
     if (!playerData) {
       // 获取 米游社 API
@@ -200,7 +202,13 @@ export class ZZZPlugin extends plugin {
       // 取第一个用户信息
       player = playerData?.list?.find(item => item.game_uid == uid) || playerData?.list?.[0]
     } else {
-      player = playerData.list?.[0] || null
+      // 兼容：允许直接传入已解析好的 playerInfo（如 Enka 的 parsePlayerInfo）
+      const maybeUser = playerData as Mys.User
+      if (Array.isArray(maybeUser?.list)) {
+        player = maybeUser.list?.[0] || null
+      } else {
+        player = playerData as Mys.User['list'][number]
+      }
     }
     if (!player) {
       throw new Error('获取玩家信息失败')

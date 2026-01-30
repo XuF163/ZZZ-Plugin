@@ -1,4 +1,4 @@
-import common from '../../../../lib/common/common.js'
+import { getYunzaiCommon } from '../lib/external.js'
 import { rulePrefix } from '../lib/common.js'
 import { ZZZPlugin } from '../lib/plugin.js'
 import settings from '../lib/settings.js'
@@ -147,7 +147,7 @@ export class User extends ZZZPlugin {
       '[解绑设备]',
       '发送 %解绑设备 即可',
     ]
-    await this.reply(await common.makeForwardMsg(this.e, [msgs.join('\n')], '绑定设备帮助'))
+    await this.reply(await (await getYunzaiCommon()).makeForwardMsg(this.e, [msgs.join('\n')], '绑定设备帮助'))
   }
 
 }

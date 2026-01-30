@@ -1,14 +1,16 @@
 import { mdLogLineToHTML } from '../utils/data.js'
 import { pluginName } from './path.js'
+import { importFromPlugins, importFromYunzai } from './external.js'
 import { exec } from 'child_process'
 import _ from 'lodash'
 
 let Update: (new (...args: any[]) => any) | null = null
 try {
   // @ts-ignore
-  Update = (await import('../../../other/update.js').catch(e => null))?.update
+  Update = (await importFromPlugins('other', 'update.js').catch(() => null))?.update
   // @ts-ignore
-  Update ||= (await import('../../system/apps/update.js')).update
+  Update ||= (await importFromYunzai('system', 'apps', 'update.js').catch(() => null))?.update
+  Update ||= (await importFromYunzai('system', 'apps', 'update.ts').catch(() => null))?.update
 } catch (e) {
   logger.error(
     `[${pluginName}]未获取到更新js ${logger.yellow('更新功能')} 将无法使用`

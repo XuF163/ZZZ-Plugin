@@ -1,14 +1,24 @@
+import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-/** 获取当前模块的 URL */
-const metaUrl = import.meta.url
+const moduleFilePath = fileURLToPath(import.meta.url)
+const moduleDirPath = path.dirname(moduleFilePath)
 
-/** 将 URL 转换为文件路径 */
-const metaPath = fileURLToPath(new URL(metaUrl))
+function findPluginRoot(startDir: string) {
+  let dir = startDir
+  for (let i = 0; i < 10; i++) {
+    if (fs.existsSync(path.join(dir, 'package.json'))) return dir
+    const parent = path.resolve(dir, '..')
+    if (parent === dir) break
+    dir = parent
+  }
+  // fallback: keep old behavior for dist/lib/path.js
+  return path.resolve(startDir, '..', '..')
+}
 
 /** 插件路径 */
-export const pluginPath = path.join(metaPath, '../../../')
+export const pluginPath = findPluginRoot(moduleDirPath)
 
 /** 插件源码路径 */
 export const srcPath = path.join(pluginPath, 'src')
@@ -17,7 +27,8 @@ export const srcPath = path.join(pluginPath, 'src')
 export const distPath = path.join(pluginPath, 'dist')
 
 /** apps 路径 */
-export const appPath = path.join(distPath, 'apps')
+const isBuilt = moduleDirPath.split(path.sep).includes('dist')
+export const appPath = isBuilt ? path.join(distPath, 'apps') : path.join(pluginPath, 'apps')
 
 /** 插件名 */
 export const pluginName = path.basename(pluginPath)

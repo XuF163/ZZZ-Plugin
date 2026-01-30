@@ -1,5 +1,5 @@
 import { downloadFile } from '../lib/download/core.js'
-import common from '../../../../lib/common/common.js'
+import { getYunzaiCommon } from '../lib/external.js'
 import { imageResourcesPath } from '../lib/path.js'
 import { rulePrefix } from '../lib/common.js'
 import { ZZZPlugin } from '../lib/plugin.js'
@@ -96,7 +96,7 @@ export class Guide extends ZZZPlugin {
         }
       }
       if (msg.length) {
-        await this.reply(await common.makeForwardMsg(this.e, msg, `${name}攻略`))
+        await this.reply(await (await getYunzaiCommon()).makeForwardMsg(this.e, msg, `${name}攻略`))
       }
     }
 

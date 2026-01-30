@@ -1,8 +1,6 @@
-import type Handler from '../../../../lib/plugins/handler.js'
 import type { Cookie } from './common.js'
 import type { EventType, Mys } from '#interface'
-// @ts-ignore
-import MysApi from '../../../genshin/model/mys/mysApi.js'
+import { getGenshinMysApi } from './external.js'
 import { randomString } from '../utils/data.js'
 import ZZZApiTool from './mysapi/tool.js'
 import { MysError } from './error.js'
@@ -11,6 +9,8 @@ import crypto from 'crypto'
 import _ from 'lodash'
 import md5 from 'md5'
 
+const MysApi = await getGenshinMysApi()
+
 // const DEVICE_ID = randomString(32).toUpperCase()
 // const DEVICE_NAME = randomString(_.random(1, 10));
 
@@ -18,7 +18,7 @@ import md5 from 'md5'
  * 米游社ZZZAPI（继承自MysApi）
  */
 export default class MysZZZApi extends MysApi {
-  handler?: typeof Handler
+  handler?: any
   e?: EventType
   uid: string
   server: string
@@ -29,7 +29,7 @@ export default class MysZZZApi extends MysApi {
   declare cookie: string
 
   constructor(uid: string, cookie: string | Record<string, Cookie>, option?: {
-    handler?: typeof Handler
+    handler?: any
     e?: EventType
   }) {
     // @ts-ignore

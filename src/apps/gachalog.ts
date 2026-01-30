@@ -2,7 +2,7 @@ import { anaylizeGachaLog, updateGachaLog, updateGachaLog_ck } from '../lib/gach
 import { getZZZGachaLink, getZZZGachaLogByAuthkey } from '../lib/gacha/core.js'
 import { gacha_type_meta_data, GachaType } from '../lib/gacha/const.js'
 import { getQueryVariable } from '../utils/network.js'
-import common from '../../../../lib/common/common.js'
+import { getYunzaiCommon } from '../lib/external.js'
 import { getAuthKey } from '../lib/authkey.js'
 import { rulePrefix } from '../lib/common.js'
 import { ZZZPlugin } from '../lib/plugin.js'
@@ -140,7 +140,7 @@ export class GachaLog extends ZZZPlugin {
         )
       }
       return this.reply(
-        await common.makeForwardMsg(this.e, msg, '抽卡记录更新成功')
+        await (await getYunzaiCommon()).makeForwardMsg(this.e, msg, '抽卡记录更新成功')
       )
     }
     const lastQueryTime = await redis.get(`ZZZ:GACHA:${uid}:LASTTIME`)
@@ -174,7 +174,7 @@ export class GachaLog extends ZZZPlugin {
       )
     }
     return this.reply(
-      await common.makeForwardMsg(this.e, msg, '抽卡记录更新成功')
+      await (await getYunzaiCommon()).makeForwardMsg(this.e, msg, '抽卡记录更新成功')
     )
   }
 
@@ -217,7 +217,7 @@ export class GachaLog extends ZZZPlugin {
       )
     }
     return this.reply(
-      await common.makeForwardMsg(this.e, msg, '抽卡记录更新成功')
+      await (await getYunzaiCommon()).makeForwardMsg(this.e, msg, '抽卡记录更新成功')
     )
   }
 
