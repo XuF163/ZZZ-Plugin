@@ -24,6 +24,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: dev
+          token: ${{ secrets.SYNC_PAT }}
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -48,6 +49,9 @@ jobs:
       - name: Prepare target worktree
         run: |
           TARGET_BRANCH="${{ inputs.target_branch }}"
+          if [ -z "$TARGET_BRANCH" ]; then
+            TARGET_BRANCH="master"
+          fi
           git fetch origin "${TARGET_BRANCH}:${TARGET_BRANCH}" || true
           git worktree remove ../target-worktree --force || true
           git worktree add ../target-worktree "${TARGET_BRANCH}"
@@ -70,6 +74,9 @@ jobs:
           DEV_ROOT="$GITHUB_WORKSPACE"
           TARGET_ROOT="$DEV_ROOT/../target-worktree"
           TARGET_BRANCH="${{ inputs.target_branch }}"
+          if [ -z "$TARGET_BRANCH" ]; then
+            TARGET_BRANCH="master"
+          fi
           BEFORE_SHA="${{ github.event.before }}"
           CURRENT_SHA="${{ github.sha }}"
           AUTHOR_NAME="$(git -C "$DEV_ROOT" log -1 --pretty=format:'%an' "$CURRENT_SHA")"
@@ -122,4 +129,3 @@ jobs:
       - name: Cleanup
         if: always()
         run: git worktree remove ../target-worktree --force || true
-
