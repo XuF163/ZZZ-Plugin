@@ -1,0 +1,125 @@
+name: Build and Sync artifacts
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Branch to receive build artifacts (usually: master)"
+        required: true
+        default: "master"
+
+concurrency:
+  group: build-and-sync-dev
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: dev
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build
+        run: pnpm run build:src
+
+      - name: Build styles
+        run: pnpm run build:css || echo "build:css failed (ignored for sync)"
+
+      - name: Prepare target worktree
+        run: |
+          TARGET_BRANCH="${{ inputs.target_branch }}"
+          git fetch origin "${TARGET_BRANCH}:${TARGET_BRANCH}" || true
+          git worktree remove ../target-worktree --force || true
+          git worktree add ../target-worktree "${TARGET_BRANCH}"
+          git -C ../target-worktree reset --hard "origin/${TARGET_BRANCH}"
+
+      - name: Sync artifacts to target
+        run: |
+          rsync -a --delete --quiet \
+            --exclude='.git' \
+            --exclude='.github/workflows/' \
+            --exclude='node_modules' \
+            --exclude='src' \
+            ./ ../target-worktree/
+          rm -rf ../target-worktree/src
+          # Master branch workflows are maintained separately; never sync workflows from dev.
+          git -C ../target-worktree checkout -- .github/workflows || true
+
+      - name: Commit and push to target
+        run: |
+          DEV_ROOT="$GITHUB_WORKSPACE"
+          TARGET_ROOT="$DEV_ROOT/../target-worktree"
+          TARGET_BRANCH="${{ inputs.target_branch }}"
+          BEFORE_SHA="${{ github.event.before }}"
+          CURRENT_SHA="${{ github.sha }}"
+          AUTHOR_NAME="$(git -C "$DEV_ROOT" log -1 --pretty=format:'%an' "$CURRENT_SHA")"
+          AUTHOR_EMAIL="$(git -C "$DEV_ROOT" log -1 --pretty=format:'%ae' "$CURRENT_SHA")"
+          SOURCE_SHA="$(git -C "$DEV_ROOT" rev-parse --short "$CURRENT_SHA")"
+          LATEST_MSG="$(git -C "$DEV_ROOT" log -1 --pretty=format:'%s' "$CURRENT_SHA")"
+          if [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ] || [ -z "$BEFORE_SHA" ]; then
+            LOG_RANGE="$(git -C "$DEV_ROOT" log --pretty=format:'%h %s' -1 "$CURRENT_SHA")"
+          elif git -C "$DEV_ROOT" merge-base --is-ancestor "$BEFORE_SHA" "$CURRENT_SHA"; then
+            LOG_RANGE="$(git -C "$DEV_ROOT" log --pretty=format:'%h %s' "$BEFORE_SHA..$CURRENT_SHA")"
+          else
+            LOG_RANGE="$(git -C "$DEV_ROOT" log --pretty=format:'%h %s' -1 "$CURRENT_SHA")"
+          fi
+          OTHER_COMMITS="$(printf "%s" "$LOG_RANGE" | tail -n +2)"
+          if [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ] || [ -z "$BEFORE_SHA" ]; then
+            AUTHOR_RANGE="$(git -C "$DEV_ROOT" log --format='%an <%ae>' -1 "$CURRENT_SHA")"
+          elif git -C "$DEV_ROOT" merge-base --is-ancestor "$BEFORE_SHA" "$CURRENT_SHA"; then
+            AUTHOR_RANGE="$(git -C "$DEV_ROOT" log --format='%an <%ae>' "$BEFORE_SHA..$CURRENT_SHA")"
+          else
+            AUTHOR_RANGE="$(git -C "$DEV_ROOT" log --format='%an <%ae>' -1 "$CURRENT_SHA")"
+          fi
+          COAUTHORS="$(printf "%s" "$AUTHOR_RANGE" | sort -u | grep -v -F "$AUTHOR_EMAIL" || true)"
+          TRAILERS=""
+          while read -r LINE; do
+            [ -z "$LINE" ] && continue
+            TRAILERS="${TRAILERS}\nCo-authored-by: ${LINE}"
+          done <<< "$COAUTHORS"
+          COMMIT_MSG="${LATEST_MSG} [${SOURCE_SHA}]${TRAILERS}"
+          if [ -n "$OTHER_COMMITS" ]; then
+            COMMIT_MSG="$(printf '%s\n\nOther commits:\n%s' "$COMMIT_MSG" "$OTHER_COMMITS")"
+          fi
+          if [ ! -e "$TARGET_ROOT/.git" ]; then
+            echo "target worktree missing at $TARGET_ROOT"
+            ls -la "$TARGET_ROOT" || true
+            exit 1
+          fi
+          git -C "$TARGET_ROOT" config user.name "${AUTHOR_NAME}"
+          git -C "$TARGET_ROOT" config user.email "${AUTHOR_EMAIL}"
+          git -C "$TARGET_ROOT" add -A
+          find "$TARGET_ROOT/resources" -type f -name "*.css" -print0 | xargs -0 git -C "$TARGET_ROOT" add -f || true
+          git -C "$TARGET_ROOT" add -f dist
+          if git -C "$TARGET_ROOT" diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git -C "$TARGET_ROOT" commit -m "${COMMIT_MSG}"
+          # Avoid rewriting target branch history (e.g. master). This also respects branch protection rules that disable force push.
+          git -C "$TARGET_ROOT" push origin "HEAD:${TARGET_BRANCH}"
+
+      - name: Cleanup
+        if: always()
+        run: git worktree remove ../target-worktree --force || true
+
