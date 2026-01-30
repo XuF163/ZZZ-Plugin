@@ -62,6 +62,8 @@ jobs:
             --exclude='src' \
             ./ ../target-worktree/
           rm -rf ../target-worktree/src
+          # Master branch workflows are maintained separately; never sync workflows from dev.
+          git -C ../target-worktree checkout -- .github/workflows || true
 
       - name: Commit and push to target
         run: |
