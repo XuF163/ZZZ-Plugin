@@ -41,7 +41,7 @@
   - `git commit --no-edit`（若 `git merge` 未自动生成提交）
 
 6) **最小校验（避免“合了就推”）**
-- 确保无冲突标记：`git grep -n "<<<<<<<"`
+- 确保无冲突标记（避免匹配到本文件里的示例）：`git grep -n "<<<<<<<" -- src resources`
 - 项目自带校验（如果存在 `package.json`）：
   - `npm run check`
   - `npm run lint`
@@ -74,7 +74,6 @@ git merge --no-edit origin/updev
 npm run check
 npm run lint
 npm run build
-git grep -n "<<<<<<<"
+git grep -n "<<<<<<<" -- src resources
 git push origin dev
 ```
-
