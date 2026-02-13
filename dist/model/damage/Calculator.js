@@ -33,6 +33,7 @@ const mainBaseValueData = {
     "能量自动回复": [0.6, '60%']
 };
 const AnomalyData = getMapData('AnomalyData');
+const ratioAble = new Set(['生命值', '防御力', '攻击力', '冲击力', '异常掌控']);
 export class Calculator {
     buffM;
     avatar;
@@ -51,6 +52,9 @@ export class Calculator {
             basicDEF: 50,
             resistance: -0.2
         };
+    }
+    get base_properties() {
+        return this.avatar.base_properties;
     }
     get initial_properties() {
         return this.avatar.initial_properties;
@@ -107,6 +111,7 @@ export class Calculator {
                 dmg.skill = skill;
             }
             logger.debug('自定义计算最终伤害：', dmg.result);
+            this.usefulBuffResults.clear();
             return dmg;
         }
         const props = this.props = skill.props || {};
@@ -152,8 +157,10 @@ export class Calculator {
                 }
                 const ExtraMultiplier = this.get_ExtraMultiplier(skill, usefulBuffs);
                 Multiplier += ExtraMultiplier;
-                if (!Multiplier)
+                if (!Multiplier) {
+                    this.usefulBuffResults.clear();
                     return logger.warn('技能倍率缺失：', skill);
+                }
                 if (ExtraMultiplier)
                     logger.debug(`最终倍率：${Multiplier}`);
             }
@@ -246,13 +253,13 @@ export class Calculator {
                 return target[prop];
             }
         });
-        this.usefulBuffResults.clear();
         if (skill.after) {
             skill.after({ avatar: this.avatar, calc: this, usefulBuffs, skill, damage, runtime });
         }
         logger.debug('最终伤害：', result);
         if (!skill.banCache)
             this.cache[skill.type] = damage;
+        this.usefulBuffResults.clear();
         return damage;
     }
     calc_showInPanel_buffs() {
@@ -260,21 +267,35 @@ export class Calculator {
             .filter(buff => buff.showInPanel)
             .map(buff => {
             try {
-                const value = this.calc_value(buff.value, buff);
-                const { _base_properties, _initial_properties } = this.avatar;
-                this.avatar._base_properties = this.avatar._initial_properties = new Proxy({}, {
-                    get: (target, prop) => {
-                        return Number.MAX_SAFE_INTEGER;
-                    }
-                });
+                const value = this.calc_final_value(buff);
                 let max = 0;
-                try {
-                    this.props = {};
-                    max = this.calc_value(buff.value, buff);
+                if (buff.max) {
+                    if (buff.max === Infinity) {
+                        max = 0;
+                    }
+                    else {
+                        max = this.calc_final_value({
+                            ...buff,
+                            value: buff.max,
+                            max: undefined
+                        });
+                    }
                 }
-                catch { }
-                this.avatar._base_properties = _base_properties;
-                this.avatar._initial_properties = _initial_properties;
+                else {
+                    const { _base_properties, _initial_properties } = this.avatar;
+                    this.avatar._base_properties = this.avatar._initial_properties = new Proxy({}, {
+                        get: (target, prop) => {
+                            return Number.MAX_SAFE_INTEGER;
+                        }
+                    });
+                    try {
+                        this.props = {};
+                        max = this.calc_final_value(buff);
+                    }
+                    catch { }
+                    this.avatar._base_properties = _base_properties;
+                    this.avatar._initial_properties = _initial_properties;
+                }
                 if (max === Infinity || !max || max > 9999) {
                     max = 0;
                 }
@@ -315,7 +336,7 @@ export class Calculator {
                 .map(({ type }) => type);
         }
         const base = {};
-        types.forEach(t => base[t] = t.includes('百分比') ? this.avatar.base_properties[property.nameZHToNameEN(t.replace('百分比', ''))] * subBaseValueData[t][0] : subBaseValueData[t][0]);
+        types.forEach(t => base[t] = t.includes('百分比') ? this.base_properties[property.nameZHToNameEN(t.replace('百分比', ''))] * subBaseValueData[t][0] : subBaseValueData[t][0]);
         logger.debug(logger.red('副词条差异计算变化值：'), base);
         const buffs = types.map(t => ({
             name: t,
@@ -346,11 +367,13 @@ export class Calculator {
                 return acc;
             }, [])
                 .sort((a, b) => b.weight - a.weight)
-                .slice(0, 6)
+                .slice(0, 8)
                 .map(({ type }) => type);
         }
         const base = {};
-        types.forEach(t => base[t] = (t.includes('百分比') || ['异常掌控', '冲击力', '能量自动回复'].includes(t)) ? this.avatar.base_properties[property.nameZHToNameEN(t.replace('百分比', ''))] * mainBaseValueData[t][0] : mainBaseValueData[t][0]);
+        types.forEach(t => base[t] = (t.includes('百分比') || ['异常掌控', '冲击力', '能量自动回复'].includes(t)) ?
+            this.base_properties[property.nameZHToNameEN(t.replace('百分比', ''))] * mainBaseValueData[t][0] :
+            mainBaseValueData[t][0]);
         logger.debug(logger.red('主词条差异计算变化值：'), base);
         const buffs = types.map(t => {
             const data = {
@@ -530,7 +553,34 @@ export class Calculator {
             default: return 0;
         }
     }
-    get(type, initial, skill = this.skill, usefulBuffs = this.buffM.buffs, isRatio = false) {
+    calc_final_value(buff) {
+        let initial;
+        const _calc_final_value = (buff) => {
+            const { value } = buff;
+            const add = this.calc_value(value, buff);
+            if (!add || !ratioAble.has(buff.type) || Math.abs(add) >= 1)
+                return add;
+            if (!(typeof value === 'number' || typeof value === 'string' || Array.isArray(value)))
+                return add;
+            if (!initial) {
+                if (buff.percentBase === 'initial') {
+                    initial = this.initial_properties[property.nameZHToNameEN(buff.type)] || 0;
+                }
+                else {
+                    initial = this.base_properties[property.nameZHToNameEN(buff.type)] || 0;
+                }
+            }
+            if (!initial)
+                return add;
+            return add * initial;
+        };
+        const value = _calc_final_value(buff);
+        if (!value || !buff.max)
+            return value;
+        const max = _calc_final_value({ ...buff, value: buff.max });
+        return Math.min(value, max);
+    }
+    get(type, initial, skill = this.skill, usefulBuffs = this.buffM.buffs) {
         const nonStackableBuffRecord = new Map();
         return this.props[type] ??= this.buffM._filter(usefulBuffs, {
             element: skill?.element,
@@ -538,10 +588,7 @@ export class Calculator {
             redirect: skill?.redirect,
             type
         }, this).reduce((previousValue, buff) => {
-            const { value } = buff;
-            let add = this.calc_value(value, buff);
-            if (isRatio && Math.abs(add) < 1 && (typeof value === 'number' || typeof value === 'string' || Array.isArray(value)))
-                add *= initial;
+            const add = this.calc_final_value(buff);
             if (buff.stackable === false) {
                 const recorded = nonStackableBuffRecord.get(buff.name);
                 if (recorded) {
@@ -563,7 +610,7 @@ export class Calculator {
         }, initial);
     }
     get_ATK(skill, usefulBuffs) {
-        let ATK = this.get('攻击力', this.initial_properties.ATK, skill, usefulBuffs, true);
+        let ATK = this.get('攻击力', this.initial_properties.ATK, skill, usefulBuffs);
         ATK = this.min_max(0, 10000, ATK);
         logger.debug(`攻击力：${ATK}`);
         return ATK;
@@ -650,7 +697,7 @@ export class Calculator {
         return AnomalyProficiency;
     }
     get_AnomalyMastery(skill, usefulBuffs) {
-        let AnomalyMastery = this.get('异常掌控', this.initial_properties.AnomalyMastery, skill, usefulBuffs, true);
+        let AnomalyMastery = this.get('异常掌控', this.initial_properties.AnomalyMastery, skill, usefulBuffs);
         AnomalyMastery = this.min_max(0, 1000, AnomalyMastery);
         logger.debug(`异常掌控：${AnomalyMastery}`);
         return AnomalyMastery;
@@ -685,26 +732,26 @@ export class Calculator {
         return AnomalyDuration;
     }
     get_HP(skill, usefulBuffs) {
-        let HP = this.get('生命值', this.initial_properties.HP, skill, usefulBuffs, true);
+        let HP = this.get('生命值', this.initial_properties.HP, skill, usefulBuffs);
         HP = this.min_max(0, 100000, HP);
         logger.debug(`生命值：${HP}`);
         return HP;
     }
     get_DEF(skill, usefulBuffs) {
-        let DEF = this.get('防御力', this.initial_properties.DEF, skill, usefulBuffs, true);
+        let DEF = this.get('防御力', this.initial_properties.DEF, skill, usefulBuffs);
         DEF = this.min_max(0, 1000, DEF);
         logger.debug(`防御力：${DEF}`);
         return DEF;
     }
     get_Impact(skill, usefulBuffs) {
-        let Impact = this.get('冲击力', this.initial_properties.Impact, skill, usefulBuffs, true);
+        let Impact = this.get('冲击力', this.initial_properties.Impact, skill, usefulBuffs);
         Impact = this.min_max(0, 1000, Impact);
         logger.debug(`冲击力：${Impact}`);
         return Impact;
     }
     get_SheerForce(skill, usefulBuffs) {
         let SheerForce = Math.trunc(this.get_ATK(skill, usefulBuffs) * 0.3);
-        SheerForce = this.get('贯穿力', SheerForce, skill, usefulBuffs, true);
+        SheerForce = this.get('贯穿力', SheerForce, skill, usefulBuffs);
         SheerForce = this.min_max(0, 10000, SheerForce);
         logger.debug(`贯穿力：${SheerForce}`);
         return SheerForce;
