@@ -5,6 +5,15 @@ import { ZZZPlugin } from '../lib/plugin.js';
 import settings from '../lib/settings.js';
 import { getCk } from '../lib/common.js';
 import _ from 'lodash';
+const getRoleNameButtonText = (roleName) => {
+    const name = String(roleName || '').trim();
+    for (const ch of name) {
+        if (/[\p{Script=Han}A-Za-z]/u.test(ch)) {
+            return /[A-Za-z]/.test(ch) ? ch.toUpperCase() : ch;
+        }
+    }
+    return name.slice(0, 1);
+};
 export class Panel extends ZZZPlugin {
     constructor() {
         super({
@@ -131,8 +140,8 @@ export class Panel extends ZZZPlugin {
         const buttons = [[]];
         for (const name of roleList) {
             const row = buttons[buttons.length - 1];
-            row.push({ text: `${name}`, callback: `%${name}面板` });
-            if (row.length > 2)
+            row.push({ text: getRoleNameButtonText(name), callback: `%${name}面板` });
+            if (row.length > 5)
                 buttons.push([]);
         }
         if (buttons.length === 1 && buttons[0].length === 0) {
@@ -181,8 +190,8 @@ export class Panel extends ZZZPlugin {
         const buttons = [[]];
         for (const name of roleList) {
             const row = buttons[buttons.length - 1];
-            row.push({ text: `${name}`, callback: `%${name}面板` });
-            if (row.length > 2)
+            row.push({ text: getRoleNameButtonText(name), callback: `%${name}面板` });
+            if (row.length > 5)
                 buttons.push([]);
         }
         if (buttons.length === 1 && buttons[0].length === 0) {
