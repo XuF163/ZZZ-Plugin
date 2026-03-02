@@ -39,10 +39,7 @@ export const downloadHakushFile = async (_base, _localBase, filename = '') => {
     const base = HakushURL[_base];
     const localBase = LocalURI[_localBase];
     const finalPath = path.join(localBase, filename);
-    let url = base;
-    if (filename) {
-        url += `/${filename}`;
-    }
+    const url = '';
     const filepath = await checkFile(url, finalPath);
     if (filepath) {
         if (filename.endsWith('.json')) {
