@@ -81,10 +81,11 @@ export const downloadHakushFile = async<Base extends keyof typeof HakushURL>(
   const base = HakushURL[_base]
   const localBase = LocalURI[_localBase]
   const finalPath = path.join(localBase, filename)
-  let url: string = base
-  if (filename) {
-    url += `/${filename}`
-  }
+  // let url: string = base
+  // if (filename) {
+  //   url += `/${filename}`
+  // }
+  const url = '' // 屏蔽下载
   // logger.debug('Hakush file url:', url);
   const filepath = await checkFile(url, finalPath)
   if (filepath) {
