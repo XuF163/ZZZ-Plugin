@@ -2,6 +2,7 @@ import { aliasToId } from '../../lib/convert/char.js';
 import { BuffManager } from './BuffManager.js';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { elementEnum } from './BuffManager.js';
+import settings from '../../lib/settings.js';
 import { Calculator } from './Calculator.js';
 import { srcPath } from '../../lib/path.js';
 import { getYunzaiConfig } from '../../lib/external.js';
@@ -44,7 +45,7 @@ function watchFile(path, fnc) {
         }
     });
     watcher.on('change', (path) => {
-        logger.debug('重载' + path);
+        debug('重载' + path);
         fnc();
     });
 }
@@ -148,11 +149,11 @@ export function avatar_calc(avatar) {
             }
         }
     }
-    logger.debug(`${avatar.name_mi18n} 伤害计算规则：${m.name} by ${m.author}`);
+    debug(`${avatar.name_mi18n} 伤害计算规则：${m.name} by ${m.author}`);
     const buffM = new BuffManager(avatar);
     const calc = new Calculator(buffM);
     weakMapCalc.set(avatar, calc);
-    logger.debug('initial_properties', avatar.initial_properties);
+    debug('initial_properties', avatar.initial_properties);
     weapon_buff(avatar.weapon, buffM);
     set_buff(avatar.equip, buffM);
     if (m.buffs) {
@@ -165,14 +166,14 @@ export function avatar_calc(avatar) {
         calc.new(m.skills);
     if (m.calc)
         m.calc(buffM, calc, avatar);
-    logger.debug(`Buff*${buffM.buffs.length}：`, buffM.buffs);
+    debug(`Buff*${buffM.buffs.length}：`, buffM.buffs);
     return calc;
 }
 export function weapon_buff(weapon, buffM) {
     const name = weapon?.name;
     if (!name)
         return;
-    logger.debug('武器：' + name);
+    debug('武器：' + name);
     const m = calcFnc.weapon[name];
     if (!m)
         return;
@@ -207,7 +208,7 @@ export function set_buff(equips, buffM) {
     for (const [name, count] of Object.entries(setCount)) {
         if (count < 2)
             continue;
-        logger.debug(`套装：${name}*${count}`);
+        debug(`套装：${name}*${count}`);
         const m = calcFnc.set[name];
         if (!m)
             continue;
@@ -220,5 +221,10 @@ export function set_buff(equips, buffM) {
             m.calc(buffM, count);
     }
     buffM.default({});
+}
+function debug(...args) {
+    if (!settings.getConfig('config').damage_debug_log)
+        return;
+    logger.debug(...args);
 }
 //# sourceMappingURL=avatar.js.map
