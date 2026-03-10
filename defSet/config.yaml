@@ -46,3 +46,7 @@ enka:
   userAgent: ZZZ-Plugin/UCPr
   # 是否启用随机域名选择
   randomSelection: true
+# 是否输出评分计算debug日志（debug模式下）
+score_debug_log: true
+# 是否输出伤害计算debug日志（debug模式下）
+damage_debug_log: true
